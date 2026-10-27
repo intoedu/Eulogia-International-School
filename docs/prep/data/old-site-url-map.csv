@@ -1,0 +1,21 @@
+old_url,old_title,new_url,note
+/,Home,/,
+/about/,About,/about,
+/about-us/,(깨진 주소),/about,기존 메뉴 링크가 404
+/eulogia/,Eulogia Language School (ACE 설명),/programs/ace,
+/whyace/,whyace,/programs/ace,중복 콘텐츠 통합
+/acecurriculum/,Ace Curriculum,/programs/ace,중복 콘텐츠 통합
+/ace-sot/,ACE SOT,/programs/ace,
+/ace-program/,(깨진 주소),/programs/ace,기존 메뉴 링크가 404
+/baanhaeng/,Baanhaeng,/programs/early-years,
+/pre-k-to-kg/,(깨진 주소),/programs/early-years,기존 메뉴 링크가 404
+/kg-schedule/,kgsched,/programs/early-years,시간표를 유아반 페이지에 표로 통합
+/dual-enrollment-program/,Dual Enrollment Program,/programs/dual-diploma,
+/ged/,GED,/programs/ged,
+/admission/,Admission,/admissions,
+/form/,form (입학 문의 양식),/apply,
+/contact-us/,Contact Us,/contact,
+/bhkrgallery/,bhkrgallery,/gallery,
+/maintenance/,maintenance (견본 페이지),/,견본 페이지 정리
+/wp-content/uploads/2026/05/Eulogia-LCA-2026-pdf-_-DocHub.pdf,LCA 인증서 PDF,(새 사이트 파일 주소),Dual Enrollment 페이지에서 링크됨. 파일 이전 필요
+/wp-content/uploads/2026/10/26-27-school-calendar.jpg,학사 일정 이미지,/calendar,
