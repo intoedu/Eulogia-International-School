@@ -2,11 +2,11 @@ old_url,old_title,new_url,note
 /,Home,/,
 /about/,About,/about,
 /about-us/,(깨진 주소),/about,기존 메뉴 링크가 404
-/eulogia/,Eulogia Language School (ACE 설명),/programs/ace,
-/whyace/,whyace,/programs/ace,중복 콘텐츠 통합
-/acecurriculum/,Ace Curriculum,/programs/ace,중복 콘텐츠 통합
-/ace-sot/,ACE SOT,/programs/ace,
-/ace-program/,(깨진 주소),/programs/ace,기존 메뉴 링크가 404
+/eulogia/,Eulogia Language School (ACE 설명),/programs/sot,
+/whyace/,whyace,/programs/sot,중복 콘텐츠 통합
+/acecurriculum/,Ace Curriculum,/programs/sot,중복 콘텐츠 통합
+/ace-sot/,ACE SOT,/programs/sot,
+/ace-program/,(깨진 주소),/programs/sot,기존 메뉴 링크가 404
 /baanhaeng/,Baanhaeng,/programs/early-years,
 /pre-k-to-kg/,(깨진 주소),/programs/early-years,기존 메뉴 링크가 404
 /kg-schedule/,kgsched,/programs/early-years,시간표를 유아반 페이지에 표로 통합
