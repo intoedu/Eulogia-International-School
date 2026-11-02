@@ -9,48 +9,37 @@
     });
   }
 
-  /* 첫 화면: 대학 깃발 벽 */
-  function pennant(r, i, hidden) {
-    var sc = r.scholarship ? '<span class="sc">' + esc(r.scholarship) + " SCHOLARSHIP</span>" : "";
-    return '<div class="pennant c' + ((i % 4) + 1) + '"' + (hidden ? ' aria-hidden="true"' : "") + ">" +
-      '<span class="yr">CLASS OF ' + esc(r.year) + "</span>" +
-      '<span class="nm">' + esc(r.university) + "</span>" + sc + "</div>";
+  /* 졸업생 진학 대학 목록 (대학별 한 칸) */
+  var admitEl = document.getElementById("admit-list");
+  if (admitEl) {
+    var byUni = {};
+    results.forEach(function (r) {
+      var u = byUni[r.university] || (byUni[r.university] = { name: r.university, state: r.state, years: [], sch: "", sample: false });
+      if (u.years.indexOf(r.year) === -1) u.years.push(r.year);
+      if (r.scholarship && !u.sch) u.sch = r.scholarship;
+      if (r.sample) u.sample = true;
+    });
+    var unis = Object.keys(byUni).map(function (k) { return byUni[k]; })
+      .sort(function (a, b) { return Math.max.apply(null, b.years) - Math.max.apply(null, a.years); });
+    admitEl.innerHTML = unis.map(function (u) {
+      return "<li><span class=\"u\">" + esc(u.name) + "</span>" +
+        "<span class=\"m\">" + esc(u.state) + " · " + u.years.sort().join(", ") + "</span>" +
+        (u.sch ? "<span class=\"s\">" + esc(u.sch) + " 장학금</span>" : "") + "</li>";
+    }).join("");
+    var note = document.getElementById("admits-note");
+    if (note) note.hidden = !unis.some(function (u) { return u.sample; });
   }
-  function fillLane(id, list) {
-    var el = document.getElementById(id);
-    if (!el || !list.length) return;
-    var html = list.map(function (r, i) { return pennant(r, i, false); }).join("");
-    var copy = list.map(function (r, i) { return pennant(r, i, true); }).join("");
-    el.innerHTML = html + copy;
-  }
-  var unique = [];
-  var seen = {};
-  results.forEach(function (r) {
-    var key = r.year + "|" + r.university;
-    if (!seen[key]) { seen[key] = 1; unique.push(r); }
-  });
-  var half = Math.ceil(unique.length / 2);
-  var laneA = unique.slice(0, half), laneB = unique.slice(half);
-  while (laneA.length && laneA.length < 5) laneA = laneA.concat(laneA);
-  while (laneB.length && laneB.length < 5) laneB = laneB.concat(laneB);
-  fillLane("lane-a", laneA);
-  fillLane("lane-b", laneB.length ? laneB : laneA);
 
-  /* 첫 화면: 장학금 카드 */
+  /* 첫 화면: 올해 장학금 소식 */
   if (highlight) {
     var set = function (id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
-    set("award-year", highlight.year);
-    set("award-pct", highlight.percent);
-    set("award-uni", highlight.university);
-    set("award-who", highlight.students);
-    var note = document.getElementById("award-note");
-    if (note) { note.textContent = highlight.sample ? "샘플 · " + highlight.note : ""; note.hidden = !highlight.sample; }
+    set("news-year", highlight.year);
+    set("news-pct", highlight.percent);
+    set("news-uni", highlight.university);
+    set("news-who", highlight.students);
+    var tag = document.getElementById("news-sample");
+    if (tag) tag.hidden = !highlight.sample;
   }
-
-  /* 숫자 띠: 진학 대학 수 */
-  var colleges = document.getElementById("stat-colleges");
-  var real = results.filter(function (r) { return !r.sample; });
-  if (colleges) colleges.textContent = real.length ? real.length + "명" : "자료 대기";
 
   /* 진학 실적 표: 연도 선택 + 검색 */
   var yearSel = document.getElementById("res-year");
@@ -78,10 +67,10 @@
       tbody.innerHTML = '<tr><td colspan="5" class="empty">조건에 맞는 진학 기록이 없습니다. 연도나 검색어를 바꿔 보세요.</td></tr>';
     } else {
       tbody.innerHTML = rows.map(function (r) {
-        var sch = r.scholarship ? '<span class="sch">' + esc(r.scholarship) + "</span>" + (r.scholarshipName ? "<small>" + esc(r.scholarshipName) + "</small>" : "") : "—";
+        var sch = r.scholarship ? '<span class="sch">' + esc(r.scholarship) + " 장학금</span>" + (r.scholarshipName ? "<small>" + esc(r.scholarshipName) + "</small>" : "") : "—";
         return "<tr>" +
           '<td class="yr">' + esc(r.year) + "</td>" +
-          "<td>" + esc(r.university) + (r.sample ? ' <span class="sample-chip">샘플</span>' : "") + "<small>" + esc(r.state) + "</small></td>" +
+          "<td><span class=\"uni\">" + esc(r.university) + "</span>" + (r.sample ? ' <span class="tag-sample">샘플</span>' : "") + "<small>" + esc(r.state) + "</small></td>" +
           "<td>" + sch + "</td>" +
           "<td>" + esc(r.route) + "</td>" +
           "<td>" + esc(r.student) + "</td></tr>";
