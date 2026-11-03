@@ -9,25 +9,25 @@
     });
   }
 
-  /* 졸업생 진학 대학 목록 (대학별 한 칸) */
-  var admitEl = document.getElementById("admit-list");
-  if (admitEl) {
+  /* 첫 화면: 졸업생 진학 대학 (흘러가는 이름 줄) */
+  var tickerEl = document.getElementById("admit-ticker");
+  if (tickerEl) {
     var byUni = {};
     results.forEach(function (r) {
-      var u = byUni[r.university] || (byUni[r.university] = { name: r.university, state: r.state, years: [], sch: "", sample: false });
+      var u = byUni[r.university] || (byUni[r.university] = { name: r.university, years: [], sch: "" });
       if (u.years.indexOf(r.year) === -1) u.years.push(r.year);
       if (r.scholarship && !u.sch) u.sch = r.scholarship;
-      if (r.sample) u.sample = true;
     });
     var unis = Object.keys(byUni).map(function (k) { return byUni[k]; })
       .sort(function (a, b) { return Math.max.apply(null, b.years) - Math.max.apply(null, a.years); });
-    admitEl.innerHTML = unis.map(function (u) {
-      return "<li><span class=\"u\">" + esc(u.name) + "</span>" +
-        "<span class=\"m\">" + esc(u.state) + " · " + u.years.sort().join(", ") + "</span>" +
-        (u.sch ? "<span class=\"s\">" + esc(u.sch) + " 장학금</span>" : "") + "</li>";
-    }).join("");
-    var note = document.getElementById("admits-note");
-    if (note) note.hidden = !unis.some(function (u) { return u.sample; });
+    var item = function (u, hidden) {
+      return '<div class="uni-item"' + (hidden ? ' aria-hidden="true"' : "") + "><b>" + esc(u.name) + "</b><span>" +
+        u.years.sort().join(" · ") + (u.sch ? ' · <em>' + esc(u.sch) + " 장학금</em>" : "") + "</span></div>";
+    };
+    var loop = unis.slice();
+    while (loop.length && loop.length < 6) loop = loop.concat(unis);
+    tickerEl.innerHTML = loop.map(function (u) { return item(u, false); }).join("") +
+      loop.map(function (u) { return item(u, true); }).join("");
   }
 
   /* 첫 화면: 올해 장학금 소식 */
