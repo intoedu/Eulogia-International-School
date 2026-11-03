@@ -9,37 +9,61 @@
     });
   }
 
-  /* 첫 화면: 졸업생 진학 대학 (흘러가는 이름 줄) */
-  var tickerEl = document.getElementById("admit-ticker");
-  if (tickerEl) {
-    var byUni = {};
-    results.forEach(function (r) {
-      var u = byUni[r.university] || (byUni[r.university] = { name: r.university, years: [], sch: "" });
-      if (u.years.indexOf(r.year) === -1) u.years.push(r.year);
-      if (r.scholarship && !u.sch) u.sch = r.scholarship;
-    });
-    var unis = Object.keys(byUni).map(function (k) { return byUni[k]; })
-      .sort(function (a, b) { return Math.max.apply(null, b.years) - Math.max.apply(null, a.years); });
-    var item = function (u, hidden) {
-      return '<div class="uni-item"' + (hidden ? ' aria-hidden="true"' : "") + "><b>" + esc(u.name) + "</b><span>" +
-        u.years.sort().join(" · ") + (u.sch ? ' · <em>' + esc(u.sch) + " 장학금</em>" : "") + "</span></div>";
-    };
-    var loop = unis.slice();
-    while (loop.length && loop.length < 6) loop = loop.concat(unis);
-    tickerEl.innerHTML = loop.map(function (u) { return item(u, false); }).join("") +
-      loop.map(function (u) { return item(u, true); }).join("");
+  /* 첫 화면: 졸업생 진학 대학 (큰 이름 + 명예 명단) */
+  var byUni = {};
+  results.forEach(function (r) {
+    var u = byUni[r.university] || (byUni[r.university] = { name: r.university, years: [], sch: "", sample: false });
+    if (u.years.indexOf(r.year) === -1) u.years.push(r.year);
+    if (r.scholarship && !u.sch) u.sch = r.scholarship;
+    if (r.sample) u.sample = true;
+  });
+  var unis = Object.keys(byUni).map(function (k) { return byUni[k]; }).sort(function (a, b) {
+    var sa = a.sch ? 1 : 0, sb = b.sch ? 1 : 0;
+    if (sa !== sb) return sb - sa;
+    return Math.max.apply(null, b.years) - Math.max.apply(null, a.years);
+  });
+  var meta = function (u) {
+    var latest = Math.max.apply(null, u.years);
+    return (u.sch ? "<em>" + esc(u.sch) + " 장학금</em> · " : "") + "Class of " + latest;
+  };
+  var honor = document.getElementById("honor-list");
+  if (honor) {
+    /* 마지막 줄에 한 칸만 남지 않게 열 수 정하기 (PC) */
+    honor.setAttribute("data-cols", unis.length % 3 === 1 && unis.length % 2 === 0 ? "2" : "3");
+    honor.innerHTML = unis.map(function (u, i) {
+      return '<li data-i="' + i + '"><b>' + esc(u.name) + "</b><span>" + meta(u) + "</span></li>";
+    }).join("");
   }
-
-  /* 첫 화면: 올해 장학금 소식 */
-  if (highlight) {
-    var set = function (id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
-    set("news-year", highlight.year);
-    set("news-pct", highlight.percent);
-    set("news-uni", highlight.university);
-    set("news-who", highlight.students);
-    var tag = document.getElementById("news-sample");
-    if (tag) tag.hidden = !highlight.sample;
+  var spot = document.querySelector(".spotlight");
+  var spotName = document.getElementById("spot-name");
+  var spotMeta = document.getElementById("spot-meta");
+  var current = 0;
+  function show(i) {
+    if (!unis.length || !spotName) return;
+    current = i % unis.length;
+    spotName.textContent = unis[current].name;
+    spotMeta.innerHTML = meta(unis[current]);
+    if (honor) honor.querySelectorAll("li").forEach(function (li) { li.classList.toggle("on", +li.getAttribute("data-i") === current); });
   }
+  show(0);
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var timer = null;
+  function next() {
+    if (!spot) return;
+    spot.classList.add("swap");
+    setTimeout(function () { show(current + 1); spot.classList.remove("swap"); }, 450);
+  }
+  if (!reduce && unis.length > 1) timer = setInterval(next, 3600);
+  if (honor) honor.addEventListener("mouseover", function (e) {
+    var li = e.target.closest("li");
+    if (!li) return;
+    if (timer) { clearInterval(timer); timer = null; }
+    show(+li.getAttribute("data-i"));
+  });
+  var heroYear = document.getElementById("hero-year");
+  if (heroYear && results.length) heroYear.textContent = Math.max.apply(null, results.map(function (r) { return r.year; }));
+  var sampleTag = document.getElementById("news-sample");
+  if (sampleTag) sampleTag.hidden = !unis.some(function (u) { return u.sample; });
 
   /* 진학 실적 표: 연도 선택 + 검색 */
   var yearSel = document.getElementById("res-year");
