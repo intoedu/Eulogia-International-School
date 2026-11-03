@@ -22,24 +22,90 @@
     if (sa !== sb) return sb - sa;
     return Math.max.apply(null, b.years) - Math.max.apply(null, a.years);
   });
-  /* 대학 엠블럼: 대학명 머리글자 (실제 로고는 사용 규정 확인 후) */
-  var initials = function (name) {
-    var skip = { of: 1, the: 1, and: 1, at: 1, "&": 1 };
-    var words = name.replace(/\[[^\]]*\]/g, "").split(/[\s,-]+/).filter(function (w) { return w && !skip[w.toLowerCase()]; });
-    var ini = words.map(function (w) { return w.charAt(0).toUpperCase(); }).join("").slice(0, 3);
-    return ini || "U";
-  };
-  var grid = document.getElementById("college-grid");
-  if (grid) {
-    var MAX = 6;
-    grid.innerHTML = unis.slice(0, MAX).map(function (u, i) {
-      var latest = Math.max.apply(null, u.years);
-      return '<li class="college' + (i >= 4 ? " extra" : "") + '" style="--i:' + i + '">' +
-        '<span class="seal c' + ((i % 4) + 1) + '" aria-hidden="true">' + esc(initials(u.name)) + "</span>" +
-        "<div><b>" + esc(u.name) + "</b><span>Class of " + latest + (u.sch ? ' · <em>' + esc(u.sch) + " 장학금</em>" : "") + "</span></div></li>";
+  /* 첫 화면: 출발 안내판 (율로기아 → 미국 대학) */
+  var rowsEl = document.getElementById("board-rows");
+  if (rowsEl) {
+    var flights = results.slice().sort(function (a, b) {
+      if (b.year !== a.year) return b.year - a.year;
+      return (b.scholarship ? 1 : 0) - (a.scholarship ? 1 : 0);
+    });
+    var seenU = {}, list = [];
+    flights.forEach(function (r) { if (!seenU[r.university]) { seenU[r.university] = 1; list.push(r); } });
+    var newest = list.length ? list[0].year : 0;
+    var SHOW = 6;
+    rowsEl.innerHTML = list.slice(0, SHOW).map(function (r, i) {
+      var now = r.year === newest && r.scholarship;
+      var status = r.scholarship ? "SCHOLAR " + r.scholarship : "ADMITTED";
+      return '<div class="board-row r' + (now ? " now" : "") + (i >= 4 ? " extra" : "") + '" role="row" style="--i:' + i + '">' +
+        '<span class="cls" role="cell">' + esc(r.year) + "</span>" +
+        '<span class="dest" role="cell">' + esc(r.university) + "</span>" +
+        '<span class="st" role="cell">' + esc(r.stateCode || "USA") + "</span>" +
+        '<span class="status flap" role="cell">' + esc(status) + "</span></div>";
     }).join("");
-    var more = document.querySelector(".colleges-more");
-    if (more && unis.length > 6) more.textContent = "진학 대학 " + unis.length + "곳 전체 보기 →";
+    var cnt = document.getElementById("board-count");
+    if (cnt) cnt.textContent = list.length + "곳";
+
+    /* 상태 글자가 출발 안내판처럼 넘어가며 자리 잡기 (한 번만) */
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduceMotion) {
+      var CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%";
+      rowsEl.querySelectorAll(".flap").forEach(function (el, i) {
+        var target = el.textContent, step = 0, total = 14 + i * 3;
+        var t = setInterval(function () {
+          step++;
+          var out = "";
+          for (var k = 0; k < target.length; k++) {
+            var c = target.charAt(k);
+            out += (c === " " || c === "·" || step / total > k / target.length) ? c : CH.charAt(Math.floor(Math.random() * CH.length));
+          }
+          el.textContent = out;
+          if (step >= total) { clearInterval(t); el.textContent = target; }
+        }, 45);
+      });
+    }
+  }
+  /* 치앙마이 현재 시각 */
+  var clock = document.getElementById("board-clock");
+  if (clock) {
+    var tick = function () {
+      try {
+        clock.textContent = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Bangkok" }).format(new Date());
+      } catch (e) { clock.textContent = ""; }
+    };
+    tick(); setInterval(tick, 30000);
+  }
+
+  /* 진학 노선도: 나이를 고르면 출발역과 남은 길 */
+  var line = document.getElementById("route-line");
+  if (line) {
+    var stops = line.querySelectorAll("li");
+    var startFor = function (age) { return age < 6 ? 0 : age < 11 ? 1 : age < 14 ? 2 : 3; };
+    var names = ["유아반", "초등 과정", "중등 과정", "고등 과정(LCA 이중 학적)"];
+    var paint = function (age) {
+      var st = startFor(age);
+      stops.forEach(function (li, i) {
+        li.classList.toggle("past", i < st);
+        li.classList.toggle("here", i === st);
+        li.classList.toggle("on", i >= st);
+        li.style.setProperty("--on", i > st ? 1 : 0);
+      });
+      var startEl = document.getElementById("route-start");
+      var yearsEl = document.getElementById("route-years");
+      if (startEl) startEl.textContent = names[st] + "에서 출발 → 미국 고교 졸업장 → 미국 대학";
+      if (yearsEl) {
+        var toHigh = Math.max(0, 14 - age);
+        yearsEl.innerHTML = toHigh > 0
+          ? "고등 과정(9학년)까지 보통 <b>약 " + toHigh + "년</b>, 그 뒤 4년 과정을 마치면 미국 고교 졸업장으로 대학에 지원합니다."
+          : "바로 <b>고등 과정</b>에서 시작합니다. 이수한 과정에 맞춰 남은 과목을 정하고, 미국 고교 졸업장 또는 GED로 대학에 지원합니다.";
+      }
+    };
+    document.querySelectorAll(".age-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll(".age-btn").forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        paint(+btn.getAttribute("data-age"));
+      });
+    });
+    paint(8);
   }
   var years = results.map(function (r) { return r.year; });
   var yEl = document.getElementById("hero-years");

@@ -8,7 +8,7 @@
 <meta name="description" content="치앙마이의 미국 교육과정 학교. SOT·Abeka 개별 진도 학습, 미국 LCA 졸업장, 미국 대학 진학과 장학금. American curriculum school in Chiang Mai with a U.S. diploma pathway.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -62,15 +62,24 @@
         </div>
       </div>
 
-      <aside class="colleges" aria-labelledby="colleges-title">
-        <div class="colleges-head">
-          <p class="kicker">College Admissions <span id="hero-years"></span></p>
-          <h2 id="colleges-title">졸업생 진학 대학</h2>
-          <span class="tag-sample" id="news-sample">대학명 샘플</span>
+      <aside class="board" aria-labelledby="board-title">
+        <div class="board-top">
+          <p class="board-title" id="board-title"><span>DEPARTURES</span> 졸업생 진학 대학</p>
+          <p class="board-clock"><span>EULOGIA · CNX</span> <b id="board-clock">--:--</b></p>
         </div>
-        <p class="colleges-news" id="roll-key"></p>
-        <ul class="college-grid" id="college-grid"></ul>
-        <a class="colleges-more" href="#results">진학 실적 전체 보기 →</a>
+        <div class="board-table" role="table" aria-label="율로기아 졸업생이 진학한 미국 대학">
+          <div class="board-row board-head" role="row">
+            <span role="columnheader">CLASS</span>
+            <span role="columnheader">DESTINATION</span>
+            <span role="columnheader" class="col-state">STATE</span>
+            <span role="columnheader">STATUS</span>
+          </div>
+          <div id="board-rows" role="rowgroup"></div>
+        </div>
+        <div class="board-foot">
+          <span class="tag-sample" id="news-sample">대학명 샘플</span>
+          <a href="#results">진학 실적 전체 <span id="board-count"></span> →</a>
+        </div>
       </aside>
     </div>
   </section>
@@ -84,6 +93,37 @@
         <div><dt>75%</dt><dd>2026 주립대학 장학금</dd></div>
         <div><dt>1 : 1</dt><dd>개별 진도 · Individualized pace</dd></div>
       </dl>
+    </div>
+  </section>
+
+  <!-- 진학 노선도: 어려운 경로를 한 줄로 -->
+  <section class="section route-sec" id="route" aria-labelledby="route-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Route Map</p>
+        <h2 id="route-title">우리 아이는 어느 역에서 출발할까요?<span class="sub-en">Find your child's route to a U.S. college</span></h2>
+        <p>아이 나이를 고르면 율로기아에서 미국 대학까지 가는 길이 한 줄로 보입니다.</p>
+      </div>
+      <div class="ages" role="group" aria-label="아이 나이">
+        <button type="button" class="age-btn" data-age="4" aria-pressed="false">2–5세</button>
+        <button type="button" class="age-btn" data-age="8" aria-pressed="true">6–10세</button>
+        <button type="button" class="age-btn" data-age="12" aria-pressed="false">11–13세</button>
+        <button type="button" class="age-btn" data-age="15" aria-pressed="false">14세 이상</button>
+      </div>
+      <ol class="line" id="route-line">
+        <li data-stop="0"><span class="stop"></span><b>유아반</b><span class="lbl">Age 2–6 · Baan Haeng</span></li>
+        <li data-stop="1"><span class="stop"></span><b>초등 과정</b><span class="lbl">K–5 · SOT · Abeka</span></li>
+        <li data-stop="2"><span class="stop"></span><b>중등 과정</b><span class="lbl">Grade 6–8 · SOT · Abeka</span></li>
+        <li data-stop="3"><span class="stop"></span><b>고등 과정</b><span class="lbl">Grade 9–12 · LCA 이중 학적 · GED</span></li>
+        <li data-stop="4"><span class="stop"></span><b>미국 고교 졸업장</b><span class="lbl">LCA Diploma</span></li>
+        <li data-stop="5" class="goal"><span class="stop"></span><b>미국 대학</b><span class="lbl">College + Scholarship</span></li>
+      </ol>
+      <div class="route-out" aria-live="polite">
+        <p class="route-start" id="route-start"></p>
+        <p class="route-years" id="route-years"></p>
+        <p class="fine">보통 학년 기준입니다. 율로기아는 개별 진도 학습이라 아이마다 속도가 다릅니다. ACE를 처음 하는 학생은 입학 전에 진단 평가로 시작 단계를 정합니다.</p>
+        <a class="btn btn-navy" href="#apply" id="route-cta">이 노선으로 상담 신청</a>
+      </div>
     </div>
   </section>
 
