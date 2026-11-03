@@ -4,23 +4,24 @@
   - 학생 이름은 본인·보호자 게시 동의를 받은 경우에만 씁니다. 동의 전에는 이니셜로 씁니다.
 */
 
-/* 졸업생 진학 실적 (첫 화면 대학 깃발 + 진학 실적 표) */
+/* 졸업생 진학 실적 (첫 화면 대학 명단 + 진학 실적 표) */
 window.EULOGIA_RESULTS = [
-  { year: 2026, student: "M.J. 외", university: "○○ State University", state: "미국", scholarship: "75%", scholarshipName: "장학금 정식 명칭 확인 필요", route: "LCA Diploma", sample: true },
-  { year: 2026, student: "졸업생", university: "○○ State University", state: "미국", scholarship: "75%", scholarshipName: "장학금 정식 명칭 확인 필요", route: "LCA Diploma", sample: true },
-  { year: 2025, student: "졸업생", university: "○○ University", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true },
-  { year: 2025, student: "졸업생", university: "○○ Christian University", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true },
-  { year: 2024, student: "졸업생", university: "○○ College", state: "미국", scholarship: "", scholarshipName: "", route: "GED", sample: true },
-  { year: 2023, student: "졸업생", university: "○○ State University", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true }
+  { year: 2026, student: "M.J. 외", university: "[대학명] State University", state: "미국", scholarship: "75%", scholarshipName: "장학금 정식 명칭 확인 필요", route: "LCA Diploma", sample: true },
+  { year: 2026, student: "졸업생", university: "University of [대학명]", state: "미국", scholarship: "75%", scholarshipName: "장학금 정식 명칭 확인 필요", route: "LCA Diploma", sample: true },
+  { year: 2025, student: "졸업생", university: "[대학명] University", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true },
+  { year: 2025, student: "졸업생", university: "[대학명] Christian University", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true },
+  { year: 2024, student: "졸업생", university: "[대학명] College", state: "미국", scholarship: "", scholarshipName: "", route: "GED", sample: true },
+  { year: 2024, student: "졸업생", university: "[대학명] Institute of Technology", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true },
+  { year: 2023, student: "졸업생", university: "[대학명] Baptist University", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true }
 ];
 
-/* 올해 장학금 소식 (첫 화면 장학금 카드) */
+/* 올해 장학금 소식 (첫 화면 대학 명단 아래 한 줄) */
 window.EULOGIA_HIGHLIGHT = {
   year: 2026,
   percent: "75%",
   label: "Scholarship",
-  university: "○○ State University",
-  students: "M.J. 외 ○명",
+  university: "[대학명] State University",
+  students: "M.J. 외 [인원]명",
   note: "대학명·장학금 명칭·인원은 자료를 받으면 바뀝니다",
   sample: true
 };

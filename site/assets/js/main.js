@@ -9,7 +9,7 @@
     });
   }
 
-  /* 첫 화면: 졸업생 진학 대학 (큰 이름 + 명예 명단) */
+  /* 첫 화면: 졸업생이 진학한 미국 대학 명단 (모든 대학을 한 번에) */
   var byUni = {};
   results.forEach(function (r) {
     var u = byUni[r.university] || (byUni[r.university] = { name: r.university, years: [], sch: "", sample: false });
@@ -22,46 +22,26 @@
     if (sa !== sb) return sb - sa;
     return Math.max.apply(null, b.years) - Math.max.apply(null, a.years);
   });
-  var meta = function (u) {
-    var latest = Math.max.apply(null, u.years);
-    return (u.sch ? "<em>" + esc(u.sch) + " 장학금</em> · " : "") + "Class of " + latest;
-  };
-  var honor = document.getElementById("honor-list");
-  if (honor) {
-    /* 마지막 줄에 한 칸만 남지 않게 열 수 정하기 (PC) */
-    honor.setAttribute("data-cols", unis.length % 3 === 1 && unis.length % 2 === 0 ? "2" : "3");
-    honor.innerHTML = unis.map(function (u, i) {
-      return '<li data-i="' + i + '"><b>' + esc(u.name) + "</b><span>" + meta(u) + "</span></li>";
-    }).join("");
+  var roll = document.getElementById("roll");
+  if (roll) {
+    roll.innerHTML = unis.map(function (u, i) {
+      var last = i === unis.length - 1;
+      return '<span class="u" style="--i:' + i + '">' + esc(u.name) +
+        (u.sch ? "<sup>" + esc(u.sch) + " 장학금</sup>" : "") +
+        (last ? "" : '<span class="dot" aria-hidden="true">·</span>') + "</span>";
+    }).join(" ");
   }
-  var spot = document.querySelector(".spotlight");
-  var spotName = document.getElementById("spot-name");
-  var spotMeta = document.getElementById("spot-meta");
-  var current = 0;
-  function show(i) {
-    if (!unis.length || !spotName) return;
-    current = i % unis.length;
-    spotName.textContent = unis[current].name;
-    spotMeta.innerHTML = meta(unis[current]);
-    if (honor) honor.querySelectorAll("li").forEach(function (li) { li.classList.toggle("on", +li.getAttribute("data-i") === current); });
+  var years = results.map(function (r) { return r.year; });
+  var yEl = document.getElementById("hero-years");
+  if (yEl && years.length) {
+    var lo = Math.min.apply(null, years), hi = Math.max.apply(null, years);
+    yEl.textContent = lo === hi ? String(hi) : lo + "–" + hi;
   }
-  show(0);
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var timer = null;
-  function next() {
-    if (!spot) return;
-    spot.classList.add("swap");
-    setTimeout(function () { show(current + 1); spot.classList.remove("swap"); }, 450);
+  var key = document.getElementById("roll-key");
+  if (key && highlight) {
+    key.innerHTML = "<b>" + esc(highlight.year) + "</b> " + esc(highlight.university) + " <b>" + esc(highlight.percent) +
+      " 장학금</b> · " + esc(highlight.students);
   }
-  if (!reduce && unis.length > 1) timer = setInterval(next, 3600);
-  if (honor) honor.addEventListener("mouseover", function (e) {
-    var li = e.target.closest("li");
-    if (!li) return;
-    if (timer) { clearInterval(timer); timer = null; }
-    show(+li.getAttribute("data-i"));
-  });
-  var heroYear = document.getElementById("hero-year");
-  if (heroYear && results.length) heroYear.textContent = Math.max.apply(null, results.map(function (r) { return r.year; }));
   var sampleTag = document.getElementById("news-sample");
   if (sampleTag) sampleTag.hidden = !unis.some(function (u) { return u.sample; });
 

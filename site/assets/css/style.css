@@ -89,40 +89,22 @@ p { margin: 0; }
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,12,38,.82) 0%, rgba(10,12,38,.9) 55%, rgba(10,12,38,.97) 100%); }
 .hero .wrap { position: relative; z-index: 1; padding-block: clamp(32px, 5vw, 64px) clamp(28px, 4vw, 44px); }
 .hero .kicker .tag-sample { color: var(--gold); letter-spacing: 0; text-transform: none; margin-left: 6px; }
-.hero-pre { margin-top: 18px; font-size: var(--t-lg); color: var(--on-dark-muted); font-weight: 500; }
-.spotlight { margin-top: 6px; min-height: 2.3em; display: grid; align-content: start; font-size: clamp(2.5rem, 6.4vw, 5rem); }
-.spot-name { font-family: var(--f-serif); font-weight: 700; line-height: 1.08; letter-spacing: -0.015em; color: var(--on-dark); text-wrap: balance; transition: opacity .45s ease, transform .45s ease; }
-.spot-meta { font-size: var(--t-lg); color: var(--on-dark-muted); margin-top: 10px; transition: opacity .45s ease; }
-.spot-meta em { font-style: normal; font-weight: 700; color: var(--gold); }
-.spotlight.swap .spot-name { opacity: 0; transform: translateY(10px); }
-.spotlight.swap .spot-meta { opacity: 0; }
-@media (prefers-reduced-motion: reduce) { .spot-name, .spot-meta { transition: none; } }
-
-.honor { list-style: none; margin: clamp(22px, 3.5vw, 36px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(255,255,255,.22); }
-.honor li { padding: 14px 18px 14px 0; border-bottom: 1px solid rgba(255,255,255,.14); display: grid; gap: 2px; min-width: 0; cursor: default; }
-.honor li:nth-child(3n+2), .honor li:nth-child(3n) { padding-left: 18px; border-left: 1px solid rgba(255,255,255,.14); }
-.honor b { font-family: var(--f-serif); font-weight: 600; font-size: clamp(1.15rem, 1.9vw, 1.5rem); line-height: 1.25; color: var(--on-dark); }
-.honor span { font-size: var(--t-xs); color: var(--on-dark-muted); }
-.honor em { font-style: normal; font-weight: 700; color: var(--gold); }
-.honor li.on b { color: var(--gold); }
-@media (min-width: 761px) {
-  .honor[data-cols="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .honor[data-cols="2"] li:nth-child(n) { padding-left: 0; border-left: 0; }
-  .honor[data-cols="2"] li:nth-child(even) { padding-left: 18px; border-left: 1px solid rgba(255,255,255,.14); }
-}
-
+.roll-title { margin-top: 16px; font-family: var(--f-sans); font-size: var(--t-lg); font-weight: 500; letter-spacing: 0; color: var(--on-dark-muted); }
+.roll { margin-top: 14px; max-width: 24em; font-family: var(--f-serif); font-weight: 600; font-size: clamp(1.7rem, 3.6vw, 2.75rem); line-height: 1.32; letter-spacing: -0.01em; color: var(--on-dark); text-wrap: pretty; word-break: keep-all; overflow-wrap: break-word; }
+.roll .u { display: inline; animation: rise .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 90ms); }
+.roll .dot { color: var(--gold); opacity: .8; margin-left: 0.4em; margin-right: 0.12em; font-weight: 400; }
+.roll sup { font-family: var(--f-sans); font-size: 0.36em; font-weight: 700; color: var(--navy-deep); background: var(--gold); border-radius: 3px; padding: 0.1em 0.4em; margin-left: 0.3em; vertical-align: 0.95em; letter-spacing: 0.02em; white-space: nowrap; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .roll .u { animation: none; } }
+.roll-key { margin-top: 14px; font-size: var(--t-sm); color: var(--on-dark-muted); }
+.roll-key b { color: var(--gold); }
 .hero-foot { margin-top: clamp(22px, 3.5vw, 34px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px; }
 .hero-slogan { font-family: var(--f-serif); font-size: var(--t-lg); font-weight: 600; }
 .hero-slogan span { display: block; font-family: var(--f-sans); font-weight: 400; font-size: var(--t-xs); letter-spacing: 0.08em; color: var(--on-dark-muted); }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
 @media (max-width: 760px) {
-  .honor { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .honor li:nth-child(3n+2), .honor li:nth-child(3n) { padding-left: 0; border-left: 0; }
-  .honor li:nth-child(even) { padding-left: 14px; border-left: 1px solid rgba(255,255,255,.14); }
-  .honor li { padding-block: 11px; }
-  .hero-pre { font-size: var(--t-md); }
-  .spotlight { min-height: 2.6em; }
-  .spot-meta { font-size: var(--t-md); }
+  .roll-title { font-size: var(--t-md); }
+  .roll { font-size: 1.5rem; }
 }
 
 /* Stats */
