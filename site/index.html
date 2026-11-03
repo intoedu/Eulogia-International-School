@@ -42,21 +42,36 @@
 
 <main id="top">
 
-  <!-- 첫 화면: 졸업생이 진학한 미국 대학 명단 -->
+  <!-- 첫 화면: 율로기아 + 졸업생 진학 대학 -->
   <section class="hero" aria-labelledby="hero-title">
     <img class="hero-img" src="assets/img/building.jpg" alt="" width="1024" height="576">
-    <div class="wrap">
-      <p class="kicker">College Admissions <span id="hero-years"></span> <span class="tag-sample" id="news-sample">대학명 샘플</span></p>
-      <h1 class="roll-title" id="hero-title">율로기아 졸업생들이 진학한 미국 대학</h1>
-      <p class="roll" id="roll"></p>
-      <p class="roll-key" id="roll-key"></p>
-      <div class="hero-foot">
-        <p class="hero-slogan">치앙마이에서 미국 대학으로 <span>American curriculum · U.S. diploma · Scholarships</span></p>
+    <div class="wrap hero-grid">
+      <div class="hero-main">
+        <div class="hero-brand">
+          <img src="assets/img/logo.jpg" alt="Eulogia 교표" width="84" height="84">
+          <div>
+            <p class="hero-name">EULOGIA</p>
+            <p class="hero-place">Chiang Mai, Thailand · Since 2013</p>
+          </div>
+        </div>
+        <h1 id="hero-title">치앙마이에서<br>미국 대학으로</h1>
+        <p class="hero-lede">미국 교육과정 SOT·Abeka로 공부하고, 미국 고교 졸업장을 받아, 장학금과 함께 미국 대학에 진학합니다.</p>
         <div class="hero-cta">
           <a class="btn btn-gold" href="#apply">입학 상담 신청</a>
-          <a class="btn btn-line" href="#results">진학 실적 전체</a>
+          <a class="btn btn-line" href="#programs">교육과정 보기</a>
         </div>
       </div>
+
+      <aside class="colleges" aria-labelledby="colleges-title">
+        <div class="colleges-head">
+          <p class="kicker">College Admissions <span id="hero-years"></span></p>
+          <h2 id="colleges-title">졸업생 진학 대학</h2>
+          <span class="tag-sample" id="news-sample">대학명 샘플</span>
+        </div>
+        <p class="colleges-news" id="roll-key"></p>
+        <ul class="college-grid" id="college-grid"></ul>
+        <a class="colleges-more" href="#results">진학 실적 전체 보기 →</a>
+      </aside>
     </div>
   </section>
 

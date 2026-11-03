@@ -22,14 +22,24 @@
     if (sa !== sb) return sb - sa;
     return Math.max.apply(null, b.years) - Math.max.apply(null, a.years);
   });
-  var roll = document.getElementById("roll");
-  if (roll) {
-    roll.innerHTML = unis.map(function (u, i) {
-      var last = i === unis.length - 1;
-      return '<span class="u" style="--i:' + i + '">' + esc(u.name) +
-        (u.sch ? "<sup>" + esc(u.sch) + " 장학금</sup>" : "") +
-        (last ? "" : '<span class="dot" aria-hidden="true">·</span>') + "</span>";
-    }).join(" ");
+  /* 대학 엠블럼: 대학명 머리글자 (실제 로고는 사용 규정 확인 후) */
+  var initials = function (name) {
+    var skip = { of: 1, the: 1, and: 1, at: 1, "&": 1 };
+    var words = name.replace(/\[[^\]]*\]/g, "").split(/[\s,-]+/).filter(function (w) { return w && !skip[w.toLowerCase()]; });
+    var ini = words.map(function (w) { return w.charAt(0).toUpperCase(); }).join("").slice(0, 3);
+    return ini || "U";
+  };
+  var grid = document.getElementById("college-grid");
+  if (grid) {
+    var MAX = 6;
+    grid.innerHTML = unis.slice(0, MAX).map(function (u, i) {
+      var latest = Math.max.apply(null, u.years);
+      return '<li class="college' + (i >= 4 ? " extra" : "") + '" style="--i:' + i + '">' +
+        '<span class="seal c' + ((i % 4) + 1) + '" aria-hidden="true">' + esc(initials(u.name)) + "</span>" +
+        "<div><b>" + esc(u.name) + "</b><span>Class of " + latest + (u.sch ? ' · <em>' + esc(u.sch) + " 장학금</em>" : "") + "</span></div></li>";
+    }).join("");
+    var more = document.querySelector(".colleges-more");
+    if (more && unis.length > 6) more.textContent = "진학 대학 " + unis.length + "곳 전체 보기 →";
   }
   var years = results.map(function (r) { return r.year; });
   var yEl = document.getElementById("hero-years");

@@ -83,28 +83,61 @@ p { margin: 0; }
 @media (max-width: 980px) { .menu { display: none; } .masthead .btn { margin-left: auto; padding: 0.65em 1em; } }
 @media (max-width: 420px) { .crest small { display: none; } .crest img { width: 44px; height: 44px; } }
 
-/* Hero: graduates' colleges are the headline */
+/* Hero: school identity on the left, graduates' colleges panel on the right */
 .hero { position: relative; color: var(--on-dark); background: var(--navy-deep); overflow: hidden; }
-.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; opacity: .55; }
-.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,12,38,.82) 0%, rgba(10,12,38,.9) 55%, rgba(10,12,38,.97) 100%); }
-.hero .wrap { position: relative; z-index: 1; padding-block: clamp(32px, 5vw, 64px) clamp(28px, 4vw, 44px); }
-.hero .kicker .tag-sample { color: var(--gold); letter-spacing: 0; text-transform: none; margin-left: 6px; }
-.roll-title { margin-top: 16px; font-family: var(--f-sans); font-size: var(--t-lg); font-weight: 500; letter-spacing: 0; color: var(--on-dark-muted); }
-.roll { margin-top: 14px; max-width: 24em; font-family: var(--f-serif); font-weight: 600; font-size: clamp(1.7rem, 3.6vw, 2.75rem); line-height: 1.32; letter-spacing: -0.01em; color: var(--on-dark); text-wrap: pretty; word-break: keep-all; overflow-wrap: break-word; }
-.roll .u { display: inline; animation: rise .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 90ms); }
-.roll .dot { color: var(--gold); opacity: .8; margin-left: 0.4em; margin-right: 0.12em; font-weight: 400; }
-.roll sup { font-family: var(--f-sans); font-size: 0.36em; font-weight: 700; color: var(--navy-deep); background: var(--gold); border-radius: 3px; padding: 0.1em 0.4em; margin-left: 0.3em; vertical-align: 0.95em; letter-spacing: 0.02em; white-space: nowrap; }
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,12,38,.9) 0%, rgba(10,12,38,.72) 50%, rgba(10,12,38,.55) 100%); }
+.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 470px); gap: clamp(28px, 5vw, 64px); align-items: center; padding-block: clamp(32px, 5vw, 60px); }
+.hero-brand { display: flex; align-items: center; gap: 16px; }
+.hero-brand img { width: 84px; height: 84px; border-radius: 50%; box-shadow: 0 0 0 4px rgba(255,255,255,.9); }
+.hero-name { font-family: var(--f-serif); font-size: clamp(2rem, 3.6vw, 2.75rem); font-weight: 700; letter-spacing: 0.14em; line-height: 1; }
+.hero-place { margin-top: 8px; font-size: var(--t-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.hero h1 { margin-top: clamp(22px, 3vw, 32px); font-size: clamp(2.1rem, 4.4vw, 3.4rem); line-height: 1.15; font-weight: 600; }
+.hero-lede { margin-top: 16px; max-width: 30em; color: var(--on-dark-muted); }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+
+.colleges { background: var(--surface); color: var(--ink); padding: 20px 20px 16px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); border-top: 4px solid var(--gold); display: grid; gap: 12px; }
+.colleges-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.colleges-head .kicker { flex-basis: 100%; }
+.colleges-head h2 { font-size: var(--t-lg); }
+.colleges-news { font-size: var(--t-xs); background: var(--gold-soft); padding: 8px 12px; line-height: 1.5; }
+.colleges-news b { color: var(--navy); }
+:root[data-theme="dark"] .colleges-news b { color: var(--gold); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .colleges-news b { color: var(--gold); } }
+.college-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.college { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; align-items: center; padding: 9px 10px; border: 1px solid var(--line); min-width: 0; animation: rise .6s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 70ms); }
+.seal { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-family: var(--f-serif); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; background: var(--seal, var(--navy)); box-shadow: inset 0 0 0 2px rgba(255,255,255,.55), 0 0 0 1px var(--seal, var(--navy)); }
+.seal.c1 { --seal: var(--navy-2); } .seal.c2 { --seal: #8e2b2c; } .seal.c3 { --seal: #1f5a3a; } .seal.c4 { --seal: #4a4f60; }
+.college > div b { display: block; font-family: var(--f-serif); font-weight: 600; font-size: 0.98rem; line-height: 1.25; word-break: keep-all; overflow-wrap: break-word; }
+.college > div span { display: block; font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+.college em { font-style: normal; font-weight: 700; color: var(--gold); white-space: nowrap; }
+.colleges-more { justify-self: start; font-size: var(--t-sm); font-weight: 700; color: var(--navy); text-decoration: none; }
+:root[data-theme="dark"] .colleges-more { color: var(--ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .colleges-more { color: var(--ink); } }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .roll .u { animation: none; } }
-.roll-key { margin-top: 14px; font-size: var(--t-sm); color: var(--on-dark-muted); }
-.roll-key b { color: var(--gold); }
-.hero-foot { margin-top: clamp(22px, 3.5vw, 34px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px; }
-.hero-slogan { font-family: var(--f-serif); font-size: var(--t-lg); font-weight: 600; }
-.hero-slogan span { display: block; font-family: var(--f-sans); font-weight: 400; font-size: var(--t-xs); letter-spacing: 0.08em; color: var(--on-dark-muted); }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
-@media (max-width: 760px) {
-  .roll-title { font-size: var(--t-md); }
-  .roll { font-size: 1.5rem; }
+@media (prefers-reduced-motion: reduce) { .college { animation: none; } }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); padding-block: 28px; gap: 24px; }
+  .hero::after { background: linear-gradient(180deg, rgba(10,12,38,.82) 0%, rgba(10,12,38,.9) 100%); }
+}
+@media (max-width: 600px) {
+  .hero-brand img { width: 60px; height: 60px; box-shadow: 0 0 0 3px rgba(255,255,255,.9); }
+  .hero h1 { margin-top: 18px; }
+  .hero-lede { display: none; }
+  .hero-cta { margin-top: 18px; }
+  .colleges { padding: 18px 14px 16px; }
+  .college { grid-template-columns: 34px minmax(0, 1fr); gap: 8px; padding: 8px; }
+  .seal { width: 34px; height: 34px; font-size: 0.78rem; }
+  .college b { font-size: 0.86rem; }
+  .college-grid .extra { display: none; }
+  .hero-name { font-size: 1.7rem; }
+  .hero-place { font-size: 0.66rem; letter-spacing: 0.08em; }
+  .hero-brand img { width: 52px; height: 52px; }
+  .colleges-news { display: none; }
+  .colleges { gap: 10px; }
+  .hero h1 { font-size: 1.9rem; }
+  .colleges-head h2 { font-size: var(--t-md); }
 }
 
 /* Stats */
