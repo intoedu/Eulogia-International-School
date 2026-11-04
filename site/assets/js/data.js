@@ -1,30 +1,55 @@
 /*
   홈페이지에 들어가는 데이터. 자료가 오면 이 파일만 고치면 됩니다.
-  - sample: true 인 항목은 초안용 샘플입니다. 실제 자료로 바꾸면 sample 을 지우세요.
-  - 학생 이름은 본인·보호자 게시 동의를 받은 경우에만 씁니다. 동의 전에는 이니셜로 씁니다.
+  - 학생 이름은 본인·보호자 게시 동의를 받은 경우에만 씁니다. 동의 전에는 이니셜이나 「학생 A」로 씁니다.
+  - check: true 는 명칭·수치 확인이 필요한 항목입니다.
 */
 
-/* 졸업생 진학 실적 (첫 화면 대학 명단 + 진학 실적 표) */
+/* 텍사스 진학 경로 누적 합격 실적 (총 40명) — 같은 경로를 거친 학생들의 기록 */
 window.EULOGIA_RESULTS = [
-  { year: 2026, student: "M.J. 외", university: "[대학명] State University", state: "미국", scholarship: "75%", scholarshipName: "장학금 정식 명칭 확인 필요", route: "LCA Diploma", sample: true },
-  { year: 2026, student: "졸업생", university: "University of [대학명]", state: "미국", scholarship: "75%", scholarshipName: "장학금 정식 명칭 확인 필요", route: "LCA Diploma", sample: true },
-  { year: 2025, student: "졸업생", university: "[대학명] University", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true },
-  { year: 2025, student: "졸업생", university: "[대학명] Christian University", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true },
-  { year: 2024, student: "졸업생", university: "[대학명] College", state: "미국", scholarship: "", scholarshipName: "", route: "GED", sample: true },
-  { year: 2024, student: "졸업생", university: "[대학명] Institute of Technology", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true },
-  { year: 2023, student: "졸업생", university: "[대학명] Baptist University", state: "미국", scholarship: "", scholarshipName: "", route: "LCA Diploma", sample: true }
+  { ko: "텍사스 A&M", university: "Texas A&M University", state: "TX", count: 4, scholarship: "최대 75%", note: "Corps of Cadets 장학금" },
+  { ko: "럿거스대", university: "Rutgers University", state: "NJ", count: 8 },
+  { ko: "뉴욕주립대 스토니브룩", university: "Stony Brook University (SUNY)", state: "NY", count: 7 },
+  { ko: "오하이오 주립대", university: "The Ohio State University", state: "OH", count: 6 },
+  { ko: "위스콘신대 매디슨", university: "University of Wisconsin–Madison", state: "WI", count: 3 },
+  { ko: "뉴욕주립대 버펄로", university: "University at Buffalo (SUNY)", state: "NY", count: 3 },
+  { ko: "뉴욕주립대 빙햄턴", university: "Binghamton University (SUNY)", state: "NY", count: 1 },
+  { ko: "몽클레어 주립대", university: "Montclair State University", state: "NJ", count: 1 },
+  { ko: "페이스대", university: "Pace University", state: "NY", count: 1 },
+  { ko: "펜실베이니아 주립대", university: "Penn State University", state: "PA", count: 1 },
+  { ko: "포덤대", university: "Fordham University", state: "NY", count: 1 },
+  { ko: "에머슨 칼리지", university: "Emerson College", state: "MA", count: 1 },
+  { ko: "메릴랜드 주립대", university: "University of Maryland", state: "MD", count: 1 },
+  { ko: "텍사스 크리스천대", university: "Texas Christian University (TCU)", state: "TX", count: 1 },
+  { ko: "텍사스 주립대", university: "텍사스 주립대 (영문 명칭 확인 필요)", state: "TX", count: 1, check: true }
 ];
 
-/* 올해 장학금 소식 (첫 화면 대학 명단 아래 한 줄) */
-window.EULOGIA_HIGHLIGHT = {
-  year: 2026,
-  percent: "75%",
-  label: "Scholarship",
-  university: "[대학명] State University",
-  students: "M.J. 외 [인원]명",
-  note: "대학명·장학금 명칭·인원은 자료를 받으면 바뀝니다",
-  sample: true
+/* 첫 화면 숫자 */
+window.EULOGIA_STATS = {
+  admits: 40,
+  scholarshipMax: "75%"
 };
+
+/* Texas A&M 장학금 실제 사례 (1학기, 개인 정보 제외) */
+window.EULOGIA_AID_CASE = {
+  term: "1학기",
+  charges: 29069.52,
+  aid: 16973.00,
+  net: 12096.52
+};
+
+/* 블린 칼리지 기수별 첫 학기 GPA 4.0 학생 수 (이름 제외) */
+window.EULOGIA_COHORTS = [
+  { label: "1기", n: 5 },
+  { label: "2기", n: 5 },
+  { label: "3기", n: 4 },
+  { label: "5기", n: 1 }
+];
+
+/* 같은 경로 학생 성장 기록 (이름 제외) */
+window.EULOGIA_GROWTH = [
+  { label: "학생 A", tag: "꾸준한 상승", gpa: [["9학년", 1.83], ["10학년", 2.92], ["11학년", 3.84]], notes: ["10학년 Cougar of the Year", "11학년 전 과목 A (Honor Roll)"] },
+  { label: "학생 B", tag: "STEM 상위권", gpa: [["9학년", 3.80], ["10학년", 3.81], ["11학년", 3.90]], notes: ["10·11학년 전 과목 A (Honor Roll)", "AP 수학 이수 · 학년 1위"] }
+];
 
 /* 2026-2027 학사 일정 (기존 학교 일정표에서 옮김) */
 window.EULOGIA_CALENDAR = [

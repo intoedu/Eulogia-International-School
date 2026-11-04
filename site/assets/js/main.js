@@ -1,70 +1,58 @@
 (function () {
   var results = window.EULOGIA_RESULTS || [];
-  var highlight = window.EULOGIA_HIGHLIGHT || null;
+  var stats = window.EULOGIA_STATS || {};
+  var aidCase = window.EULOGIA_AID_CASE || null;
+  var growth = window.EULOGIA_GROWTH || [];
+  var cohorts = window.EULOGIA_COHORTS || [];
   var calendar = window.EULOGIA_CALENDAR || [];
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+  var money = function (n) { return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
 
-  /* 첫 화면: 졸업생이 진학한 미국 대학 명단 (모든 대학을 한 번에) */
-  var byUni = {};
-  results.forEach(function (r) {
-    var u = byUni[r.university] || (byUni[r.university] = { name: r.university, years: [], sch: "", sample: false });
-    if (u.years.indexOf(r.year) === -1) u.years.push(r.year);
-    if (r.scholarship && !u.sch) u.sch = r.scholarship;
-    if (r.sample) u.sample = true;
-  });
-  var unis = Object.keys(byUni).map(function (k) { return byUni[k]; }).sort(function (a, b) {
-    var sa = a.sch ? 1 : 0, sb = b.sch ? 1 : 0;
+  /* 장학금 받은 대학 먼저, 그다음 합격 인원 순 */
+  var ranked = results.slice().sort(function (a, b) {
+    var sa = a.scholarship ? 1 : 0, sb = b.scholarship ? 1 : 0;
     if (sa !== sb) return sb - sa;
-    return Math.max.apply(null, b.years) - Math.max.apply(null, a.years);
+    return (b.count || 0) - (a.count || 0);
   });
-  /* 첫 화면: 출발 안내판 (율로기아 → 미국 대학) */
+  var total = results.reduce(function (t, r) { return t + (r.count || 0); }, 0);
+
+  /* 첫 화면: 출발 안내판 */
   var rowsEl = document.getElementById("board-rows");
   if (rowsEl) {
-    var flights = results.slice().sort(function (a, b) {
-      if (b.year !== a.year) return b.year - a.year;
-      return (b.scholarship ? 1 : 0) - (a.scholarship ? 1 : 0);
-    });
-    var seenU = {}, list = [];
-    flights.forEach(function (r) { if (!seenU[r.university]) { seenU[r.university] = 1; list.push(r); } });
-    var newest = list.length ? list[0].year : 0;
-    var SHOW = 6;
-    rowsEl.innerHTML = list.slice(0, SHOW).map(function (r, i) {
-      var now = r.year === newest && r.scholarship;
-      var status = r.scholarship ? "SCHOLAR " + r.scholarship : "ADMITTED";
-      return '<div class="board-row r' + (now ? " now" : "") + (i >= 4 ? " extra" : "") + '" role="row" style="--i:' + i + '">' +
-        '<span class="cls" role="cell">' + esc(r.year) + "</span>" +
+    rowsEl.innerHTML = ranked.slice(0, 6).map(function (r, i) {
+      var status = r.scholarship ? "SCHOLAR " + r.scholarship.replace("최대 ", "") : "ADMITTED";
+      return '<div class="board-row r' + (r.scholarship ? " now" : "") + (i >= 4 ? " extra" : "") + '" role="row" style="--i:' + i + '">' +
         '<span class="dest" role="cell">' + esc(r.university) + "</span>" +
-        '<span class="st" role="cell">' + esc(r.stateCode || "USA") + "</span>" +
+        '<span class="st" role="cell">' + esc(r.state) + "</span>" +
+        '<span class="n" role="cell">' + esc(r.count) + "</span>" +
         '<span class="status flap" role="cell">' + esc(status) + "</span></div>";
     }).join("");
     var cnt = document.getElementById("board-count");
-    if (cnt) cnt.textContent = list.length + "곳";
+    if (cnt) cnt.textContent = total + "명 · " + results.length + "곳";
 
-    /* 상태 글자가 출발 안내판처럼 넘어가며 자리 잡기 (한 번만) */
-    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reduceMotion) {
       var CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%";
       rowsEl.querySelectorAll(".flap").forEach(function (el, i) {
-        var target = el.textContent, step = 0, total = 14 + i * 3;
+        var target = el.textContent, step = 0, steps = 14 + i * 3;
         var t = setInterval(function () {
           step++;
           var out = "";
           for (var k = 0; k < target.length; k++) {
             var c = target.charAt(k);
-            out += (c === " " || c === "·" || step / total > k / target.length) ? c : CH.charAt(Math.floor(Math.random() * CH.length));
+            out += (c === " " || step / steps > k / target.length) ? c : CH.charAt(Math.floor(Math.random() * CH.length));
           }
           el.textContent = out;
-          if (step >= total) { clearInterval(t); el.textContent = target; }
+          if (step >= steps) { clearInterval(t); el.textContent = target; }
         }, 45);
       });
     }
   }
-  /* 치앙마이 현재 시각 */
   var clock = document.getElementById("board-clock");
   if (clock) {
     var tick = function () {
@@ -75,12 +63,22 @@
     tick(); setInterval(tick, 30000);
   }
 
-  /* 진학 노선도: 나이를 고르면 출발역과 남은 길 */
+  /* 숫자 띠 */
+  var setText = function (id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
+  if (stats.admits) setText("stat-admits", stats.admits);
+  setText("stat-perfect", cohorts.reduce(function (t, c) { return t + c.n; }, 0));
+
+  /* 진학 노선도 */
   var line = document.getElementById("route-line");
   if (line) {
     var stops = line.querySelectorAll("li");
-    var startFor = function (age) { return age < 6 ? 0 : age < 11 ? 1 : age < 14 ? 2 : 3; };
-    var names = ["유아반", "초등 과정", "중등 과정", "고등 과정(LCA 이중 학적)"];
+    var startFor = function (age) { return age < 6 ? 0 : age < 13 ? 1 : age < 18 ? 2 : 3; };
+    var copy = [
+      ["유아반에서 출발 → 초·중등 → 텍사스 → 미국 대학", "율로기아 유아반에서 영어와 학교생활을 시작하고, 초·중등 과정으로 이어집니다. 8학년 무렵부터 텍사스 현지 고교로 갈 수 있습니다."],
+      ["초·중등 SOT·Abeka에서 출발 → 텍사스 현지 고교 → 블린 칼리지 → 미국 대학", "율로기아에서 6개월 이상 공부하고 학교 추천을 받으면 <b>8학년부터</b> 텍사스 현지 고교로 진학할 수 있습니다."],
+      ["텍사스 현지 고교에서 출발 → 블린 칼리지 → 텍사스 A&M·미국 대학", "율로기아에서 6개월 이상 준비한 뒤 텍사스 현지 고교로 갑니다. 재학 중 <b>블린 칼리지 학점 선이수</b>와 AP를 들어 대학 준비를 앞당깁니다."],
+      ["블린 칼리지에서 출발 → 텍사스 A&M 편입", "고교를 마친 학생은 블린 칼리지에서 <b>1~2년</b> 공부한 뒤 텍사스 A&amp;M으로 편입합니다. 블린 간호 과정으로 이어지는 진로도 있습니다."]
+    ];
     var paint = function (age) {
       var st = startFor(age);
       stops.forEach(function (li, i) {
@@ -89,85 +87,115 @@
         li.classList.toggle("on", i >= st);
         li.style.setProperty("--on", i > st ? 1 : 0);
       });
-      var startEl = document.getElementById("route-start");
-      var yearsEl = document.getElementById("route-years");
-      if (startEl) startEl.textContent = names[st] + "에서 출발 → 미국 고교 졸업장 → 미국 대학";
-      if (yearsEl) {
-        var toHigh = Math.max(0, 14 - age);
-        yearsEl.innerHTML = toHigh > 0
-          ? "고등 과정(9학년)까지 보통 <b>약 " + toHigh + "년</b>, 그 뒤 4년 과정을 마치면 미국 고교 졸업장으로 대학에 지원합니다."
-          : "바로 <b>고등 과정</b>에서 시작합니다. 이수한 과정에 맞춰 남은 과목을 정하고, 미국 고교 졸업장 또는 GED로 대학에 지원합니다.";
-      }
+      var a = document.getElementById("route-start"), b = document.getElementById("route-years");
+      if (a) a.textContent = copy[st][0];
+      if (b) b.innerHTML = copy[st][1];
     };
     document.querySelectorAll(".age-btn").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        document.querySelectorAll(".age-btn").forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        document.querySelectorAll(".age-btn").forEach(function (x) { x.setAttribute("aria-pressed", String(x === btn)); });
         paint(+btn.getAttribute("data-age"));
       });
     });
-    paint(8);
+    paint(9);
   }
-  var years = results.map(function (r) { return r.year; });
-  var yEl = document.getElementById("hero-years");
-  if (yEl && years.length) {
-    var lo = Math.min.apply(null, years), hi = Math.max.apply(null, years);
-    yEl.textContent = lo === hi ? String(hi) : lo + "–" + hi;
-  }
-  var key = document.getElementById("roll-key");
-  if (key && highlight) {
-    key.innerHTML = "<b>" + esc(highlight.year) + "</b> " + esc(highlight.university) + " <b>" + esc(highlight.percent) +
-      " 장학금</b> · " + esc(highlight.students);
-  }
-  var sampleTag = document.getElementById("news-sample");
-  if (sampleTag) sampleTag.hidden = !unis.some(function (u) { return u.sample; });
 
-  /* 진학 실적 표: 연도 선택 + 검색 */
-  var yearSel = document.getElementById("res-year");
+  /* 성장 기록: 학년별 GPA 선 그래프 (SVG) */
+  var chart = document.getElementById("gpa-chart");
+  if (chart && growth.length) {
+    var W = 560, H = 260, L = 40, R = 70, T = 18, B = 34;
+    var xs = growth[0].gpa.map(function (p) { return p[0]; });
+    var x = function (i) { return L + i * (W - L - R) / (xs.length - 1); };
+    var y = function (v) { return T + (4 - v) / 3 * (H - T - B); };   /* 1.0 ~ 4.0 */
+    var svg = '<svg viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="xMidYMid meet" aria-hidden="true">';
+    [1, 2, 3, 4].forEach(function (g) {
+      svg += '<line class="grid" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(g) + '" y2="' + y(g) + '"/>' +
+        '<text class="tick" x="' + (L - 10) + '" y="' + (y(g) + 4) + '" text-anchor="end">' + g.toFixed(1) + "</text>";
+    });
+    xs.forEach(function (lab, i) {
+      svg += '<text class="tick" x="' + x(i) + '" y="' + (H - 10) + '" text-anchor="middle">' + esc(lab) + "</text>";
+    });
+    growth.forEach(function (g, k) {
+      var pts = g.gpa.map(function (p, i) { return x(i) + "," + y(p[1]); }).join(" ");
+      svg += '<polyline class="ln s' + k + '" points="' + pts + '"/>';
+      g.gpa.forEach(function (p, i) {
+        svg += '<circle class="pt s' + k + '" cx="' + x(i) + '" cy="' + y(p[1]) + '" r="' + (i === g.gpa.length - 1 ? 6 : 4) + '"/>';
+      });
+      var last = g.gpa[g.gpa.length - 1];
+      svg += '<text class="end s' + k + '" x="' + (x(g.gpa.length - 1) + 12) + '" y="' + (y(last[1]) + (k === 0 ? 14 : -4)) + '">' + last[1].toFixed(2) + "</text>";
+    });
+    chart.innerHTML = svg + "</svg>";
+    var leg = document.getElementById("gpa-legend");
+    if (leg) leg.innerHTML = growth.map(function (g, k) {
+      return '<li class="s' + k + '"><b>' + esc(g.label) + " · " + esc(g.tag) + "</b> " +
+        g.gpa[0][1].toFixed(2) + " → " + g.gpa[g.gpa.length - 1][1].toFixed(2) +
+        "<span>" + g.notes.map(esc).join(" · ") + "</span></li>";
+    }).join("");
+  }
+
+  /* 장학금 사례: 청구액 중 장학금 비율 막대 */
+  var aidEl = document.getElementById("aid");
+  if (aidEl && aidCase) {
+    var pct = Math.round(aidCase.aid / aidCase.charges * 100);
+    aidEl.innerHTML =
+      '<div class="aid-big"><b>' + pct + "%</b><span>를 장학금으로</span></div>" +
+      '<div class="aid-bar" role="img" aria-label="청구액 ' + money(aidCase.charges) + " 중 장학금 " + money(aidCase.aid) + ", 실제 부담 " + money(aidCase.net) + '">' +
+      '<span class="aid-a" style="width:' + pct + '%"></span><span class="aid-n" style="width:' + (100 - pct) + '%"></span></div>' +
+      '<dl class="aid-dl"><div><dt>' + esc(aidCase.term) + " 청구액</dt><dd>" + money(aidCase.charges) + "</dd></div>" +
+      '<div class="a"><dt>장학금</dt><dd>−' + money(aidCase.aid) + "</dd></div>" +
+      '<div class="n"><dt>실제 부담</dt><dd>' + money(aidCase.net) + "</dd></div></dl>";
+  }
+
+  /* 블린 첫 학기 4.0: 기수별 점 */
+  var coEl = document.getElementById("cohorts");
+  if (coEl && cohorts.length) {
+    var sum = cohorts.reduce(function (t, c) { return t + c.n; }, 0);
+    coEl.innerHTML = '<div class="co-big"><b>' + sum + "명</b><span>첫 학기 4.0 만점</span></div><ul>" +
+      cohorts.map(function (c) {
+        var dots = "";
+        for (var i = 0; i < c.n; i++) dots += '<i style="--i:' + i + '"></i>';
+        return "<li><span>" + esc(c.label) + "</span><span class=\"dots\">" + dots + "</span><b>" + c.n + "</b></li>";
+      }).join("") + "</ul>";
+  }
+
+  /* 진학 실적 표: 검색 + 주 선택 */
+  var stateSel = document.getElementById("res-state");
   var query = document.getElementById("res-q");
   var tbody = document.getElementById("res-body");
   var summary = document.getElementById("res-summary");
-  var years = results.map(function (r) { return r.year; }).filter(function (y, i, a) { return a.indexOf(y) === i; }).sort(function (a, b) { return b - a; });
-  if (yearSel) {
-    years.forEach(function (y) {
-      var o = document.createElement("option");
-      o.value = String(y); o.textContent = y + "년";
-      yearSel.appendChild(o);
+  if (stateSel) {
+    results.map(function (r) { return r.state; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).sort().forEach(function (st) {
+      var o = document.createElement("option"); o.value = st; o.textContent = st; stateSel.appendChild(o);
     });
   }
   function renderResults() {
     if (!tbody) return;
-    var y = yearSel ? yearSel.value : "";
+    var st = stateSel ? stateSel.value : "";
     var q = query ? query.value.trim().toLowerCase() : "";
-    var rows = results.filter(function (r) {
-      if (y && String(r.year) !== y) return false;
+    var rows = ranked.filter(function (r) {
+      if (st && r.state !== st) return false;
       if (!q) return true;
-      return [r.university, r.state, r.student, r.route, r.scholarshipName].join(" ").toLowerCase().indexOf(q) !== -1;
-    }).sort(function (a, b) { return b.year - a.year; });
+      return [r.university, r.ko, r.state, r.note].join(" ").toLowerCase().indexOf(q) !== -1;
+    });
     if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="5" class="empty">조건에 맞는 진학 기록이 없습니다. 연도나 검색어를 바꿔 보세요.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="4" class="empty">조건에 맞는 대학이 없습니다. 검색어나 주를 바꿔 보세요.</td></tr>';
     } else {
       tbody.innerHTML = rows.map(function (r) {
-        var sch = r.scholarship ? '<span class="sch">' + esc(r.scholarship) + " 장학금</span>" + (r.scholarshipName ? "<small>" + esc(r.scholarshipName) + "</small>" : "") : "—";
-        return "<tr>" +
-          '<td class="yr">' + esc(r.year) + "</td>" +
-          "<td><span class=\"uni\">" + esc(r.university) + "</span>" + (r.sample ? ' <span class="tag-sample">샘플</span>' : "") + "<small>" + esc(r.state) + "</small></td>" +
-          "<td>" + sch + "</td>" +
-          "<td>" + esc(r.route) + "</td>" +
-          "<td>" + esc(r.student) + "</td></tr>";
+        var sch = r.scholarship ? '<span class="sch">' + esc(r.scholarship) + "</span>" + (r.note ? "<small>" + esc(r.note) + "</small>" : "") : "—";
+        return "<tr><td><span class=\"uni\">" + esc(r.university) + "</span><small>" + esc(r.ko) + (r.check ? ' <span class="tag-sample">명칭 확인</span>' : "") + "</small></td>" +
+          "<td>" + esc(r.state) + "</td><td class=\"num\">" + esc(r.count) + "명</td><td>" + sch + "</td></tr>";
       }).join("");
     }
     if (summary) {
-      var u = {};
-      rows.forEach(function (r) { u[r.university] = 1; });
-      var s = rows.filter(function (r) { return r.scholarship; }).length;
-      summary.innerHTML = "<b>" + rows.length + "</b>건 · 대학 <b>" + Object.keys(u).length + "</b>곳 · 장학금 <b>" + s + "</b>건";
+      var n = rows.reduce(function (t, r) { return t + (r.count || 0); }, 0);
+      summary.innerHTML = "대학 <b>" + rows.length + "</b>곳 · 합격 <b>" + n + "</b>명";
     }
   }
-  if (yearSel) yearSel.addEventListener("change", renderResults);
+  if (stateSel) stateSel.addEventListener("change", renderResults);
   if (query) query.addEventListener("input", renderResults);
   renderResults();
 
-  /* 학사 일정: 오늘 이후 일정 4개 */
+  /* 학사 일정: 오늘 이후 4개 */
   var calEl = document.getElementById("cal-list");
   if (calEl) {
     var today = new Date(); today.setHours(0, 0, 0, 0);
@@ -188,12 +216,11 @@
   /* 상담 신청서: 초안이라 실제로 보내지 않음 */
   var form = document.getElementById("apply-form");
   if (form) {
-    var programParam = function (val) {
-      var sel = document.getElementById("f-program");
-      if (sel && val) sel.value = val;
-    };
     document.querySelectorAll("[data-program]").forEach(function (a) {
-      a.addEventListener("click", function () { programParam(a.getAttribute("data-program")); });
+      a.addEventListener("click", function () {
+        var sel = document.getElementById("f-program");
+        if (sel) sel.value = a.getAttribute("data-program");
+      });
     });
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
