@@ -8,7 +8,7 @@
 <meta name="description" content="치앙마이의 미국 교육과정 학교 율로기아. SOT·Abeka로 기초를 다지고 텍사스 현지 고교·블린 칼리지를 거쳐 텍사스 A&M 등 미국 대학으로. American curriculum school in Chiang Mai with a pathway to Texas and U.S. colleges.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
     <span>79 M.7 T.Faham, Chiang Mai</span>
     <span class="hide-sm">Thai 085-033-3982 · English 099-007-1899</span>
     <span class="hide-sm">eulogiaschool@gmail.com</span>
-    <span class="draft">Draft · 사진과 일부 수치는 확인 후 교체</span>
+    <span class="draft">초안 · 사진과 일부 수치는 확인 후 교체</span>
   </div>
 </div>
 
@@ -36,7 +36,7 @@
       <a href="#admissions">입학 안내</a>
       <a href="#contact">오시는 길</a>
     </nav>
-    <a class="btn btn-outline" href="#apply">입학 상담</a>
+    <a class="btn btn-navy" href="#apply">입학 상담</a>
   </div>
 </header>
 
@@ -48,26 +48,37 @@
     <div class="wrap hero-grid">
       <div class="hero-main">
         <div class="hero-brand">
-          <img src="assets/img/logo.jpg" alt="Eulogia 교표" width="56" height="56">
-          <p class="hero-name">EULOGIA<span>Chiang Mai · Est. 2013</span></p>
+          <img src="assets/img/logo.jpg" alt="Eulogia 교표" width="84" height="84">
+          <div>
+            <p class="hero-name">EULOGIA</p>
+            <p class="hero-place">Chiang Mai → Texas → U.S. Colleges</p>
+          </div>
         </div>
         <h1 id="hero-title">치앙마이에서 텍사스,<br>그리고 미국 대학으로</h1>
-        <p class="hero-en">From Chiang Mai to Texas, and on to America’s universities</p>
-        <span class="hero-rule" aria-hidden="true"></span>
-        <p class="hero-lede">미국 교육과정으로 기초를 다지고, 텍사스 현지 고교와 블린 칼리지를 거쳐 텍사스 A&amp;M을 비롯한 미국 대학으로 이어집니다.</p>
+        <p class="hero-lede">율로기아에서 미국 교육과정으로 기초를 다지고, 텍사스 현지 고교와 블린 칼리지를 거쳐 텍사스 A&amp;M을 비롯한 미국 대학으로 이어집니다.</p>
         <div class="hero-cta">
           <a class="btn btn-gold" href="#apply">입학 상담 신청</a>
-          <a class="link-arrow" href="#route">우리 아이 노선 보기</a>
+          <a class="btn btn-line" href="#route">우리 아이 노선 보기</a>
         </div>
       </div>
 
-      <aside class="admit" aria-labelledby="admit-title">
-        <p class="admit-label">College Admissions</p>
-        <h2 id="admit-title">이 노선의 학생들이 합격한 대학</h2>
-        <ol class="admit-list" id="board-rows"></ol>
-        <div class="admit-foot">
-          <span>같은 텍사스 노선 학생 누적 기록</span>
-          <a href="#results">전체 <span id="board-count"></span></a>
+      <aside class="board" aria-labelledby="board-title">
+        <div class="board-top">
+          <p class="board-title" id="board-title"><span>DEPARTURES</span> 이 노선 학생들이 합격한 미국 대학</p>
+          <p class="board-clock"><span>EULOGIA · CNX</span> <b id="board-clock">--:--</b></p>
+        </div>
+        <div class="board-table" role="table" aria-label="같은 진학 경로 학생들이 합격한 미국 대학">
+          <div class="board-row board-head" role="row">
+            <span role="columnheader">DESTINATION</span>
+            <span role="columnheader" class="col-state">STATE</span>
+            <span role="columnheader" class="col-n">ADMITS</span>
+            <span role="columnheader">STATUS</span>
+          </div>
+          <div id="board-rows" role="rowgroup"></div>
+        </div>
+        <div class="board-foot">
+          <span class="board-note">같은 텍사스 노선 학생 누적 기록</span>
+          <a href="#results">전체 <span id="board-count"></span> →</a>
         </div>
       </aside>
     </div>
