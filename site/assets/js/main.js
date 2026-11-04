@@ -5,7 +5,6 @@
   var growth = window.EULOGIA_GROWTH || [];
   var cohorts = window.EULOGIA_COHORTS || [];
   var calendar = window.EULOGIA_CALENDAR || [];
-  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -22,45 +21,17 @@
   });
   var total = results.reduce(function (t, r) { return t + (r.count || 0); }, 0);
 
-  /* 첫 화면: 출발 안내판 */
+  /* 첫 화면: 합격 대학 목록 */
   var rowsEl = document.getElementById("board-rows");
   if (rowsEl) {
     rowsEl.innerHTML = ranked.slice(0, 6).map(function (r, i) {
-      var status = r.scholarship ? "SCHOLAR " + r.scholarship.replace("최대 ", "") : "ADMITTED";
-      return '<div class="board-row r' + (r.scholarship ? " now" : "") + (i >= 4 ? " extra" : "") + '" role="row" style="--i:' + i + '">' +
-        '<span class="dest" role="cell">' + esc(r.university) + "</span>" +
-        '<span class="st" role="cell">' + esc(r.state) + "</span>" +
-        '<span class="n" role="cell">' + esc(r.count) + "</span>" +
-        '<span class="status flap" role="cell">' + esc(status) + "</span></div>";
+      return '<li class="' + (r.scholarship ? "has-sch" : "") + (i >= 4 ? " extra" : "") + '" style="--i:' + i + '">' +
+        '<span class="u">' + esc(r.university) + "</span>" +
+        '<span class="m">' + esc(r.state) + (r.scholarship ? " · <em>" + esc(r.scholarship.replace("최대 ", "")) + " Scholarship</em>" : "") + "</span>" +
+        '<span class="c">' + esc(r.count) + "<small>명</small></span></li>";
     }).join("");
     var cnt = document.getElementById("board-count");
-    if (cnt) cnt.textContent = total + "명 · " + results.length + "곳";
-
-    if (!reduceMotion) {
-      var CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%";
-      rowsEl.querySelectorAll(".flap").forEach(function (el, i) {
-        var target = el.textContent, step = 0, steps = 14 + i * 3;
-        var t = setInterval(function () {
-          step++;
-          var out = "";
-          for (var k = 0; k < target.length; k++) {
-            var c = target.charAt(k);
-            out += (c === " " || step / steps > k / target.length) ? c : CH.charAt(Math.floor(Math.random() * CH.length));
-          }
-          el.textContent = out;
-          if (step >= steps) { clearInterval(t); el.textContent = target; }
-        }, 45);
-      });
-    }
-  }
-  var clock = document.getElementById("board-clock");
-  if (clock) {
-    var tick = function () {
-      try {
-        clock.textContent = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Bangkok" }).format(new Date());
-      } catch (e) { clock.textContent = ""; }
-    };
-    tick(); setInterval(tick, 30000);
+    if (cnt) cnt.textContent = total + "명 · " + results.length + "개 대학 →";
   }
 
   /* 숫자 띠 */
