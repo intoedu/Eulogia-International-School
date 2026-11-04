@@ -24,7 +24,7 @@
   /* 첫 화면: 합격 대학 목록 */
   var rowsEl = document.getElementById("board-rows");
   if (rowsEl) {
-    rowsEl.innerHTML = ranked.slice(0, 6).map(function (r, i) {
+    rowsEl.innerHTML = ranked.slice(0, 5).map(function (r, i) {
       return '<li class="' + (r.scholarship ? "has-sch" : "") + (i >= 4 ? " extra" : "") + '" style="--i:' + i + '">' +
         '<span class="u">' + esc(r.university) + "</span>" +
         '<span class="m">' + esc(r.state) + (r.scholarship ? " · <em>" + esc(r.scholarship.replace("최대 ", "")) + " Scholarship</em>" : "") + "</span>" +
