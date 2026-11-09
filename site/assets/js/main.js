@@ -195,6 +195,13 @@
   if (query) query.addEventListener("input", renderResults);
   renderResults();
 
+  /* 사진 파일이 없으면 깨진 그림 대신 「사진 준비 중」 표시 */
+  document.querySelectorAll(".tx-photos img").forEach(function (img) {
+    var mark = function () { img.closest("figure").classList.add("missing"); };
+    if (img.complete && img.naturalWidth === 0) mark();
+    else img.addEventListener("error", mark);
+  });
+
   /* 학사 일정: 오늘 이후 4개 */
   var calEl = document.getElementById("cal-list");
   if (calEl) {

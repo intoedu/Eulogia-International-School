@@ -333,6 +333,9 @@ td small { display: block; color: var(--muted); font-size: 0.78rem; }
 .tx-photos { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 10px; margin-bottom: 36px; }
 .tx-photos figure { margin: 0; position: relative; min-width: 0; }
 .tx-photos img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.tx-photos figure.missing { aspect-ratio: 4 / 3; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); }
+.tx-photos figure.missing img { display: none; }
+.tx-photos figure.missing::before { content: "사진 준비 중"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--on-dark-muted); font-size: var(--t-xs); letter-spacing: 0.08em; }
 .tx-photos figcaption { position: absolute; left: 0; bottom: 0; padding: 6px 10px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; color: #fff; background: rgba(10,12,38,.7); }
 .stations { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 6px solid var(--navy-2); position: relative; }
 .stations > li { padding: 26px 24px 8px 0; min-width: 0; position: relative; }
