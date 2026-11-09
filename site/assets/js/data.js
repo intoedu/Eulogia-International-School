@@ -1,0 +1,68 @@
+/*
+  홈페이지에 들어가는 데이터. 자료가 오면 이 파일만 고치면 됩니다.
+  - 학생 이름은 본인·보호자 게시 동의를 받은 경우에만 씁니다. 동의 전에는 이니셜이나 「학생 A」로 씁니다.
+  - check: true 는 명칭·수치 확인이 필요한 항목입니다.
+*/
+
+/* 텍사스 진학 경로 누적 합격 실적 (총 40명) — 같은 경로를 거친 학생들의 기록 */
+window.EULOGIA_RESULTS = [
+  { ko: "텍사스 A&M", university: "Texas A&M University", state: "TX", count: 4, scholarship: "최대 75%", note: "Corps of Cadets 장학금" },
+  { ko: "럿거스대", university: "Rutgers University", state: "NJ", count: 8 },
+  { ko: "뉴욕주립대 스토니브룩", university: "Stony Brook University (SUNY)", state: "NY", count: 7 },
+  { ko: "오하이오 주립대", university: "The Ohio State University", state: "OH", count: 6 },
+  { ko: "위스콘신대 매디슨", university: "University of Wisconsin–Madison", state: "WI", count: 3 },
+  { ko: "뉴욕주립대 버펄로", university: "University at Buffalo (SUNY)", state: "NY", count: 3 },
+  { ko: "뉴욕주립대 빙햄턴", university: "Binghamton University (SUNY)", state: "NY", count: 1 },
+  { ko: "몽클레어 주립대", university: "Montclair State University", state: "NJ", count: 1 },
+  { ko: "페이스대", university: "Pace University", state: "NY", count: 1 },
+  { ko: "펜실베이니아 주립대", university: "Penn State University", state: "PA", count: 1 },
+  { ko: "포덤대", university: "Fordham University", state: "NY", count: 1 },
+  { ko: "에머슨 칼리지", university: "Emerson College", state: "MA", count: 1 },
+  { ko: "메릴랜드 주립대", university: "University of Maryland", state: "MD", count: 1 },
+  { ko: "텍사스 크리스천대", university: "Texas Christian University (TCU)", state: "TX", count: 1 },
+  { ko: "텍사스 주립대", university: "텍사스 주립대 (영문 명칭 확인 필요)", state: "TX", count: 1, check: true }
+];
+
+/* 첫 화면 숫자 */
+window.EULOGIA_STATS = {
+  admits: 40,
+  scholarshipMax: "75%"
+};
+
+/* Texas A&M 장학금 실제 사례 (1학기, 개인 정보 제외) */
+window.EULOGIA_AID_CASE = {
+  term: "1학기",
+  charges: 29069.52,
+  aid: 16973.00,
+  net: 12096.52
+};
+
+/* 블린 칼리지 기수별 첫 학기 GPA 4.0 학생 수 (이름 제외) */
+window.EULOGIA_COHORTS = [
+  { label: "1기", n: 5 },
+  { label: "2기", n: 5 },
+  { label: "3기", n: 4 },
+  { label: "5기", n: 1 }
+];
+
+/* 같은 경로 학생 성장 기록 (이름 제외) */
+window.EULOGIA_GROWTH = [
+  { label: "학생 A", tag: "꾸준한 상승", gpa: [["9학년", 1.83], ["10학년", 2.92], ["11학년", 3.84]], notes: ["10학년 Cougar of the Year", "11학년 전 과목 A (Honor Roll)"] },
+  { label: "학생 B", tag: "STEM 상위권", gpa: [["9학년", 3.80], ["10학년", 3.81], ["11학년", 3.90]], notes: ["10·11학년 전 과목 A (Honor Roll)", "AP 수학 이수 · 학년 1위"] }
+];
+
+/* 2026-2027 학사 일정 (기존 학교 일정표에서 옮김) */
+window.EULOGIA_CALENDAR = [
+  { cat: "staff", ko: "교사 연수", en: "Supervisor's Training", start: "2026-07-13", end: "2026-07-17" },
+  { cat: "term", ko: "개학", en: "Start of School Year", start: "2026-07-20", end: "2026-07-20" },
+  { cat: "term", ko: "1학기", en: "First Quarter", start: "2026-07-20", end: "2026-09-18" },
+  { cat: "break", ko: "학기 방학", en: "Quarter Break", start: "2026-09-21", end: "2026-09-25" },
+  { cat: "term", ko: "2학기", en: "Second Quarter", start: "2026-09-28", end: "2026-12-04" },
+  { cat: "event", ko: "지역 학생 대회", en: "Regional Student Convention", start: "2026-11-23", end: "2026-11-27" },
+  { cat: "break", ko: "겨울 방학", en: "Christmas Break", start: "2026-12-07", end: "2027-01-01" },
+  { cat: "term", ko: "3학기", en: "Third Quarter", start: "2027-01-04", end: "2027-03-05" },
+  { cat: "term", ko: "4학기", en: "Fourth Quarter", start: "2027-03-08", end: "2027-05-28" },
+  { cat: "event", ko: "CEC", en: "CEC", start: "2027-03-10", end: "2027-03-12" },
+  { cat: "break", ko: "봄 방학", en: "Spring Break", start: "2027-03-29", end: "2027-04-16" },
+  { cat: "break", ko: "여름 방학", en: "Summer Break", start: "2027-05-31", end: "2027-07-18" }
+];
