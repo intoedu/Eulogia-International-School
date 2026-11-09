@@ -71,45 +71,38 @@
 
 <main id="main">
 
-  <!-- 첫 화면: 율로기아 + 미국 대학 출발 안내판 -->
+  <!-- 첫 화면: 캠퍼스 사진 -->
   <section class="hero" aria-labelledby="hero-title">
-    <img class="hero-img" src="assets/img/building.jpg" alt="" width="1024" height="576" fetchpriority="high">
-    <div class="wrap hero-grid">
-      <div class="hero-main">
-        <div class="hero-brand">
-          <img src="assets/img/logo.jpg" alt="Eulogia 교표" width="84" height="84">
-          <div>
-            <p class="hero-name">EULOGIA</p>
-            <p class="hero-place">Chiang Mai → Texas → U.S. Colleges</p>
-          </div>
-        </div>
+    <div class="slides" id="slides" aria-hidden="true">
+      <img class="slide on" src="assets/img/building.jpg" alt="" width="1024" height="576" fetchpriority="high">
+    </div>
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="hero-kicker"><img src="assets/img/logo.jpg" alt="" width="34" height="34"> EULOGIA · Chiang Mai → Texas → U.S. Colleges</p>
         <h1 id="hero-title">치앙마이에서 텍사스,<br>그리고 미국 대학으로</h1>
-        <p class="hero-lede">율로기아에서 미국 교육과정으로 기초를 다지고, 텍사스 현지 고교와 블린 칼리지를 거쳐 텍사스 A&amp;M을 비롯한 미국 대학으로 이어집니다.</p>
+        <p class="hero-lede">미국 교육과정으로 기초를 다지고, 텍사스 현지 고교와 블린 칼리지를 거쳐 텍사스 A&amp;M을 비롯한 미국 대학으로 이어집니다.</p>
         <div class="hero-cta">
           <a class="btn btn-gold" href="#apply">입학 상담 신청</a>
           <a class="btn btn-line" href="#route">우리 아이 노선 보기</a>
         </div>
       </div>
-
-      <div class="board" role="region" aria-labelledby="board-title">
-        <div class="board-top">
-          <p class="board-title" id="board-title"><span>DEPARTURES</span> 이 노선 학생들이 합격한 미국 대학</p>
-          <p class="board-clock"><span>EULOGIA · CNX</span> <b id="board-clock">--:--</b></p>
-        </div>
-        <div class="board-table" role="table" aria-label="같은 진학 경로 학생들이 합격한 미국 대학">
-          <div class="board-row board-head" role="row">
-            <span role="columnheader">DESTINATION</span>
-            <span role="columnheader" class="col-state">STATE</span>
-            <span role="columnheader" class="col-n">ADMITS</span>
-            <span role="columnheader">STATUS</span>
-          </div>
-          <div id="board-rows" role="rowgroup"></div>
-        </div>
-        <div class="board-foot">
-          <span class="board-note">같은 텍사스 노선 학생 누적 기록</span>
-          <a href="#results">전체 <span id="board-count"></span> →</a>
-        </div>
+      <div class="hero-meta">
+        <p class="slide-cap" id="slide-cap">치앙마이 · Eulogia Vision Center</p>
+        <div class="slide-dots" id="slide-dots" role="group" aria-label="사진 넘기기"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- 합격 대학 띠 -->
+  <section class="admits" aria-labelledby="admits-title">
+    <div class="wrap admits-inner">
+      <div class="admits-head">
+        <p class="kicker">College Admissions</p>
+        <h2 id="admits-title">이 노선의 학생들이 합격한 대학</h2>
+        <p class="admits-sum">같은 텍사스 노선 누적 <b><span id="admits-total">40</span>명</b> · <b><span id="admits-unis">15</span>개 대학</b></p>
+      </div>
+      <ol class="admit-list" id="admit-list"></ol>
+      <a class="admits-more" href="#results">전체 실적 보기 →</a>
     </div>
   </section>
 
@@ -125,8 +118,47 @@
     </div>
   </section>
 
+  <!-- 세 곳, 하나의 과정 -->
+  <section class="section places-sec" aria-labelledby="places-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">One Pathway, Three Places</p>
+        <h2 id="places-title">세 곳에서 이어지는 하나의 과정<span class="sub-en">Chiang Mai · Bryan · College Station</span></h2>
+      </div>
+      <div class="places">
+        <a class="place" href="#programs" data-mark="CNX">
+          <img src="assets/img/classroom-2.jpg" alt="율로기아 교실" loading="lazy" decoding="async" width="900" height="506">
+          <span class="place-body">
+            <span class="place-no">01 · CHIANG MAI</span>
+            <b>율로기아</b>
+            <span>미국 교육과정 SOT·Abeka로 영어와 공부 습관의 기초를 만듭니다.</span>
+            <em>교육과정 보기 →</em>
+          </span>
+        </a>
+        <a class="place" href="#texas" data-mark="TX">
+          <img src="assets/img/private/bryan-day.jpg" alt="텍사스 브라이언 시내" loading="lazy" decoding="async" width="721" height="539">
+          <span class="place-body">
+            <span class="place-no">02 · BRYAN, TEXAS</span>
+            <b>텍사스 현지 고교</b>
+            <span>8~12학년. 블린 칼리지 학점 선이수와 AP로 대학을 미리 준비합니다.</span>
+            <em>텍사스 과정 보기 →</em>
+          </span>
+        </a>
+        <a class="place" href="#results" data-mark="A&amp;M">
+          <img src="assets/img/private/am-aerial.jpg" alt="텍사스 A&amp;M 캠퍼스 전경" loading="lazy" decoding="async" width="1024" height="572">
+          <span class="place-body">
+            <span class="place-no">03 · COLLEGE STATION</span>
+            <b>블린 칼리지 → 텍사스 A&amp;M</b>
+            <span>블린에서 1~2년 공부한 뒤 텍사스 A&amp;M 등 미국 대학으로 갑니다.</span>
+            <em>진학 실적 보기 →</em>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- 진학 노선도 -->
-  <section class="section route-sec" id="route" aria-labelledby="route-title">
+  <section class="section band route-sec" id="route" aria-labelledby="route-title">
     <div class="wrap">
       <div class="head">
         <p class="kicker">Route Map</p>
@@ -156,7 +188,7 @@
   </section>
 
   <!-- 텍사스 과정 -->
-  <section class="section band" id="texas" aria-labelledby="texas-title">
+  <section class="section" id="texas" aria-labelledby="texas-title">
     <div class="wrap">
       <div class="head">
         <p class="kicker">Texas Pathway</p>
@@ -205,7 +237,7 @@
   </section>
 
   <!-- 성장 기록 -->
-  <section class="section" id="growth" aria-labelledby="growth-title">
+  <section class="section band" id="growth" aria-labelledby="growth-title">
     <div class="wrap">
       <div class="head">
         <p class="kicker">Proof, in numbers</p>
@@ -234,7 +266,7 @@
   </section>
 
   <!-- 진학 실적 -->
-  <section class="section band" id="results" aria-labelledby="results-title">
+  <section class="section" id="results" aria-labelledby="results-title">
     <div class="wrap">
       <div class="head">
         <p class="kicker">College Admissions</p>
@@ -257,7 +289,7 @@
   </section>
 
   <!-- 학교 소개 -->
-  <section class="section" id="about" aria-labelledby="about-title">
+  <section class="section band" id="about" aria-labelledby="about-title">
     <div class="wrap">
       <div class="feature">
         <figure class="feature-media">
@@ -279,7 +311,7 @@
   </section>
 
   <!-- 교육과정 -->
-  <section class="section band" id="programs" aria-labelledby="programs-title">
+  <section class="section" id="programs" aria-labelledby="programs-title">
     <div class="wrap">
       <div class="head">
         <p class="kicker">Programs</p>
@@ -316,7 +348,7 @@
   </section>
 
   <!-- 학사 일정 -->
-  <section class="section" id="calendar" aria-labelledby="cal-title">
+  <section class="section band" id="calendar" aria-labelledby="cal-title">
     <div class="wrap">
       <div class="head">
         <p class="kicker">School Calendar 2026–2027</p>
@@ -336,7 +368,7 @@
   </section>
 
   <!-- 입학 안내 -->
-  <section class="section band" id="admissions" aria-labelledby="adm-title">
+  <section class="section" id="admissions" aria-labelledby="adm-title">
     <div class="wrap">
       <div class="head">
         <p class="kicker">Admissions</p>
@@ -394,7 +426,7 @@
   </section>
 
   <!-- 수강료 납부 -->
-  <section class="section" id="pay" aria-labelledby="pay-title">
+  <section class="section band" id="pay" aria-labelledby="pay-title">
     <div class="wrap pay">
       <div class="qr-box">학교 PromptPay QR<br>(계좌 확정 후 표시)</div>
       <div>
@@ -410,7 +442,7 @@
   </section>
 
   <!-- 오시는 길 -->
-  <section class="section band" id="contact" aria-labelledby="contact-title">
+  <section class="section" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
       <div class="head">
         <p class="kicker">Contact</p>
