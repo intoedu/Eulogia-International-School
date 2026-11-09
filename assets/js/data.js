@@ -9,6 +9,16 @@ window.EULOGIA_CONFIG = {
   applyEmail: "teakgonkim@gmail.com"
 };
 
+/* 첫 화면 사진 (순서대로 넘어감). 파일이 없는 사진은 자동으로 빠집니다.
+   private/ 사진은 사용 허락을 받기 전이라 공개 저장소에 없습니다. */
+window.EULOGIA_SLIDES = [
+  { src: "assets/img/building.jpg", place: "치앙마이 · Eulogia Vision Center" },
+  { src: "assets/img/private/am-academic.jpg", place: "College Station · Texas A&M University" },
+  { src: "assets/img/private/bryan-dusk.jpg", place: "Bryan, Texas" },
+  { src: "assets/img/classroom-1.jpg", place: "치앙마이 · 개별 진도 교실" },
+  { src: "assets/img/private/am-stadium.jpg", place: "Texas A&M · Kyle Field" }
+];
+
 /* 텍사스 진학 경로 누적 합격 실적 (총 40명) — 같은 경로를 거친 학생들의 기록 */
 window.EULOGIA_RESULTS = [
   { ko: "텍사스 A&M", university: "Texas A&M University", state: "TX", count: 4, scholarship: "최대 75%", note: "Corps of Cadets 장학금" },

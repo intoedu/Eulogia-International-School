@@ -22,46 +22,57 @@
   });
   var total = results.reduce(function (t, r) { return t + (r.count || 0); }, 0);
 
-  /* 첫 화면: 출발 안내판 */
-  var rowsEl = document.getElementById("board-rows");
-  if (rowsEl) {
-    rowsEl.innerHTML = ranked.slice(0, 6).map(function (r, i) {
-      var status = r.scholarship ? "SCHOLAR " + r.scholarship.replace("최대 ", "") : "ADMITTED";
-      return '<div class="board-row r' + (r.scholarship ? " now" : "") + (i >= 4 ? " extra" : "") + '" role="row" style="--i:' + i + '">' +
-        '<span class="dest" role="cell">' + esc(r.university) + "</span>" +
-        '<span class="st" role="cell">' + esc(r.state) + "</span>" +
-        '<span class="n" role="cell">' + esc(r.count) + "</span>" +
-        '<span class="status flap" role="cell">' + esc(status) + "</span></div>";
-    }).join("");
-    var cnt = document.getElementById("board-count");
-    if (cnt) cnt.textContent = total + "명 · " + results.length + "곳";
-
-    if (!reduceMotion) {
-      var CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%";
-      rowsEl.querySelectorAll(".flap").forEach(function (el, i) {
-        var target = el.textContent, step = 0, steps = 14 + i * 3;
-        var t = setInterval(function () {
-          step++;
-          var out = "";
-          for (var k = 0; k < target.length; k++) {
-            var c = target.charAt(k);
-            out += (c === " " || step / steps > k / target.length) ? c : CH.charAt(Math.floor(Math.random() * CH.length));
-          }
-          el.textContent = out;
-          if (step >= steps) { clearInterval(t); el.textContent = target; }
-        }, 45);
-      });
-    }
-  }
-  var clock = document.getElementById("board-clock");
-  if (clock) {
-    var tick = function () {
-      try {
-        clock.textContent = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Bangkok" }).format(new Date());
-      } catch (e) { clock.textContent = ""; }
+  /* 첫 화면: 사진 넘기기 */
+  var slidesEl = document.getElementById("slides");
+  var dotsEl = document.getElementById("slide-dots");
+  var capEl = document.getElementById("slide-cap");
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (slidesEl && (window.EULOGIA_SLIDES || []).length) {
+    var wanted = window.EULOGIA_SLIDES, ready = [];
+    var checked = 0;
+    var start = function () {
+      ready.sort(function (a, b) { return a.i - b.i; });
+      if (ready.length < 2) return;
+      slidesEl.innerHTML = ready.map(function (r, k) {
+        return '<img class="slide' + (k === 0 ? " on" : "") + '" src="' + esc(r.src) + '" alt="">';
+      }).join("");
+      var imgs = slidesEl.querySelectorAll(".slide");
+      dotsEl.innerHTML = ready.map(function (r, k) {
+        return '<button type="button" aria-label="' + esc(r.place) + '"' + (k === 0 ? ' aria-current="true"' : "") + "></button>";
+      }).join("");
+      var dots = dotsEl.querySelectorAll("button");
+      var cur = 0, timer = null;
+      var show = function (k) {
+        cur = (k + ready.length) % ready.length;
+        imgs.forEach(function (im, n) { im.classList.toggle("on", n === cur); });
+        dots.forEach(function (d, n) { if (n === cur) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+        if (capEl) capEl.textContent = ready[cur].place;
+      };
+      var play = function () { if (!reduceMotion) { clearInterval(timer); timer = setInterval(function () { show(cur + 1); }, 5500); } };
+      dots.forEach(function (d, n) { d.addEventListener("click", function () { show(n); play(); }); });
+      document.addEventListener("visibilitychange", function () { if (document.hidden) clearInterval(timer); else play(); });
+      play();
     };
-    tick(); setInterval(tick, 30000);
+    wanted.forEach(function (w, i) {
+      var im = new Image();
+      im.onload = function () { ready.push({ i: i, src: w.src, place: w.place }); if (++checked === wanted.length) start(); };
+      im.onerror = function () { if (++checked === wanted.length) start(); };
+      im.src = w.src;
+    });
   }
+
+  /* 합격 대학 띠 */
+  var listEl = document.getElementById("admit-list");
+  if (listEl) {
+    listEl.innerHTML = ranked.slice(0, 6).map(function (r) {
+      return '<li class="' + (r.scholarship ? "has-sch" : "") + '"><b>' + esc(r.university) + "</b>" +
+        "<span>" + esc(r.state) + " · " + esc(r.count) + "명 합격" + (r.scholarship ? " · <em>장학금 " + esc(r.scholarship.replace("최대 ", "")) + "</em>" : "") + "</span></li>";
+    }).join("") + (results.length > 6 ? '<li class="more"><b>+' + (results.length - 6) + "개 대학</b><span>" +
+      esc(ranked.slice(6, 9).map(function (r) { return r.ko; }).join(" · ")) + " 외</span></li>" : "");
+    setText2("admits-total", total);
+    setText2("admits-unis", results.length);
+  }
+  function setText2(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
 
   /* 숫자 띠 */
   var setText = function (id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
@@ -198,6 +209,11 @@
   renderResults();
 
   /* 사진 파일이 없으면 깨진 그림 대신 「사진 준비 중」 표시 */
+  document.querySelectorAll(".place img").forEach(function (img) {
+    var mark = function () { img.closest(".place").classList.add("missing"); };
+    if (img.complete && img.naturalWidth === 0) mark();
+    else img.addEventListener("error", mark);
+  });
   var strip = document.querySelector(".tx-photos");
   if (strip) {
     var figs = strip.querySelectorAll("figure");
