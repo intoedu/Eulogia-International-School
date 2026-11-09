@@ -4,6 +4,11 @@
   - check: true 는 명칭·수치 확인이 필요한 항목입니다.
 */
 
+/* 사이트 설정: 상담 신청서를 받을 메일 (의뢰처 신청서 기준) */
+window.EULOGIA_CONFIG = {
+  applyEmail: "teakgonkim@gmail.com"
+};
+
 /* 텍사스 진학 경로 누적 합격 실적 (총 40명) — 같은 경로를 거친 학생들의 기록 */
 window.EULOGIA_RESULTS = [
   { ko: "텍사스 A&M", university: "Texas A&M University", state: "TX", count: 4, scholarship: "최대 75%", note: "Corps of Cadets 장학금" },

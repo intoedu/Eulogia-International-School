@@ -3,29 +3,45 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Eulogia Chiang Mai</title>
+<title>Eulogia Chiang Mai · 율로기아 치앙마이</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="치앙마이의 미국 교육과정 학교 율로기아. SOT·Abeka로 기초를 다지고 텍사스 현지 고교·블린 칼리지를 거쳐 텍사스 A&M 등 미국 대학으로. American curriculum school in Chiang Mai with a pathway to Texas and U.S. colleges.">
+<link rel="canonical" href="https://intoedu.github.io/Eulogia-International-School/">
+<meta name="theme-color" content="#161a5c">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eulogia Chiang Mai">
+<meta property="og:title" content="치앙마이에서 텍사스, 그리고 미국 대학으로 · 율로기아">
+<meta property="og:description" content="미국 교육과정으로 기초를 다지고 텍사스 현지 고교와 블린 칼리지를 거쳐 텍사스 A&amp;M 등 미국 대학으로 이어지는 율로기아 진학 노선.">
+<meta property="og:image" content="https://intoedu.github.io/Eulogia-International-School/assets/img/og-image.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"School","name":"Eulogia Language School","alternateName":["Eulogia Chiang Mai","สอนภาษายูโลเกีย"],"url":"https://intoedu.github.io/Eulogia-International-School/","logo":"https://intoedu.github.io/Eulogia-International-School/assets/img/logo.jpg","foundingDate":"2013-08","telephone":"+66-85-033-3982","email":"eulogiaschool@gmail.com","address":{"@type":"PostalAddress","streetAddress":"79 M.7 T.Faham","addressLocality":"Mueang Chiang Mai","addressRegion":"Chiang Mai","postalCode":"50000","addressCountry":"TH"},"sameAs":["https://www.facebook.com/eulogiavisioncenter"]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="preload" as="image" href="assets/img/building.jpg">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
 
-<div class="utility">
+<div class="utility" role="region" aria-label="학교 연락처">
   <div class="wrap">
     <span>79 M.7 T.Faham, Chiang Mai</span>
-    <span class="hide-sm">Thai 085-033-3982 · English 099-007-1899</span>
-    <span class="hide-sm">eulogiaschool@gmail.com</span>
+    <span class="hide-sm">Thai <a href="tel:+66850333982">085-033-3982</a> · English <a href="tel:+66990071899">099-007-1899</a></span>
+    <span class="hide-sm"><a href="mailto:eulogiaschool@gmail.com">eulogiaschool@gmail.com</a></span>
     <span class="draft">초안 · 사진과 일부 수치는 확인 후 교체</span>
   </div>
 </div>
 
 <header class="masthead">
   <div class="wrap">
-    <a class="crest" href="#top" aria-label="Eulogia Chiang Mai 처음으로">
+    <a class="crest" href="#main" aria-label="Eulogia Chiang Mai 처음으로">
       <img src="assets/img/logo.jpg" alt="Eulogia 교표" width="52" height="52">
       <span><b>EULOGIA</b><small>Chiang Mai · Est. 2013</small></span>
     </a>
@@ -37,15 +53,27 @@
       <a href="#admissions">입학 안내</a>
       <a href="#contact">오시는 길</a>
     </nav>
-    <a class="btn btn-navy" href="#apply">입학 상담</a>
+    <a class="btn btn-navy head-cta" href="#apply">입학 상담</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" id="menu-btn"><span class="bars" aria-hidden="true"></span><span class="sr">메뉴</span></button>
   </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="모바일 메뉴" hidden>
+    <div class="wrap">
+      <a href="#route">진학 노선</a>
+      <a href="#texas">텍사스 과정</a>
+      <a href="#results">진학 실적</a>
+      <a href="#programs">교육과정</a>
+      <a href="#calendar">학사 일정</a>
+      <a href="#admissions">입학 안내</a>
+      <a href="#contact">오시는 길</a>
+    </div>
+  </nav>
 </header>
 
-<main id="top">
+<main id="main">
 
   <!-- 첫 화면: 율로기아 + 미국 대학 출발 안내판 -->
   <section class="hero" aria-labelledby="hero-title">
-    <img class="hero-img" src="assets/img/building.jpg" alt="" width="1024" height="576">
+    <img class="hero-img" src="assets/img/building.jpg" alt="" width="1024" height="576" fetchpriority="high">
     <div class="wrap hero-grid">
       <div class="hero-main">
         <div class="hero-brand">
@@ -63,7 +91,7 @@
         </div>
       </div>
 
-      <aside class="board" aria-labelledby="board-title">
+      <div class="board" role="region" aria-labelledby="board-title">
         <div class="board-top">
           <p class="board-title" id="board-title"><span>DEPARTURES</span> 이 노선 학생들이 합격한 미국 대학</p>
           <p class="board-clock"><span>EULOGIA · CNX</span> <b id="board-clock">--:--</b></p>
@@ -81,7 +109,7 @@
           <span class="board-note">같은 텍사스 노선 학생 누적 기록</span>
           <a href="#results">전체 <span id="board-count"></span> →</a>
         </div>
-      </aside>
+      </div>
     </div>
   </section>
 
@@ -136,9 +164,9 @@
         <p>텍사스 현지 고교, 블린 칼리지, 텍사스 A&amp;M이 모두 차로 20분 안팎 거리에 있습니다. 한 도시 안에서 고등학교부터 대학까지 이어집니다.</p>
       </div>
       <div class="tx-photos">
-        <figure><img src="assets/img/private/bryan-dusk.jpg" alt="텍사스 브라이언 시내 저녁 풍경" loading="lazy" width="776" height="528"><figcaption>Bryan, Texas</figcaption></figure>
-        <figure><img src="assets/img/private/am-academic.jpg" alt="텍사스 A&amp;M 대학교 본관 건물" loading="lazy" width="1024" height="447"><figcaption>Texas A&amp;M University</figcaption></figure>
-        <figure><img src="assets/img/private/am-ring.jpg" alt="텍사스 A&amp;M 졸업 반지 조형물과 경기장" loading="lazy" width="1024" height="574"><figcaption>Aggie Ring · Kyle Field</figcaption></figure>
+        <figure><img src="assets/img/private/bryan-dusk.jpg" alt="텍사스 브라이언 시내 저녁 풍경" loading="lazy" decoding="async" width="776" height="528"><figcaption>Bryan, Texas</figcaption></figure>
+        <figure><img src="assets/img/private/am-academic.jpg" alt="텍사스 A&amp;M 대학교 본관 건물" loading="lazy" decoding="async" width="1024" height="447"><figcaption>Texas A&amp;M University</figcaption></figure>
+        <figure><img src="assets/img/private/am-ring.jpg" alt="텍사스 A&amp;M 졸업 반지 조형물과 경기장" loading="lazy" decoding="async" width="1024" height="574"><figcaption>Aggie Ring · Kyle Field</figcaption></figure>
       </div>
       <ol class="stations">
         <li>
@@ -218,7 +246,7 @@
         <label class="field" for="res-state">주<select id="res-state"><option value="">전체</option></select></label>
         <p class="summary" id="res-summary" aria-live="polite"></p>
       </div>
-      <div class="table-box">
+      <div class="table-box" tabindex="0" role="region" aria-label="진학 실적 표 (가로로 밀어 보기)">
         <table>
           <thead><tr><th scope="col">대학교</th><th scope="col">주</th><th scope="col" class="num">합격</th><th scope="col">장학금</th></tr></thead>
           <tbody id="res-body"></tbody>
@@ -233,7 +261,7 @@
     <div class="wrap">
       <div class="feature">
         <figure class="feature-media">
-          <img src="assets/img/classroom-1.jpg" alt="개인 학습석이 놓인 율로기아 교실" loading="lazy" width="900" height="506">
+          <img src="assets/img/classroom-1.jpg" alt="개인 학습석이 놓인 율로기아 교실" loading="lazy" decoding="async" width="900" height="506">
           <figcaption>율로기아 개인 학습석 교실 · 새 사진을 받으면 교체</figcaption>
         </figure>
         <div>
@@ -295,6 +323,15 @@
         <h2 id="cal-title">다가오는 일정<span class="sub-en">Upcoming dates</span></h2>
       </div>
       <ul class="cal" id="cal-list"></ul>
+      <details class="cal-all">
+        <summary>2026–2027 전체 학사 일정 보기</summary>
+        <div class="table-box" tabindex="0" role="region" aria-label="전체 학사 일정">
+          <table>
+            <thead><tr><th scope="col">기간</th><th scope="col">일정</th><th scope="col">구분</th></tr></thead>
+            <tbody id="cal-all-body"></tbody>
+          </table>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -307,23 +344,23 @@
         <p>신입생은 6세 이상, 유아반은 2~6세를 받습니다. ACE를 처음 하는 학생은 입학 전에 진단 평가를 봅니다.</p>
       </div>
       <ol class="steps">
-        <li><b>상담 신청</b><span>신청서, 전화, 카카오톡</span></li>
+        <li><b>상담 신청</b><span>신청서, 전화, 이메일</span></li>
         <li><b>학교 방문·진단 평가</b><span>수준 확인과 과정 안내</span></li>
         <li><b>서류 제출</b><span>필요 서류 안내</span></li>
         <li><b>등록·수강료 납부</b><span>QR 또는 계좌이체</span></li>
       </ol>
 
       <div class="apply" id="apply">
-        <aside>
+        <div class="apply-side">
           <p class="kicker">Book a Consultation</p>
           <h3>입학 상담 신청</h3>
           <p>원하는 날짜와 시간을 남겨 주시면 학교에서 연락드립니다.</p>
           <dl>
-            <div><dt>Thai</dt><dd>085-033-3982 · 099-296-3331</dd></div>
-            <div><dt>English</dt><dd>099-007-1899</dd></div>
-            <div><dt>Email</dt><dd>eulogiaschool@gmail.com</dd></div>
+            <div><dt>Thai</dt><dd><a href="tel:+66850333982">085-033-3982</a> · <a href="tel:+66992963331">099-296-3331</a></dd></div>
+            <div><dt>English</dt><dd><a href="tel:+66990071899">099-007-1899</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:eulogiaschool@gmail.com">eulogiaschool@gmail.com</a></dd></div>
           </dl>
-        </aside>
+        </div>
         <form class="form" id="apply-form" novalidate>
           <label class="field" for="f-name">보호자 이름 Name *<input id="f-name" name="name" required autocomplete="name"></label>
           <label class="field" for="f-phone">연락처 Phone *<input id="f-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+66 / +82"></label>
@@ -348,9 +385,9 @@
             <select id="f-lang" name="lang"><option>한국어</option><option>English</option><option>ไทย</option></select>
           </label>
           <label class="field full" for="f-msg">요청 사항 Message<textarea id="f-msg" name="message" rows="3" placeholder="자녀 나이·학년, 궁금한 점"></textarea></label>
-          <label class="check full" for="f-agree"><input id="f-agree" type="checkbox" required> 상담을 위해 이름·연락처·이메일을 수집하고 이용하는 데 동의합니다.</label>
+          <label class="check full" for="f-agree"><input id="f-agree" type="checkbox" required> <span>상담 연락을 위해 위 정보를 수집·이용하는 데 동의합니다. (<a href="privacy.html">개인정보 처리방침</a>)</span></label>
           <p class="form-msg" id="form-msg" hidden></p>
-          <div class="full"><button class="btn btn-navy" type="submit">상담 신청 보내기</button></div>
+          <div class="full form-actions"><button class="btn btn-navy" type="submit">상담 신청 보내기</button><span class="form-note">보내기를 누르면 내용이 채워진 메일이 열립니다.</span></div>
         </form>
       </div>
     </div>
@@ -387,13 +424,13 @@
         </div>
         <div>
           <h3>Phone</h3>
-          <p>태국어 · 085-033-3982, 099-296-3331</p>
-          <p>영어 · 099-007-1899</p>
+          <p>태국어 · <a href="tel:+66850333982">085-033-3982</a>, <a href="tel:+66992963331">099-296-3331</a></p>
+          <p>영어 · <a href="tel:+66990071899">099-007-1899</a></p>
           <p>한국어 · <span class="tag-sample">번호 확인 필요</span></p>
         </div>
         <div>
           <h3>Online</h3>
-          <p>eulogiaschool@gmail.com</p>
+          <a href="mailto:eulogiaschool@gmail.com">eulogiaschool@gmail.com</a>
           <a href="https://www.facebook.com/eulogiavisioncenter" target="_blank" rel="noopener">Facebook ↗</a>
           <p>카카오톡 · LINE <span class="tag-sample">계정 확인 필요</span></p>
         </div>
@@ -409,15 +446,15 @@
       <b>EULOGIA LANGUAGE SCHOOL · สอนภาษายูโลเกีย</b>
       <p>운영 Global Eulogia Co., Ltd. · 학교 인가 번호 ชม 01-001/2558</p>
       <p>79 M.7 T.Faham, A.Muang, Chiang Mai 50000, Thailand</p>
-      <p>개인정보 처리방침 · 이용약관 · © 2026 Eulogia</p>
+      <p><a href="privacy.html">개인정보 처리방침</a> · © 2026 Eulogia</p>
     </div>
   </div>
 </footer>
 
 <nav class="mbar" aria-label="빠른 연락">
   <a class="primary" href="#apply">상담 신청</a>
-  <a href="#contact">전화</a>
-  <a href="#contact">카카오톡</a>
+  <a href="tel:+66850333982">전화</a>
+  <a href="https://www.google.com/maps/search/?api=1&amp;query=79+Moo+7+Fa+Ham+Mueang+Chiang+Mai+50000" target="_blank" rel="noopener">길 찾기</a>
 </nav>
 
 <script src="assets/js/data.js"></script>

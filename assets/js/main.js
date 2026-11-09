@@ -90,6 +90,8 @@
       var a = document.getElementById("route-start"), b = document.getElementById("route-years");
       if (a) a.textContent = copy[st][0];
       if (b) b.innerHTML = copy[st][1];
+      var cta = document.getElementById("route-cta");
+      if (cta) cta.setAttribute("data-program", ["early-years", "sot", "texas-hs", "blinn"][st]);
     };
     document.querySelectorAll(".age-btn").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -196,11 +198,18 @@
   renderResults();
 
   /* 사진 파일이 없으면 깨진 그림 대신 「사진 준비 중」 표시 */
-  document.querySelectorAll(".tx-photos img").forEach(function (img) {
-    var mark = function () { img.closest("figure").classList.add("missing"); };
-    if (img.complete && img.naturalWidth === 0) mark();
-    else img.addEventListener("error", mark);
-  });
+  var strip = document.querySelector(".tx-photos");
+  if (strip) {
+    var figs = strip.querySelectorAll("figure");
+    strip.querySelectorAll("img").forEach(function (img) {
+      var mark = function () {
+        img.closest("figure").classList.add("missing");
+        if (strip.querySelectorAll("figure.missing").length === figs.length) strip.classList.add("all-missing");
+      };
+      if (img.complete && img.naturalWidth === 0) mark();
+      else img.addEventListener("error", mark);
+    });
+  }
 
   /* 학사 일정: 오늘 이후 4개 */
   var calEl = document.getElementById("cal-list");
@@ -212,6 +221,14 @@
     if (!upcoming.length) upcoming = calendar.slice(-4);
     var kind = { term: "학기 Term", break: "방학 Break", event: "행사 Event", staff: "교사 Staff" };
     var fmt = function (s) { var d = parse(s); return (d.getMonth() + 1) + "." + d.getDate(); };
+    var allBody = document.getElementById("cal-all-body");
+    if (allBody) {
+      allBody.innerHTML = calendar.slice().sort(function (a, b) { return parse(a.start) - parse(b.start); }).map(function (e) {
+        var range = e.start === e.end ? fmt(e.start) : fmt(e.start) + " – " + fmt(e.end);
+        var past = parse(e.end) < today;
+        return "<tr" + (past ? ' class="past"' : "") + '><td class="yr">' + esc(range) + "</td><td>" + esc(e.ko) + "<small>" + esc(e.en) + "</small></td><td>" + esc(kind[e.cat] || "") + "</td></tr>";
+      }).join("");
+    }
     calEl.innerHTML = upcoming.map(function (e) {
       var range = e.start === e.end ? fmt(e.start) : fmt(e.start) + " – " + fmt(e.end);
       return '<li class="' + esc(e.cat) + '"><span class="k">' + esc(kind[e.cat] || "") + "</span>" +
@@ -220,8 +237,9 @@
     }).join("");
   }
 
-  /* 상담 신청서: 초안이라 실제로 보내지 않음 */
+  /* 상담 신청서: 내용이 채워진 메일을 열어 학교 신청 메일로 보냄 */
   var form = document.getElementById("apply-form");
+  var applyEmail = (window.EULOGIA_CONFIG || {}).applyEmail || "eulogiaschool@gmail.com";
   if (form) {
     document.querySelectorAll("[data-program]").forEach(function (a) {
       a.addEventListener("click", function () {
@@ -229,14 +247,42 @@
         if (sel) sel.value = a.getAttribute("data-program");
       });
     });
+    var val = function (id) { var el = document.getElementById(id); return el ? el.value.trim() : ""; };
+    var label = function (id) { var el = document.getElementById(id); return el && el.selectedIndex > 0 ? el.options[el.selectedIndex].text : ""; };
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
-      var msg = document.getElementById("form-msg");
       if (!form.checkValidity()) { form.reportValidity(); return; }
+      var lines = [
+        "보호자 이름: " + val("f-name"),
+        "연락처: " + val("f-phone"),
+        "이메일: " + val("f-email"),
+        "희망 과정: " + label("f-program"),
+        "희망 날짜: " + (val("f-date") || "-"),
+        "희망 시간: " + (label("f-time") || "-"),
+        "인원: " + (val("f-people") || "-"),
+        "상담 언어: " + val("f-lang"),
+        "요청 사항: " + (val("f-msg") || "-")
+      ];
+      var body = lines.join("\n");
+      var subject = "[입학 상담 신청] " + val("f-name") + " · " + label("f-program");
+      var msg = document.getElementById("form-msg");
       if (msg) {
         msg.hidden = false;
-        msg.textContent = "초안 화면입니다. 실제 접수는 신청서 연결 후 시작됩니다. 입력하신 내용은 보내지 않았습니다.";
+        msg.innerHTML = "메일 앱에서 <b>보내기</b>를 누르면 신청이 끝납니다. 메일 앱이 열리지 않으면 아래 내용을 복사해 " +
+          '<a href="mailto:' + esc(applyEmail) + '">' + esc(applyEmail) + "</a> 로 보내 주시거나 학교로 전화해 주세요." +
+          "<pre>" + esc(subject + "\n\n" + body) + "</pre>";
       }
+      window.location.href = "mailto:" + applyEmail + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     });
+  }
+
+  /* 모바일 메뉴 */
+  var menuBtn = document.getElementById("menu-btn");
+  var menu = document.getElementById("mobile-menu");
+  if (menuBtn && menu) {
+    var setOpen = function (open) { menu.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open)); };
+    menuBtn.addEventListener("click", function () { setOpen(menu.hidden); });
+    menu.addEventListener("click", function (e) { if (e.target.closest("a")) setOpen(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) { setOpen(false); menuBtn.focus(); } });
   }
 })();
