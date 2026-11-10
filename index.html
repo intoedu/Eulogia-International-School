@@ -78,7 +78,7 @@
     </div>
     <div class="wrap hero-inner">
       <div class="hero-copy">
-        <p class="hero-kicker"><img src="assets/img/logo.jpg" alt="" width="34" height="34"> EULOGIA · Chiang Mai → Texas → U.S. Colleges</p>
+        <p class="hero-kicker"><img src="assets/img/logo.jpg" alt="" width="34" height="34"> EULOGIA<span class="hk-route"> · Chiang Mai → Texas → U.S. Colleges</span></p>
         <h1 id="hero-title">치앙마이에서 텍사스,<br>그리고 미국 대학으로</h1>
         <p class="hero-lede">미국 교육과정으로 기초를 다지고, 텍사스 현지 고교와 블린 칼리지를 거쳐 텍사스 A&amp;M을 비롯한 미국 대학으로 이어집니다.</p>
         <div class="hero-cta">
@@ -93,28 +93,20 @@
     </div>
   </section>
 
-  <!-- 합격 대학 띠 -->
-  <section class="admits" aria-labelledby="admits-title">
-    <div class="wrap admits-inner">
-      <div class="admits-head">
-        <p class="kicker">College Admissions</p>
-        <h2 id="admits-title">이 노선의 학생들이 합격한 대학</h2>
-        <p class="admits-sum">같은 텍사스 노선 누적 <b><span id="admits-total">40</span>명</b> · <b><span id="admits-unis">15</span>개 대학</b></p>
-      </div>
-      <ol class="admit-list" id="admit-list"></ol>
-      <a class="admits-more" href="#results">전체 실적 보기 →</a>
-    </div>
-  </section>
-
-  <!-- 숫자 -->
-  <section class="stats" aria-label="진학 실적 요약">
+  <!-- 합격 대학 벽: 첫 화면 사진 위로 겹쳐 올라옴 -->
+  <section class="wall" aria-labelledby="wall-title">
     <div class="wrap">
-      <dl>
-        <div><dt><span id="stat-admits">40</span>명</dt><dd>미국 대학 합격 · 같은 노선 누적</dd></div>
-        <div><dt>75%</dt><dd>텍사스 A&amp;M 장학금 사례</dd></div>
-        <div><dt><span id="stat-perfect">15</span>명</dt><dd>블린 칼리지 첫 학기 GPA 4.0</dd></div>
-        <div><dt>2013</dt><dd>율로기아 개교 · Chiang Mai</dd></div>
-      </dl>
+      <div class="wall-card">
+        <div class="wall-head">
+          <div>
+            <p class="kicker">College Admissions</p>
+            <h2 id="wall-title"><span class="big" id="wall-total">40</span>명이 <span class="big" id="wall-unis">15</span>개 미국 대학에 합격했습니다</h2>
+          </div>
+          <p class="wall-note">같은 텍사스 노선 학생 누적 기록<br><a href="#results">전체 실적 보기 →</a></p>
+        </div>
+        <ol class="unis" id="unis"></ol>
+        <ul class="uni-chips" id="uni-chips" aria-label="그 밖에 합격한 대학"></ul>
+      </div>
     </div>
   </section>
 
