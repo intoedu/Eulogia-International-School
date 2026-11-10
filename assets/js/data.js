@@ -19,23 +19,24 @@ window.EULOGIA_SLIDES = [
   { src: "assets/img/private/am-stadium.jpg", place: "Texas A&M · Kyle Field" }
 ];
 
-/* 텍사스 진학 경로 누적 합격 실적 (총 40명) — 같은 경로를 거친 학생들의 기록 */
+/* 텍사스 진학 경로 누적 합격 실적 (총 40명) — 같은 경로를 거친 학생들의 기록
+   abbr: 첫 화면 대학 표시 약칭 / color: 대학 공식 상징색 참고 (로고는 쓰지 않음) */
 window.EULOGIA_RESULTS = [
-  { ko: "텍사스 A&M", university: "Texas A&M University", state: "TX", count: 4, scholarship: "최대 75%", note: "Corps of Cadets 장학금" },
-  { ko: "럿거스대", university: "Rutgers University", state: "NJ", count: 8 },
-  { ko: "뉴욕주립대 스토니브룩", university: "Stony Brook University (SUNY)", state: "NY", count: 7 },
-  { ko: "오하이오 주립대", university: "The Ohio State University", state: "OH", count: 6 },
-  { ko: "위스콘신대 매디슨", university: "University of Wisconsin–Madison", state: "WI", count: 3 },
-  { ko: "뉴욕주립대 버펄로", university: "University at Buffalo (SUNY)", state: "NY", count: 3 },
-  { ko: "뉴욕주립대 빙햄턴", university: "Binghamton University (SUNY)", state: "NY", count: 1 },
-  { ko: "몽클레어 주립대", university: "Montclair State University", state: "NJ", count: 1 },
-  { ko: "페이스대", university: "Pace University", state: "NY", count: 1 },
-  { ko: "펜실베이니아 주립대", university: "Penn State University", state: "PA", count: 1 },
-  { ko: "포덤대", university: "Fordham University", state: "NY", count: 1 },
-  { ko: "에머슨 칼리지", university: "Emerson College", state: "MA", count: 1 },
-  { ko: "메릴랜드 주립대", university: "University of Maryland", state: "MD", count: 1 },
-  { ko: "텍사스 크리스천대", university: "Texas Christian University (TCU)", state: "TX", count: 1 },
-  { ko: "텍사스 주립대", university: "텍사스 주립대 (영문 명칭 확인 필요)", state: "TX", count: 1, check: true }
+  { ko: "텍사스 A&M", university: "Texas A&M University", state: "TX", count: 4, scholarship: "최대 75%", note: "Corps of Cadets 장학금", abbr: "A&M", color: "#500000" },
+  { ko: "럿거스대", university: "Rutgers University", state: "NJ", count: 8, abbr: "RU", color: "#CC0033" },
+  { ko: "뉴욕주립대 스토니브룩", university: "Stony Brook University (SUNY)", state: "NY", count: 7, abbr: "SBU", color: "#990000" },
+  { ko: "오하이오 주립대", university: "The Ohio State University", state: "OH", count: 6, abbr: "OSU", color: "#BB0000" },
+  { ko: "위스콘신대 매디슨", university: "University of Wisconsin–Madison", state: "WI", count: 3, abbr: "UW", color: "#C5050C" },
+  { ko: "뉴욕주립대 버펄로", university: "University at Buffalo (SUNY)", state: "NY", count: 3, abbr: "UB", color: "#005BBB" },
+  { ko: "뉴욕주립대 빙햄턴", university: "Binghamton University (SUNY)", state: "NY", count: 1, abbr: "BU", color: "#005A43" },
+  { ko: "몽클레어 주립대", university: "Montclair State University", state: "NJ", count: 1, abbr: "MSU", color: "#C8102E" },
+  { ko: "페이스대", university: "Pace University", state: "NY", count: 1, abbr: "PACE", color: "#003C7D" },
+  { ko: "펜실베이니아 주립대", university: "Penn State University", state: "PA", count: 1, abbr: "PSU", color: "#041E42" },
+  { ko: "포덤대", university: "Fordham University", state: "NY", count: 1, abbr: "FU", color: "#860038" },
+  { ko: "에머슨 칼리지", university: "Emerson College", state: "MA", count: 1, abbr: "EC", color: "#4A2C82" },
+  { ko: "메릴랜드 주립대", university: "University of Maryland", state: "MD", count: 1, abbr: "UMD", color: "#E21833" },
+  { ko: "텍사스 크리스천대", university: "Texas Christian University (TCU)", state: "TX", count: 1, abbr: "TCU", color: "#4D1979" },
+  { ko: "텍사스 주립대", university: "텍사스 주립대 (영문 명칭 확인 필요)", state: "TX", count: 1, check: true, abbr: "TX", color: "#501214" }
 ];
 
 /* 첫 화면 숫자 */

@@ -61,16 +61,29 @@
     });
   }
 
-  /* 합격 대학 띠 */
-  var listEl = document.getElementById("admit-list");
-  if (listEl) {
-    listEl.innerHTML = ranked.slice(0, 6).map(function (r) {
-      return '<li class="' + (r.scholarship ? "has-sch" : "") + '"><b>' + esc(r.university) + "</b>" +
-        "<span>" + esc(r.state) + " · " + esc(r.count) + "명 합격" + (r.scholarship ? " · <em>장학금 " + esc(r.scholarship.replace("최대 ", "")) + "</em>" : "") + "</span></li>";
-    }).join("") + (results.length > 6 ? '<li class="more"><b>+' + (results.length - 6) + "개 대학</b><span>" +
-      esc(ranked.slice(6, 9).map(function (r) { return r.ko; }).join(" · ")) + " 외</span></li>" : "");
-    setText2("admits-total", total);
-    setText2("admits-unis", results.length);
+  /* 합격 대학 벽: 장학금 대학을 크게, 다음 4곳은 카드, 나머지는 칩 */
+  var unisEl = document.getElementById("unis");
+  var chipsEl = document.getElementById("uni-chips");
+  if (unisEl) {
+    var card = function (r, feature) {
+      var sch = r.scholarship ? r.scholarship.replace("최대 ", "") : "";
+      return '<li class="uni' + (feature ? " feature" : "") + '" style="--c:' + esc(r.color || "#283090") + '">' +
+        '<span class="mono" aria-hidden="true">' + esc(r.abbr || "") + "</span>" +
+        '<span class="uni-body"><b>' + esc(r.university) + "</b>" +
+        '<span class="uni-ko">' + esc(r.ko) + " · " + esc(r.state) + "</span></span>" +
+        (feature && sch ? '<span class="uni-sch"><small>최대</small><b>' + esc(sch) + "</b><span>장학금" + (r.note ? "<br>" + esc(r.note) : "") + "</span></span>" : "") +
+        '<span class="uni-n"><b>' + esc(r.count) + "</b>명 합격</span>" +
+        "</li>";
+    };
+    var featured = ranked.filter(function (r) { return r.scholarship; }).slice(0, 1);
+    var rest = ranked.filter(function (r) { return featured.indexOf(r) === -1; });
+    unisEl.innerHTML = featured.map(function (r) { return card(r, true); }).join("") +
+      rest.slice(0, 4).map(function (r) { return card(r, false); }).join("");
+    if (chipsEl) chipsEl.innerHTML = rest.slice(4).map(function (r) {
+      return '<li style="--c:' + esc(r.color || "#283090") + '"><i aria-hidden="true"></i>' + esc(r.university) + " <span>" + esc(r.count) + "명</span></li>";
+    }).join("");
+    setText2("wall-total", total);
+    setText2("wall-unis", results.length);
   }
   function setText2(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
 
@@ -195,7 +208,7 @@
     } else {
       tbody.innerHTML = rows.map(function (r) {
         var sch = r.scholarship ? '<span class="sch">' + esc(r.scholarship) + "</span>" + (r.note ? "<small>" + esc(r.note) + "</small>" : "") : "—";
-        return "<tr><td><span class=\"uni\">" + esc(r.university) + "</span><small>" + esc(r.ko) + (r.check ? ' <span class="tag-sample">명칭 확인</span>' : "") + "</small></td>" +
+        return "<tr><td><span class=\"uni\"><span class=\"uni-dot\" style=\"--c:" + esc(r.color || "#283090") + "\"></span>" + esc(r.university) + "</span><small>" + esc(r.ko) + (r.check ? ' <span class="tag-sample">명칭 확인</span>' : "") + "</small></td>" +
           "<td>" + esc(r.state) + "</td><td class=\"num\">" + esc(r.count) + "명</td><td>" + sch + "</td></tr>";
       }).join("");
     }
