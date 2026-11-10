@@ -9,14 +9,14 @@ window.EULOGIA_CONFIG = {
   applyEmail: "teakgonkim@gmail.com"
 };
 
-/* 첫 화면 사진 (순서대로 넘어감). 파일이 없는 사진은 자동으로 빠집니다.
+/* 첫 화면 사진 (순서대로 넘어감). 파일이 없는 사진, 화면에서 너무 크게 늘어나는 사진은 자동으로 빠집니다.
+   pos: 사진에서 보여 줄 위치 (CSS object-position)
    private/ 사진은 사용 허락을 받기 전이라 공개 저장소에 없습니다. */
 window.EULOGIA_SLIDES = [
-  { src: "assets/img/building.jpg", place: "치앙마이 · Eulogia Vision Center" },
-  { src: "assets/img/private/am-academic.jpg", place: "College Station · Texas A&M University" },
-  { src: "assets/img/private/bryan-dusk.jpg", place: "Bryan, Texas" },
-  { src: "assets/img/classroom-1.jpg", place: "치앙마이 · 개별 진도 교실" },
-  { src: "assets/img/private/am-stadium.jpg", place: "Texas A&M · Kyle Field" }
+  { src: "assets/img/building.jpg", place: "치앙마이 · Eulogia Vision Center", pos: "8% 50%" },
+  { src: "assets/img/classroom-1.jpg", place: "치앙마이 · 개별 진도 교실", pos: "50% 55%" },
+  { src: "assets/img/private/bryan-dusk.jpg", place: "Bryan, Texas", pos: "62% 60%" },
+  { src: "assets/img/private/am-aerial.jpg", place: "College Station · Texas A&M University", pos: "50% 45%" }
 ];
 
 /* 텍사스 진학 경로 누적 합격 실적 (총 40명) — 같은 경로를 거친 학생들의 기록
