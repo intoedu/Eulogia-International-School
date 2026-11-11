@@ -13,8 +13,10 @@ window.EULOGIA_CONFIG = {
    pos: 사진에서 보여 줄 위치 (CSS object-position)
    private/ 사진은 사용 허락을 받기 전이라 공개 저장소에 없습니다. */
 window.EULOGIA_SLIDES = [
+  { src: "assets/img/k-classroom.jpg", place: "치앙마이 · 유아반 교실", pos: "50% 60%" },
   { src: "assets/img/building.jpg", place: "치앙마이 · Eulogia Vision Center", pos: "8% 50%" },
-  { src: "assets/img/classroom-1.jpg", place: "치앙마이 · 개별 진도 교실", pos: "50% 55%" },
+  { src: "assets/img/k-reading.jpg", place: "치앙마이 · 유아반 독서 공간", pos: "40% 55%" },
+  { src: "assets/img/k-music.jpg", place: "치앙마이 · 유아반 음악실", pos: "55% 55%" },
   { src: "assets/img/private/bryan-dusk.jpg", place: "Bryan, Texas", pos: "62% 60%" },
   { src: "assets/img/private/am-aerial.jpg", place: "College Station · Texas A&M University", pos: "50% 45%" }
 ];
