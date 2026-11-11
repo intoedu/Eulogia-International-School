@@ -162,20 +162,6 @@
     setText("summary-meta", results.length + "곳 · " + total + "명");
   }
 
-  /* 학교 생활: 미리보기에만 있는 사진(private/)은 불러와지면 보여 주고, 없으면 공개 사진만으로 배치 */
-  var lifeGrid = document.getElementById("life-grid");
-  if (lifeGrid) {
-    lifeGrid.querySelectorAll("[data-private] img[data-src]").forEach(function (im) {
-      var t = new Image();
-      t.onload = function () {
-        im.src = im.getAttribute("data-src");
-        im.closest("figure").hidden = false;
-        lifeGrid.classList.remove("only-public");
-      };
-      t.src = im.getAttribute("data-src");
-    });
-  }
-
   /* 진학 실적 펼치기: #results 로 가는 링크, 주소의 #results */
   var resDetails = document.getElementById("results");
   var openResults = function (scroll) {
