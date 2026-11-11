@@ -63,7 +63,7 @@
       active = ok;
       if (ok.length < 2) {
         /* 사진이 1장뿐이면 처음 건물 사진을 그대로 두고 점은 숨김 */
-        var first = ok[0] || { src: "assets/img/building.jpg", pos: "8% 50%", place: capEl ? capEl.textContent : "" };
+        var first = ok[0] || { src: "assets/img/k-classroom.jpg", pos: "50% 60%", place: capEl ? capEl.textContent : "" };
         slidesEl.innerHTML = '<img class="slide on" src="' + esc(first.src) + '" alt="" style="object-position:' + esc(first.pos || "50% 50%") + '">';
         if (capEl && first.place) capEl.textContent = first.place;
         dotsEl.hidden = true;

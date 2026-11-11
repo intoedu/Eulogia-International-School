@@ -886,3 +886,21 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
 .page .sub-en { margin-top: 6px; }
 .page-lede { margin-top: 16px; }
 @media (max-width: 759px) { .page-cta { display: inline-flex; padding-inline: 16px; } }
+
+/* 유아반 교실 사진 모음 */
+.kgal { margin-top: var(--head-gap); display: grid; gap: 16px; }
+.kgal-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 16px; }
+.kgal-head h3 { font-size: var(--fs-h4); }
+.kgal-head p { font-size: var(--fs-caption); color: var(--muted); letter-spacing: .04em; }
+.kgal-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, clamp(150px, 15vw, 210px)); gap: 12px; }
+.kgal-grid figure { position: relative; margin: 0; min-width: 0; overflow: hidden; border-radius: var(--r-2); background: var(--photo-bg); }
+.kgal-grid img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.kgal-grid .kg-main { grid-column: 1 / 3; grid-row: 1 / 3; }
+.kgal-grid .kg-tall { grid-column: 3; grid-row: 1 / 3; }
+.kgal-grid .kg-tall img { object-position: 50% 62%; }
+.kgal-grid figcaption { position: absolute; left: 8px; bottom: 8px; padding: 4px 10px; border-radius: var(--r-1); background: color-mix(in srgb, var(--navy-deep) 78%, transparent); color: var(--on-dark); font-size: var(--fs-caption); line-height: 1.4; }
+@media (max-width: 759px) {
+  .kgal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; grid-auto-rows: 132px; }
+  .kgal-grid .kg-main { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; height: auto; }
+  .kgal-grid .kg-tall { grid-column: 1; grid-row: span 2; }
+}
