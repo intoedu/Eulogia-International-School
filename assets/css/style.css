@@ -904,3 +904,34 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
   .kgal-grid .kg-main { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; height: auto; }
   .kgal-grid .kg-tall { grid-column: 1; grid-row: span 2; }
 }
+
+/* 학교 생활: K3 졸업식 */
+.life { display: grid; gap: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, clamp(200px, 20vw, 280px)); }
+.life .lf { margin: 0; min-width: 0; overflow: hidden; border-radius: var(--r-2); background: var(--photo-bg); }
+.life .lf img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.life-text { grid-column: 1; grid-row: 2; align-self: end; display: grid; gap: 10px; padding: 4px 8px 8px 0; min-width: 0; }
+.life-text h2 { font-size: var(--fs-h3); }
+.life-text p:last-child { font-size: var(--fs-small); line-height: 1.7; color: var(--muted); }
+.lf-lawn { grid-column: 1 / 4; grid-row: 1; }
+.lf-lawn img { object-position: 50% 58%; }
+.lf-huddle { grid-column: 4; grid-row: 1 / 3; }
+.lf-huddle img { object-position: 50% 52%; }
+.lf-stage { grid-column: 2; grid-row: 2; }
+.lf-stage img { object-position: 50% 66%; }
+.lf-cere { grid-column: 3; grid-row: 2; }
+.lf-cere img { object-position: 50% 74%; }
+/* 공개 사이트: 얼굴을 흐린 사진 한 장 + 글 */
+.life.only-public { grid-template-columns: minmax(0, 1fr) minmax(0, 360px); grid-template-rows: auto; align-items: center; column-gap: var(--g); }
+.life.only-public .life-text { grid-column: 1; grid-row: 1; align-self: center; }
+.life.only-public .lf-huddle { grid-column: 2; grid-row: 1; aspect-ratio: 4 / 5; }
+@media (max-width: 759px) {
+  .life { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: auto; }
+  .life-text { grid-column: 1 / -1; grid-row: 1; padding: 0; }
+  .lf-lawn { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 2 / 1; }
+  .lf-stage, .lf-cere { grid-column: auto; grid-row: auto; aspect-ratio: 3 / 4; }
+  .lf-huddle { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
+  .lf-huddle img { object-position: 50% 48%; }
+  .lf-lawn { order: 1; } .lf-stage, .lf-cere { order: 2; } .lf-huddle { order: 3; }
+  .life.only-public { grid-template-columns: minmax(0, 1fr); }
+  .life.only-public .lf-huddle { grid-column: 1; grid-row: 2; aspect-ratio: 4 / 3; }
+}
