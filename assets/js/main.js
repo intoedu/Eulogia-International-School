@@ -146,6 +146,17 @@
         '<span class="n">' + esc(r.count) + "명</span></li>";
     }).join("");
     setText("uni-rest-n", others.length);
+    /* 율로기아 졸업생 진학: 누적 기록과 따로 */
+    var own = window.EULOGIA_OWN || [];
+    var ownEl = document.getElementById("own"), ownList = document.getElementById("own-list");
+    if (ownEl && ownList && own.length) {
+      ownList.innerHTML = own.map(function (r) {
+        return '<li style="--c:' + color(r) + '"><span class="own-mono" aria-hidden="true">' + esc(r.abbr || "") + "</span>" +
+          '<span class="own-nm"><b lang="en">' + esc(r.university) + "</b><small>" + esc(nb(r.ko)) + " · " + esc(r.state) + "</small></span>" +
+          '<span class="own-n"><b>' + esc(r.count) + "</b>명</span></li>";
+      }).join("");
+      ownEl.hidden = false;
+    }
     setText("wall-total", total);
     setText("wall-unis", results.length);
     setText("summary-meta", results.length + "곳 · " + total + "명");

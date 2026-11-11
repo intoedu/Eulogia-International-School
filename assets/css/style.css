@@ -313,6 +313,22 @@ small { font-size: inherit; }
 @media (max-width: 374px) { .hero-photo { aspect-ratio: 16 / 9; } }
 
 /* ---------- 6. College wall ---------- */
+.own { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 40px; padding: 16px 24px; background: var(--gold-soft); border-radius: var(--r-2); }
+.own-label { display: flex; align-items: center; gap: 12px; }
+.own-label img { border-radius: 50%; flex: none; }
+.own-label b { display: block; font: 700 var(--fs-name)/1.3 var(--f-serif); color: var(--ink); }
+.own-label small { display: block; font-size: var(--fs-micro); letter-spacing: .12em; text-transform: uppercase; color: var(--gold-ink); font-weight: 600; }
+.own-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px 32px; }
+.own-list li { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.own-mono { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--c); color: var(--on-dark); display: grid; place-items: center; font: 700 .6875rem/1 var(--f-serif); letter-spacing: .02em; }
+.own-nm { display: grid; min-width: 0; }
+.own-nm b { font: 600 var(--fs-small)/1.3 var(--f-serif); color: var(--ink); }
+.own-nm small { font-size: var(--fs-caption); line-height: 1.4; color: var(--muted); }
+.own-n { margin-left: 4px; font-size: var(--fs-caption); color: var(--muted); white-space: nowrap; }
+.own-n b { font: 700 var(--fs-num-m)/1 var(--f-serif); color: var(--gold-ink); }
+@media (min-width: 1024px) { .own-list { margin-left: auto; } }
+@media (max-width: 599px) { .own { padding: 14px 16px; gap: 12px; } .own-list { flex-direction: column; gap: 10px; width: 100%; } .own-n { margin-left: auto; } }
+
 .wall { position: relative; z-index: 2; margin-top: calc(-1 * var(--overlap)); }
 .wall-card {
   background: var(--surface); border-radius: var(--r-2); box-shadow: var(--shadow-card);
