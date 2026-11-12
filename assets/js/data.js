@@ -21,14 +21,18 @@ window.EULOGIA_SLIDES = [
   { src: "assets/img/private/am-aerial.jpg", place: "College Station · Texas A&M University", pos: "50% 45%" }
 ];
 
-/* 율로기아 졸업생 합격 대학 (학교 제공 합격 포스터 기준 + 확인된 졸업 사례).
-   위 텍사스 노선 누적 기록과 따로 표시. 학생 이름·인원수는 쓰지 않음.
+/* 율로기아 과정 합격 대학: 율로기아 졸업생(학교 합격 포스터) + 율로기아와 같은 과정(텍사스 노선) 학생.
+   아래 EULOGIA_RESULTS(텍사스 노선 상세)와 겹치는 대학은 여기 한 번만. 학생 이름·인원수는 쓰지 않음.
    tag: 장학금 등 강조 표시 / key: 이름 있는 대학 굵게 */
 window.EULOGIA_OWN = [
   { region: "미국", en: "USA", wide: true, schools: [
     { name: "Texas A&M University", key: true, tag: "전액 장학금" },
     { name: "Penn State University", key: true },
     { name: "Stony Brook University (SUNY)", key: true },
+    { name: "The Ohio State University", key: true },
+    { name: "Rutgers University", key: true },
+    { name: "University of Wisconsin–Madison", key: true },
+    { name: "University of Maryland", key: true },
     { name: "University of Rochester", key: true },
     { name: "Fordham University", key: true },
     { name: "Baylor University", key: true },
@@ -49,7 +53,13 @@ window.EULOGIA_OWN = [
     { name: "Cedarville University" },
     { name: "Southern Illinois University Edwardsville" },
     { name: "Robert Morris University" },
-    { name: "Eastern Michigan University" }
+    { name: "Eastern Michigan University" },
+    { name: "University at Buffalo (SUNY)" },
+    { name: "Binghamton University (SUNY)" },
+    { name: "Texas Christian University (TCU)" },
+    { name: "Emerson College" },
+    { name: "Pace University" },
+    { name: "Montclair State University" }
   ] },
   { region: "아시아", en: "Asia", schools: [
     { name: "University of Macau", key: true, tag: "전액 장학금 · 기숙사 · 생활비", place: "마카오" },

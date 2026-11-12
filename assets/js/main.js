@@ -114,7 +114,7 @@
   /* 2. 합격 대학 벽: 장학금 대학 크게, 다음 4곳 카드, 나머지 목록 */
   var unisEl = document.getElementById("unis");
   var listEl = document.getElementById("uni-chips");
-  if (unisEl && ranked.length) {
+  if (ranked.length) {
     var color = function (r) { return esc(r.color || "#283090"); };
     var featureCard = function (r) {
       var fig = (r.scholarship || "").replace(/^최대\s*/, "");
@@ -137,7 +137,7 @@
     };
     /* 텍사스 A&M은 율로기아 졸업생 목록에 함께 표시하므로 여기서는 뺌 */
     var rest = ranked.filter(function (r) { return !/^Texas A&M/.test(r.university); });
-    unisEl.innerHTML = rest.slice(0, 4).map(tile).join("");
+    if (unisEl) unisEl.innerHTML = rest.slice(0, 4).map(tile).join("");
     var others = rest.slice(4);
     if (listEl) listEl.innerHTML = others.map(function (r) {
       return '<li style="--c:' + color(r) + '"><i aria-hidden="true"></i>' +
