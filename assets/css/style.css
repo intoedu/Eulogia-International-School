@@ -962,19 +962,22 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
 }
 
 /* 졸업과 진학 */
-.com-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, clamp(170px, 17vw, 240px)); gap: 12px; }
+.com-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, clamp(170px, 17vw, 240px)) clamp(200px, 22vw, 300px); gap: 12px; }
 .com-grid figure { position: relative; margin: 0; min-width: 0; overflow: hidden; border-radius: var(--r-2); background: var(--photo-bg); }
 .com-grid img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .com-grid figcaption { position: absolute; left: 8px; bottom: 8px; padding: 4px 10px; border-radius: var(--r-1); background: color-mix(in srgb, var(--navy-deep) 78%, transparent); color: var(--on-dark); font-size: var(--fs-caption); line-height: 1.4; }
-.cg-psu { grid-column: 1 / 2; grid-row: 1 / 3; }
+.cg-sbu { grid-column: 1 / 3; grid-row: 1 / 3; }
+.cg-sbu img { object-position: 50% 40%; }
+.cg-psu { grid-column: 3; grid-row: 1 / 3; }
 .cg-psu img { object-position: 50% 62%; }
-.cg-cake { grid-column: 2 / 4; grid-row: 1 / 3; }
-.cg-cake img { object-position: 50% 40%; }
 .cg-2025 { grid-column: 4; grid-row: 1 / 3; }
 .cg-2025 img { object-position: 50% 45%; }
+.cg-cake { grid-column: 1 / -1; grid-row: 3; }
+.cg-cake img { object-position: 50% 42%; }
 @media (max-width: 759px) {
   .com-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: auto; }
-  .cg-cake { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 10; order: -1; }
+  .cg-sbu { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 1080 / 905; }
+  .cg-cake { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 10; }
   .cg-psu, .cg-2025 { grid-column: auto; grid-row: auto; aspect-ratio: 3 / 4; }
 }
 
