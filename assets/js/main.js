@@ -153,7 +153,7 @@
       ownList.innerHTML = own.map(function (r) {
         return '<li style="--c:' + color(r) + '"><span class="own-mono" aria-hidden="true">' + esc(r.abbr || "") + "</span>" +
           '<span class="own-nm"><b lang="en">' + esc(r.university) + "</b><small>" + esc(nb(r.ko)) + " · " + esc(r.state) + "</small></span>" +
-          '<span class="own-n"><b>' + esc(r.count) + "</b>명</span></li>";
+          '<span class="own-n"><b>' + esc(r.count) + "</b>명" + (r.status ? " " + esc(r.status) : "") + "</span></li>";
       }).join("");
       ownEl.hidden = false;
     }
