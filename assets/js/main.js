@@ -155,13 +155,24 @@
         nUni += g.schools.length;
         return '<section class="ob' + (g.wide ? " ob-wide" : "") + '" aria-label="' + esc(g.region) + '">' +
           '<h4><span lang="en">' + esc(g.en) + "</span><small>" + esc(g.region) + "</small></h4><ul>" +
-          g.schools.map(function (u) {
+          g.schools.map(function (u, k) {
             if (u.tag && u.tag.indexOf("전액") === 0) nFull++;
-            return "<li" + (u.key ? ' class="key"' : "") + '><span class="ob-nm" lang="en">' + esc(u.name) + "</span>" +
+            var cls = (u.key ? "key" : "") + (g.wide && k >= 10 ? " more" : "");
+            return "<li" + (cls.trim() ? ' class="' + cls.trim() + '"' : "") + '><span class="ob-nm" lang="en">' + esc(u.name) + "</span>" +
               (u.place ? '<span class="ob-pl">' + esc(u.place) + "</span>" : "") +
               (u.tag ? '<span class="ob-tag">' + esc(u.tag) + "</span>" : "") + "</li>";
-          }).join("") + "</ul></section>";
+          }).join("") + "</ul>" +
+          (g.wide && g.schools.length > 10 ? '<button type="button" class="ob-more" aria-expanded="false">' + esc(g.region) + " 대학 " + (g.schools.length - 10) + "곳 더 보기</button>" : "") +
+          "</section>";
       }).join("");
+      board.querySelectorAll(".ob-more").forEach(function (btn) {
+        var label = btn.textContent;
+        btn.addEventListener("click", function () {
+          var open = btn.closest(".ob").classList.toggle("open");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.textContent = open ? "접기" : label;
+        });
+      });
       setText("own-n-uni", nUni);
       setText("own-n-reg", own.length);
       setText("own-n-full", nFull);
