@@ -22,11 +22,11 @@ window.EULOGIA_SLIDES = [
 ];
 
 /* 율로기아 졸업생 진학·졸업 (위 텍사스 노선 누적 기록 40명과 따로 표시, 합계에 더하지 않음)
-   status: 졸업 / 합격. 학생 이름은 본인 게시 동의 확인 후에만 씀 */
+   숫자는 쓰지 않고 대학과 결과(status: 졸업 / 합격)만 보여 줌. 새 대학은 한 줄씩 추가. 학생 이름은 본인 게시 동의 확인 후에만 씀 */
 window.EULOGIA_OWN = [
-  { ko: "펜실베이니아 주립대", university: "Penn State University", state: "PA", count: 1, status: "졸업", abbr: "PSU", color: "#041E42" },
-  { ko: "뉴욕주립대 스토니브룩", university: "Stony Brook University (SUNY)", state: "NY", count: 1, status: "졸업", abbr: "SBU", color: "#990000" },
-  { ko: "성균관대학교", university: "Sungkyunkwan University", state: "한국", count: 1, status: "합격", abbr: "SKKU", color: "#006940" }
+  { ko: "펜실베이니아 주립대", university: "Penn State University", state: "PA", status: "졸업", abbr: "PSU", color: "#041E42" },
+  { ko: "뉴욕주립대 스토니브룩", university: "Stony Brook University (SUNY)", state: "NY", status: "졸업", abbr: "SBU", color: "#990000" },
+  { ko: "성균관대학교", university: "Sungkyunkwan University", state: "Seoul, Korea", status: "합격", abbr: "SKKU", color: "#006940" }
 ];
 
 /* 텍사스 진학 경로 누적 합격 실적 (총 40명) — 같은 경로를 거친 학생들의 기록
