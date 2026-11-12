@@ -1146,9 +1146,12 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
   .fee-card { padding: 20px 16px; }
 }
 
-.bank-row { display: grid; grid-template-columns: minmax(0, 1fr) 132px; gap: 20px; align-items: start; }
+.bank-row { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 20px; align-items: start; }
 .fee-bank .bank-row dl { margin-top: 12px; }
 .qr { margin: 16px 0 0; display: grid; gap: 8px; justify-items: center; text-align: center; }
-.qr img { width: 132px; height: auto; padding: 8px; border-radius: var(--r-2); background: #fff; }
+.qr img { width: 150px; height: auto; border-radius: var(--r-2); background: #fff; box-shadow: 0 0 0 1px var(--on-color-line); }
 .qr figcaption { font-size: var(--fs-micro); line-height: 1.5; color: var(--on-dark-muted); }
-@media (max-width: 479px) { .bank-row { grid-template-columns: minmax(0, 1fr); } .qr img { width: 180px; } }
+@media (max-width: 479px) { .bank-row { grid-template-columns: minmax(0, 1fr); } .qr img { width: 200px; } }
+
+.fee-bank dd small { display: block; font-weight: 500; font-size: var(--fs-caption); color: var(--on-dark-muted); }
+.qr figcaption { margin-bottom: 8px; }
