@@ -21,14 +21,54 @@ window.EULOGIA_SLIDES = [
   { src: "assets/img/private/am-aerial.jpg", place: "College Station · Texas A&M University", pos: "50% 45%" }
 ];
 
-/* 율로기아 졸업생 합격 대학 (위 텍사스 노선 누적 기록 40명과 따로 표시, 합계에 더하지 않음)
-   숫자는 쓰지 않고 대학과 「합격」만 보여 줌. 새 대학은 한 줄씩 추가. 학생 이름은 쓰지 않음(한 명만 간 것처럼 보이지 않도록) */
+/* 율로기아 졸업생 합격 대학 (학교 제공 합격 포스터 기준 + 확인된 졸업 사례).
+   위 텍사스 노선 누적 기록과 따로 표시. 학생 이름·인원수는 쓰지 않음.
+   tag: 장학금 등 강조 표시 / key: 이름 있는 대학 굵게 */
 window.EULOGIA_OWN = [
-  { ko: "마카오대학교", university: "University of Macau", state: "Macau", status: "합격", note: "전액 장학금 · 기숙사비 100%", abbr: "UM", color: "#1B3F8B" },
-  { ko: "펜실베이니아 주립대", university: "Penn State University", state: "PA", status: "합격", abbr: "PSU", color: "#041E42" },
-  { ko: "뉴욕주립대 스토니브룩", university: "Stony Brook University (SUNY)", state: "NY", status: "합격", abbr: "SBU", color: "#990000" },
-  { ko: "성균관대학교", university: "Sungkyunkwan University", state: "Seoul, Korea", status: "합격", abbr: "SKKU", color: "#006940" }
+  { region: "미국", en: "USA", wide: true, schools: [
+    { name: "Texas A&M University", key: true, tag: "전액 장학금" },
+    { name: "Penn State University", key: true },
+    { name: "Stony Brook University (SUNY)", key: true },
+    { name: "University of Rochester", key: true },
+    { name: "Fordham University", key: true },
+    { name: "Baylor University", key: true },
+    { name: "Saint Louis University", tag: "전액 장학금" },
+    { name: "Miami University", tag: "Honors" },
+    { name: "Calvin University", tag: "전액 + MK 장학금" },
+    { name: "Coe College", tag: "전액 장학금" },
+    { name: "Temple University" },
+    { name: "Drexel University" },
+    { name: "Bentley University" },
+    { name: "Stevens Institute of Technology" },
+    { name: "Wheaton College" },
+    { name: "DePauw University" },
+    { name: "DePaul University" },
+    { name: "Hofstra University" },
+    { name: "University of Tulsa" },
+    { name: "Florida International University" },
+    { name: "Cedarville University" },
+    { name: "Southern Illinois University Edwardsville" },
+    { name: "Robert Morris University" },
+    { name: "Eastern Michigan University" }
+  ] },
+  { region: "아시아", en: "Asia", schools: [
+    { name: "University of Macau", key: true, tag: "전액 장학금 · 기숙사 · 생활비", place: "마카오" },
+    { name: "University of Science and Technology of Hanoi", place: "베트남" },
+    { name: "S P Jain School of Global Management" },
+    { name: "Assumption University", place: "방콕" }
+  ] },
+  { region: "한국", en: "Korea", schools: [
+    { name: "Sungkyunkwan University", key: true, place: "성균관대학교" },
+    { name: "SUNY Korea", place: "인천 송도" }
+  ] },
+  { region: "캐나다", en: "Canada", schools: [
+    { name: "Simon Fraser University", key: true }
+  ] },
+  { region: "호주", en: "Australia", schools: [
+    { name: "International College of Management, Sydney" }
+  ] }
 ];
+
 
 /* 텍사스 진학 경로 누적 합격 실적 (총 40명) — 같은 경로를 거친 학생들의 기록
    abbr: 첫 화면 대학 표시 약칭 / color: 대학 공식 상징색 참고 (로고는 쓰지 않음) */

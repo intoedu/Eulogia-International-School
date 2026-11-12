@@ -148,15 +148,23 @@
     setText("uni-rest-n", others.length);
     /* 율로기아 졸업생 진학: 누적 기록과 따로 */
     var own = window.EULOGIA_OWN || [];
-    var ownEl = document.getElementById("own"), ownList = document.getElementById("own-list");
-    if (ownEl && ownList && own.length) {
-      ownList.innerHTML = own.map(function (r) {
-        return '<li style="--c:' + color(r) + '"><span class="own-mono" aria-hidden="true">' + esc(r.abbr || "") + "</span>" +
-          '<span class="own-nm"><b lang="en">' + esc(r.university) + "</b><small>" + esc(nb(r.ko)) + " · " + esc(r.state) + "</small>" +
-          (r.student ? '<span class="own-who"><b>' + esc(r.student) + "</b>" + (r.story ? " · " + esc(r.story) : "") + "</span>" : "") +
-          (r.note ? '<em class="own-note">' + esc(r.note) + "</em>" : "") + "</span>" +
-          (r.status ? '<span class="own-st' + (r.status === "졸업" ? " grad" : "") + '">' + esc(r.status) + "</span>" : "") + "</li>";
+    var ownEl = document.getElementById("own"), board = document.getElementById("own-board");
+    if (ownEl && board && own.length) {
+      var nUni = 0, nFull = 0;
+      board.innerHTML = own.map(function (g) {
+        nUni += g.schools.length;
+        return '<section class="ob' + (g.wide ? " ob-wide" : "") + '" aria-label="' + esc(g.region) + '">' +
+          '<h4><span lang="en">' + esc(g.en) + "</span><small>" + esc(g.region) + "</small></h4><ul>" +
+          g.schools.map(function (u) {
+            if (u.tag && u.tag.indexOf("전액") === 0) nFull++;
+            return "<li" + (u.key ? ' class="key"' : "") + '><span class="ob-nm" lang="en">' + esc(u.name) + "</span>" +
+              (u.place ? '<span class="ob-pl">' + esc(u.place) + "</span>" : "") +
+              (u.tag ? '<span class="ob-tag">' + esc(u.tag) + "</span>" : "") + "</li>";
+          }).join("") + "</ul></section>";
       }).join("");
+      setText("own-n-uni", nUni);
+      setText("own-n-reg", own.length);
+      setText("own-n-full", nFull);
       ownEl.hidden = false;
     }
     setText("wall-unis", results.length);
