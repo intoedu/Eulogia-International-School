@@ -630,7 +630,13 @@ textarea { padding: 12px 14px; min-height: 0; resize: vertical; line-height: 1.6
 .legend li > span { display: block; color: var(--muted); }
 .cohorts, .aid { margin-top: 20px; display: grid; gap: 16px; }
 .co-big b, .aid-big b { font: 700 var(--fs-num-l)/1 var(--f-serif); color: var(--ink); font-variant-numeric: lining-nums proportional-nums; }
-.co-big span { margin-left: 8px; font-size: var(--fs-small); color: var(--muted); }
+.co-big b { font-size: var(--fs-num-xl); color: var(--gold-ink); }
+.co-big span { margin-left: 10px; font-size: var(--fs-sub); font-weight: 700; color: var(--ink); }
+.cohorts .co-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.cohorts .co-chips li { display: inline-flex; grid-template-columns: none; column-gap: 0; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--gold-soft); font-size: var(--fs-small); }
+.co-chips b { color: var(--ink); }
+.co-chips span { font-weight: 700; color: var(--gold-ink); font-variant-numeric: lining-nums; }
+.co-note { font-size: var(--fs-caption); color: var(--muted); }
 .aid-big span { font-size: var(--fs-small); color: var(--muted); }
 .cohorts ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .cohorts li { display: grid; grid-template-columns: 40px max-content 32px; justify-content: start; align-items: center; column-gap: 16px; font-size: var(--fs-small); }

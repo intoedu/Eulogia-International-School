@@ -21,11 +21,11 @@ window.EULOGIA_SLIDES = [
   { src: "assets/img/private/am-aerial.jpg", place: "College Station · Texas A&M University", pos: "50% 45%" }
 ];
 
-/* 율로기아 졸업생 진학·졸업 (위 텍사스 노선 누적 기록 40명과 따로 표시, 합계에 더하지 않음)
-   숫자는 쓰지 않고 대학과 결과(status: 졸업 / 합격)만 보여 줌. 새 대학은 한 줄씩 추가. 학생 이름은 본인 게시 동의 확인 후에만 씀 */
+/* 율로기아 졸업생 합격 대학 (위 텍사스 노선 누적 기록 40명과 따로 표시, 합계에 더하지 않음)
+   숫자는 쓰지 않고 대학과 「합격」만 보여 줌. 새 대학은 한 줄씩 추가. 학생 이름은 본인 게시 동의 확인 후에만 씀 */
 window.EULOGIA_OWN = [
-  { ko: "펜실베이니아 주립대", university: "Penn State University", state: "PA", status: "졸업", abbr: "PSU", color: "#041E42" },
-  { ko: "뉴욕주립대 스토니브룩", university: "Stony Brook University (SUNY)", state: "NY", status: "졸업", abbr: "SBU", color: "#990000" },
+  { ko: "펜실베이니아 주립대", university: "Penn State University", state: "PA", status: "합격", abbr: "PSU", color: "#041E42" },
+  { ko: "뉴욕주립대 스토니브룩", university: "Stony Brook University (SUNY)", state: "NY", status: "합격", abbr: "SBU", color: "#990000" },
   { ko: "성균관대학교", university: "Sungkyunkwan University", state: "Seoul, Korea", status: "합격", abbr: "SKKU", color: "#006940" }
 ];
 
@@ -63,7 +63,7 @@ window.EULOGIA_AID_CASE = {
   net: 12096.52
 };
 
-/* 블린 칼리지 기수별 첫 학기 GPA 4.0 학생 수 (이름 제외) */
+/* 블린 칼리지를 거쳐 텍사스 A&M에 진학한 기수 (전원 첫 학기 GPA 4.0, 화면에는 인원수 표시 안 함) */
 window.EULOGIA_COHORTS = [
   { label: "1기", n: 5 },
   { label: "2기", n: 5 },
