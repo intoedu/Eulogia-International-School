@@ -61,10 +61,11 @@ window.EULOGIA_OWN = [
     { name: "Pace University" },
     { name: "Montclair State University" }
   ] },
-  { region: "아시아", en: "Asia", schools: [
+  { region: "중동·아시아", en: "Middle East & Asia", schools: [
     { name: "University of Macau", key: true, tag: "전액 장학금 · 기숙사 · 생활비", place: "마카오" },
+    { name: "Hamad Bin Khalifa University", key: true, place: "카타르" },
     { name: "University of Science and Technology of Hanoi", place: "베트남" },
-    { name: "S P Jain School of Global Management" },
+    { name: "S P Jain School of Global Management", place: "싱가포르" },
     { name: "Assumption University", place: "방콕" }
   ] },
   { region: "한국", en: "Korea", schools: [
