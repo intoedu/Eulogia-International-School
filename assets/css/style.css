@@ -1087,3 +1087,8 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
 .adm-line b { font-size: var(--fs-small); color: var(--on-dark); font-variant-numeric: tabular-nums; word-break: break-all; }
 .apply-side .adm-line:hover b { text-decoration: underline; text-underline-offset: 3px; }
 .ct-who { margin-left: 4px; font-size: var(--fs-caption); color: var(--muted); }
+
+/* 텍사스 노선 실적 소제목 */
+.route-res { display: grid; gap: 6px; padding-top: 8px; scroll-margin-top: calc(var(--masthead-h) + 16px); }
+.route-res h3 { font-size: var(--fs-h4); color: var(--ink); }
+.route-res p { font-size: var(--fs-small); color: var(--muted); }

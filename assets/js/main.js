@@ -135,9 +135,9 @@
         '<span class="uni-n">합격</span>' +
         "</li>";
     };
-    var featured = ranked.filter(function (r) { return r.scholarship; }).slice(0, 1);
-    var rest = ranked.filter(function (r) { return featured.indexOf(r) === -1; });
-    unisEl.innerHTML = featured.map(featureCard).join("") + rest.slice(0, 4).map(tile).join("");
+    /* 텍사스 A&M은 율로기아 졸업생 목록에 함께 표시하므로 여기서는 뺌 */
+    var rest = ranked.filter(function (r) { return !/^Texas A&M/.test(r.university); });
+    unisEl.innerHTML = rest.slice(0, 4).map(tile).join("");
     var others = rest.slice(4);
     if (listEl) listEl.innerHTML = others.map(function (r) {
       return '<li style="--c:' + color(r) + '"><i aria-hidden="true"></i>' +
@@ -173,12 +173,11 @@
           btn.textContent = open ? "접기" : label;
         });
       });
-      setText("own-n-uni", nUni);
+      setText("wall-unis", nUni);
       setText("own-n-reg", own.length);
       setText("own-n-full", nFull);
       ownEl.hidden = false;
     }
-    setText("wall-unis", results.length);
     setText("summary-meta", results.length + "곳");
   }
 

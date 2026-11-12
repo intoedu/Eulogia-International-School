@@ -4,9 +4,9 @@
   - check: true 는 명칭·수치 확인이 필요한 항목입니다.
 */
 
-/* 사이트 설정: 상담 신청서를 받을 메일 (의뢰처 신청서 기준) */
+/* 사이트 설정: 상담 신청서를 받을 메일 (현지 입학 상담 담당 도형래 선교사) */
 window.EULOGIA_CONFIG = {
-  applyEmail: "teakgonkim@gmail.com"
+  applyEmail: "dhr2000@daum.net"
 };
 
 /* 첫 화면 사진 (순서대로 넘어감). 파일이 없는 사진, 화면에서 너무 크게 늘어나는 사진은 자동으로 빠집니다.
