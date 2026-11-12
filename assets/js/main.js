@@ -152,7 +152,8 @@
     if (ownEl && ownList && own.length) {
       ownList.innerHTML = own.map(function (r) {
         return '<li style="--c:' + color(r) + '"><span class="own-mono" aria-hidden="true">' + esc(r.abbr || "") + "</span>" +
-          '<span class="own-nm"><b lang="en">' + esc(r.university) + "</b><small>" + esc(nb(r.ko)) + " · " + esc(r.state) + "</small></span>" +
+          '<span class="own-nm"><b lang="en">' + esc(r.university) + "</b><small>" + esc(nb(r.ko)) + " · " + esc(r.state) + "</small>" +
+          (r.note ? '<em class="own-note">' + esc(r.note) + "</em>" : "") + "</span>" +
           (r.status ? '<span class="own-st' + (r.status === "졸업" ? " grad" : "") + '">' + esc(r.status) + "</span>" : "") + "</li>";
       }).join("");
       ownEl.hidden = false;
