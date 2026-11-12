@@ -354,13 +354,11 @@
   /* 블린 첫 학기 4.0: 기수별 점 */
   var coEl = document.getElementById("cohorts");
   if (coEl && cohorts.length) {
-    var sum = cohorts.reduce(function (t, c) { return t + c.n; }, 0);
-    coEl.innerHTML = '<div class="co-big"><b>' + sum + "명</b><span>첫 학기 4.0 만점</span></div><ul>" +
-      cohorts.map(function (c) {
-        var dots = "";
-        for (var i = 0; i < c.n; i++) dots += '<i style="--i:' + i + '"></i>';
-        return "<li><span>" + esc(c.label) + '</span><span class="dots" aria-hidden="true">' + dots + "</span><b>" + c.n + "</b></li>";
-      }).join("") + "</ul>";
+    coEl.innerHTML = '<div class="co-big"><b>4.0</b><span>전원 만점</span></div>' +
+      '<ul class="co-chips" aria-label="첫 학기 GPA 4.0을 받은 기수">' + cohorts.map(function (c) {
+        return "<li><b>" + esc(c.label) + "</b><span>4.0</span></li>";
+      }).join("") + "</ul>" +
+      '<p class="co-note">블린&nbsp;칼리지 첫 학기 GPA 4.0 → 텍사스&nbsp;A&amp;M 진학</p>';
   }
 
   /* 6c. 학사 일정: 오늘 이후 4개 + 전체 표 */
