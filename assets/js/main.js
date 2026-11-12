@@ -356,7 +356,7 @@
   /* 블린 첫 학기 4.0: 기수별 점 */
   var coEl = document.getElementById("cohorts");
   if (coEl && cohorts.length) {
-    coEl.innerHTML = '<div class="co-big"><b>4.0</b><span>전원 만점</span></div>' +
+    coEl.innerHTML = '<div class="co-big"><b>4.0</b><span>기수마다 만점자</span></div>' +
       '<ul class="co-chips" aria-label="첫 학기 GPA 4.0을 받은 기수">' + cohorts.map(function (c) {
         return "<li><b>" + esc(c.label) + "</b><span>4.0</span></li>";
       }).join("") + "</ul>" +
