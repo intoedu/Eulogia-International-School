@@ -313,21 +313,25 @@ small { font-size: inherit; }
 @media (max-width: 374px) { .hero-photo { aspect-ratio: 16 / 9; } }
 
 /* ---------- 6. College wall ---------- */
-.own { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 40px; padding: 16px 24px; background: var(--gold-soft); border-radius: var(--r-2); }
-.own-label { display: flex; align-items: center; gap: 12px; }
-.own-label img { border-radius: 50%; flex: none; }
-.own-label b { display: block; font: 700 var(--fs-name)/1.3 var(--f-serif); color: var(--ink); }
-.own-label small { display: block; font-size: var(--fs-micro); letter-spacing: .12em; text-transform: uppercase; color: var(--gold-ink); font-weight: 600; }
-.own-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px 32px; }
-.own-list li { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.own-mono { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--c); color: var(--on-dark); display: grid; place-items: center; font: 700 .6875rem/1 var(--f-serif); letter-spacing: .02em; }
-.own-nm { display: grid; min-width: 0; }
-.own-nm b { font: 600 var(--fs-small)/1.3 var(--f-serif); color: var(--ink); }
-.own-nm small { font-size: var(--fs-caption); line-height: 1.4; color: var(--muted); }
-.own-n { margin-left: 4px; font-size: var(--fs-caption); color: var(--muted); white-space: nowrap; }
-.own-n b { font: 700 var(--fs-num-m)/1 var(--f-serif); color: var(--gold-ink); }
-@media (min-width: 1024px) { .own-list { margin-left: auto; } }
-@media (max-width: 599px) { .own { padding: 14px 16px; gap: 12px; } .own-list { flex-direction: column; gap: 10px; width: 100%; } .own-n { margin-left: auto; } }
+.own { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px 40px; align-items: center; padding: clamp(24px, 3vw, 36px); border-radius: var(--r-2); color: var(--on-dark);
+  background: radial-gradient(120% 140% at 0% 0%, var(--navy) 0%, transparent 60%), var(--navy-deep); }
+.own-head { display: grid; gap: 10px; min-width: 0; }
+.own-kicker { display: flex; align-items: center; gap: 10px; font-size: var(--fs-micro); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-lt); }
+.own-kicker img { border-radius: 50%; flex: none; }
+.own-title { font: 700 var(--fs-h3)/1.3 var(--f-serif); color: var(--on-dark); letter-spacing: -.01em; }
+.own-lede { font-size: var(--fs-small); line-height: 1.7; color: var(--on-dark-soft); }
+.own-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-width: 0; }
+.own-list li { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 14px 18px; border-radius: var(--r-2); background: rgba(255, 255, 255, .06); border: 1px solid var(--on-color-line); border-left: 4px solid var(--c); min-width: 0; }
+.own-mono { width: 52px; height: 52px; border-radius: 50%; background: var(--c); color: #fff; box-shadow: 0 0 0 2px rgba(255, 255, 255, .85); display: grid; place-items: center; font: 700 .75rem/1 var(--f-serif); letter-spacing: .02em; }
+.own-nm { display: grid; gap: 2px; min-width: 0; }
+.own-nm b { font: 700 var(--fs-name)/1.3 var(--f-serif); color: var(--on-dark); }
+.own-nm small { font-size: var(--fs-caption); line-height: 1.4; color: var(--on-dark-muted); }
+.own-st { padding: 6px 14px; border-radius: 999px; font-size: var(--fs-caption); font-weight: 700; line-height: 1.2; white-space: nowrap; background: var(--gold-lt); color: var(--navy-deep); }
+.own-st.grad { background: var(--gold); color: var(--navy-deep); }
+.own-more { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--on-color-line); font-size: var(--fs-caption); color: var(--on-dark-muted); }
+.own :focus-visible { outline-color: var(--focus-on-dark); }
+@media (max-width: 899px) { .own { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 599px) { .own { padding: 20px 16px; margin-inline: calc(-1 * var(--side) + 8px); } .own-list li { grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; padding: 12px 14px; } .own-mono { width: 40px; height: 40px; font-size: .625rem; } }
 
 .wall { position: relative; z-index: 2; margin-top: calc(-1 * var(--overlap)); }
 .wall-card {
