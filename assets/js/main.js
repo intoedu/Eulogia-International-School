@@ -124,7 +124,7 @@
         '<span class="uni-ko">' + esc(nb(r.ko)) + " · " + esc(r.state) + "</span></span>" +
         (fig ? '<span class="uni-sch"><span class="sch-fig"><small>최대</small><b>' + esc(fig) + "</b></span>" +
           (r.note ? '<span class="sch-note">' + esc(r.note) + "</span>" : "") + "</span>" : "") +
-        '<span class="uni-n"><b>' + esc(r.count) + "</b>명 합격</span>" +
+        '<span class="uni-n">합격</span>' +
         "</li>";
     };
     var tile = function (r) {
@@ -132,7 +132,7 @@
         '<span class="mono" aria-hidden="true">' + esc(r.abbr || "") + "</span>" +
         '<span class="uni-body"><b lang="en">' + esc(r.university) + "</b>" +
         '<span class="uni-ko">' + esc(nb(r.ko)) + " · " + esc(r.state) + "</span></span>" +
-        '<span class="uni-n"><b>' + esc(r.count) + "</b>명 합격</span>" +
+        '<span class="uni-n">합격</span>' +
         "</li>";
     };
     var featured = ranked.filter(function (r) { return r.scholarship; }).slice(0, 1);
@@ -143,7 +143,7 @@
       return '<li style="--c:' + color(r) + '"><i aria-hidden="true"></i>' +
         '<span class="nm"' + (r.check ? "" : ' lang="en"') + ">" + esc(r.university) +
         (r.check ? ' <span class="tag-sample">명칭 확인</span>' : "") + "</span>" +
-        '<span class="n">' + esc(r.count) + "명</span></li>";
+        "</li>";
     }).join("");
     setText("uni-rest-n", others.length);
     /* 율로기아 졸업생 진학: 누적 기록과 따로 */
@@ -157,9 +157,8 @@
       }).join("");
       ownEl.hidden = false;
     }
-    setText("wall-total", total);
     setText("wall-unis", results.length);
-    setText("summary-meta", results.length + "곳 · " + total + "명");
+    setText("summary-meta", results.length + "곳");
   }
 
   /* 진학 실적 펼치기: #results 로 가는 링크, 주소의 #results */
@@ -199,7 +198,7 @@
       return [r.university, r.ko, r.state, r.note].join(" ").toLowerCase().indexOf(q) !== -1;
     });
     if (!rows.length) {
-      tbody.innerHTML = '<tr class="empty-row"><td colspan="4" class="empty">조건에 맞는 대학이 없습니다. 검색어나 주를 바꿔 보세요.</td></tr>';
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="3" class="empty">조건에 맞는 대학이 없습니다. 검색어나 주를 바꿔 보세요.</td></tr>';
     } else {
       tbody.innerHTML = rows.map(function (r) {
         var sch = r.scholarship ? '<span class="sch">' + esc(nb(r.scholarship)) + "</span>" + (r.note ? "<small>" + esc(r.note) + "</small>" : "") : "—";
@@ -207,13 +206,12 @@
           '<td class="nm-cell"><span class="uni-dot" style="--c:' + esc(r.color || "#283090") + '"></span>' +
           '<span class="nm"' + (r.check ? "" : ' lang="en"') + ">" + esc(r.university) + "</span>" +
           "<small>" + esc(nb(r.ko)) + '<span class="st-inline"> · ' + esc(r.state) + "</span>" + (r.check ? ' <span class="tag-sample">명칭 확인</span>' : "") + "</small></td>" +
-          '<td class="st">' + esc(r.state) + '</td><td class="num">' + esc(r.count) + "명</td>" +
+          '<td class="st">' + esc(r.state) + '</td>' +
           '<td class="sch-cell">' + sch + "</td></tr>";
       }).join("");
     }
     if (summary) {
-      var n = rows.reduce(function (t, r) { return t + (r.count || 0); }, 0);
-      summary.innerHTML = "대학 <b>" + rows.length + "</b>곳 · 합격 <b>" + n + "</b>명";
+      summary.innerHTML = "대학 <b>" + rows.length + "</b>곳";
     }
   }
   if (stateSel) stateSel.addEventListener("change", renderResults);
