@@ -1145,3 +1145,10 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
   .refund { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fee-card { padding: 20px 16px; }
 }
+
+.bank-row { display: grid; grid-template-columns: minmax(0, 1fr) 132px; gap: 20px; align-items: start; }
+.fee-bank .bank-row dl { margin-top: 12px; }
+.qr { margin: 16px 0 0; display: grid; gap: 8px; justify-items: center; text-align: center; }
+.qr img { width: 132px; height: auto; padding: 8px; border-radius: var(--r-2); background: #fff; }
+.qr figcaption { font-size: var(--fs-micro); line-height: 1.5; color: var(--on-dark-muted); }
+@media (max-width: 479px) { .bank-row { grid-template-columns: minmax(0, 1fr); } .qr img { width: 180px; } }
