@@ -28,7 +28,8 @@ window.EULOGIA_OWN = [
   { region: "미국", en: "USA", wide: true, schools: [
     { name: "Texas A&M University", key: true, tag: "전액 장학금" },
     { name: "Penn State University", key: true },
-    { name: "Stony Brook University (SUNY)", key: true },
+    { name: "Stony Brook University (SUNY)", key: true, tag: "졸업" },
+    { name: "New York University", key: true, tag: "석사 과정" },
     { name: "The Ohio State University", key: true },
     { name: "Rutgers University", key: true },
     { name: "University of Wisconsin–Madison", key: true },
@@ -65,7 +66,8 @@ window.EULOGIA_OWN = [
     { name: "University of Macau", key: true, tag: "전액 장학금 · 기숙사 · 생활비", place: "마카오" },
     { name: "Hamad Bin Khalifa University", key: true, place: "카타르" },
     { name: "University of Science and Technology of Hanoi", place: "베트남" },
-    { name: "S P Jain School of Global Management", place: "싱가포르" },
+    { name: "Fulbright University Vietnam", place: "베트남" },
+    { name: "S P Jain School of Global Management", key: true, place: "싱가포르", tag: "장학금 90% · 졸업" },
     { name: "Assumption University", place: "방콕" }
   ] },
   { region: "한국", en: "Korea", schools: [
