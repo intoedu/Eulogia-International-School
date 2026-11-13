@@ -4,7 +4,7 @@
   - check: true 는 명칭·수치 확인이 필요한 항목입니다.
 */
 
-/* 사이트 설정: 상담 신청서를 받을 메일 (현지 입학 상담 담당 도형래 선교사) */
+/* 사이트 설정: 상담 신청서를 받을 메일 (현지 입학 상담 담당 Administrator) */
 window.EULOGIA_CONFIG = {
   applyEmail: "dhr2000@daum.net"
 };
@@ -26,8 +26,8 @@ window.EULOGIA_SLIDES = [
    tag: 장학금 등 강조 표시 / key: 이름 있는 대학 굵게 */
 window.EULOGIA_OWN = [
   { region: "미국", en: "USA", wide: true, schools: [
-    { name: "Texas A&M University", key: true, tag: "전액 장학금" },
-    { name: "Penn State University", key: true },
+    { name: "Texas A&M University", key: true, tag: "장학금 85%" },
+    { name: "Penn State University", key: true, tag: "졸업 · 미국 조지아 한화 취업" },
     { name: "Stony Brook University (SUNY)", key: true, tag: "졸업" },
     { name: "New York University", key: true, tag: "석사 과정" },
     { name: "The Ohio State University", key: true },
@@ -35,26 +35,27 @@ window.EULOGIA_OWN = [
     { name: "University of Wisconsin–Madison", key: true },
     { name: "University of Maryland", key: true },
     { name: "University of Rochester", key: true },
-    { name: "Fordham University", key: true },
-    { name: "Baylor University", key: true },
+    { name: "Fordham University", key: true, tag: "장학금 $25,000" },
+    { name: "Baylor University", key: true, tag: "장학금 $18,000" },
     { name: "Saint Louis University", tag: "전액 장학금" },
-    { name: "Miami University", tag: "Honors" },
-    { name: "Calvin University", tag: "전액 + MK 장학금" },
-    { name: "Coe College", tag: "전액 장학금" },
+    { name: "Miami University", key: true, tag: "Honors · 퍼블릭 아이비" },
+    { name: "Calvin University", tag: "장학금 90% + CMSF" },
+    { name: "Coe College", tag: "장학금 75%" },
     { name: "Temple University" },
-    { name: "Drexel University" },
+    { name: "Drexel University", key: true, tag: "Honors · 장학금 70%" },
     { name: "Bentley University" },
     { name: "Stevens Institute of Technology" },
-    { name: "Wheaton College" },
+    { name: "Wheaton College", tag: "장학금 80%" },
     { name: "DePauw University" },
-    { name: "DePaul University" },
-    { name: "Hofstra University" },
-    { name: "University of Tulsa" },
+    { name: "DePaul University", tag: "Presidential Scholarship" },
+    { name: "Hofstra University", tag: "장학금 $31,000" },
+    { name: "University of Tulsa", tag: "장학금 $18,000" },
     { name: "Florida International University" },
-    { name: "Cedarville University" },
+    { name: "Cedarville University", tag: "전액 장학금" },
     { name: "Southern Illinois University Edwardsville" },
     { name: "Robert Morris University" },
     { name: "Eastern Michigan University" },
+    { name: "Azusa Pacific University", tag: "장학금 90%" },
     { name: "University at Buffalo (SUNY)" },
     { name: "Binghamton University (SUNY)" },
     { name: "Texas Christian University (TCU)" },
@@ -65,8 +66,9 @@ window.EULOGIA_OWN = [
   { region: "중동·아시아", en: "Middle East & Asia", schools: [
     { name: "University of Macau", key: true, tag: "전액 장학금 · 기숙사 · 생활비", place: "마카오" },
     { name: "Hamad Bin Khalifa University", key: true, place: "카타르" },
+    { name: "University of Wollongong in Dubai", place: "두바이", tag: "장학금 50%" },
     { name: "University of Science and Technology of Hanoi", place: "베트남" },
-    { name: "Fulbright University Vietnam", place: "베트남" },
+    { name: "Fulbright University Vietnam", place: "베트남", tag: "장학금 80%" },
     { name: "S P Jain School of Global Management", key: true, place: "싱가포르", tag: "장학금 90% · 졸업" },
     { name: "Assumption University", place: "방콕" }
   ] },
