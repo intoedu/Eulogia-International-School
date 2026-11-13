@@ -1178,3 +1178,10 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
 @media (max-width: 1199px) { .dorm-accts { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 1023px) { .dorm { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 599px) { .dorm-head, .acct-card { padding: 20px 16px; } }
+
+/* 학비 계좌: 휴대폰에서는 QR 바로 아래에 계좌 정보 */
+.pay-en dt { white-space: nowrap; }
+@media (max-width: 479px) {
+  .tuition-row .qr { order: -1; margin-top: 8px; }
+  .tuition-row .pay-en { margin-top: 0; }
+}
