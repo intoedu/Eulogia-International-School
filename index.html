@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400..700&family=Noto+Serif+KR:wght@600..700&family=Source+Serif+4:opsz,wght@36,400..700&display=swap">
 <link rel="preload" as="image" href="assets/img/k-classroom.jpg">
-<link rel="stylesheet" href="assets/css/style.css?v=20261113f">
+<link rel="stylesheet" href="assets/css/style.css?v=20261113i">
 </head>
 <body>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
@@ -125,20 +125,17 @@
           <div class="own-board" id="own-board" aria-label="율로기아 과정 합격 대학"></div>
           <article class="spot" aria-labelledby="spot-title">
             <div class="spot-head">
-              <p class="spot-kicker">합격 사례 · 율로기아 졸업생</p>
-              <h4 id="spot-title">세 대학 전액 장학금 합격 <span>율로기아 과정이면 누구나 도전할 수 있습니다</span></h4>
-              <p class="spot-lede">텍사스&nbsp;A&amp;M과 세인트루이스대학교에서 전액 장학금을 받고, 기숙사비와 생활비까지 지원하는 마카오대학교를 골라 진학했습니다. 율로기아에서 쌓은 성적과 영어로 받은 결과입니다.</p>
+              <p class="spot-kicker">합격 하이라이트</p>
+              <h4 id="spot-title">전액 장학금, <span class="nw">Public Ivy Honors 합격</span> <span>율로기아 과정이면 누구나 도전할 수 있습니다</span></h4>
+              <p class="spot-lede">「퍼블릭 아이비」로 불리는 마이애미대학교와 드렉셀대학교에 Honors 학생으로 합격했고, 세인트루이스대학교·시더빌대학교·마카오대학교에서 전액 장학금을 받았습니다.</p>
             </div>
-            <dl class="spot-stats">
-              <div><dt>GPA</dt><dd>4.0</dd></div>
-              <div><dt>AP</dt><dd>3<small>과목</small></dd></div>
-              <div><dt lang="en">TOEFL</dt><dd>110<small>+</small></dd></div>
-              <div><dt lang="en">SAT</dt><dd>1500<small>+</small></dd></div>
-            </dl>
-            <ul class="spot-offers" aria-label="합격 대학과 장학금">
-              <li><b lang="en">Texas A&amp;M University</b><span>전액 장학금</span></li>
+            <ul class="spot-offers" aria-label="합격 하이라이트">
+              <li class="chosen"><b lang="en">Miami University</b><span>Honors 합격 · Public Ivy</span></li>
+              <li class="chosen"><b lang="en">Drexel University</b><span>Honors 합격 · 장학금 70%</span></li>
+              <li><b lang="en">University of Macau</b><span>전액 장학금 · 기숙사 · 생활비</span></li>
               <li><b lang="en">Saint Louis University</b><span>전액 장학금</span></li>
-              <li class="chosen"><b lang="en">University of Macau</b><span>전액 장학금 · 기숙사 · 생활비 · 진학</span></li>
+              <li><b lang="en">Cedarville University</b><span>전액 장학금</span></li>
+              <li><b lang="en">Texas A&amp;M University</b><span>장학금 85%</span></li>
             </ul>
           </article>
           <p class="own-more">학교가 받은 합격 기록 기준 · 율로기아 졸업생과 같은 과정 학생 포함 · 합격 소식은 계속 더해집니다</p>
@@ -297,23 +294,12 @@
   <section class="section follow" id="growth" aria-labelledby="growth-title" data-nav="texas">
     <div class="wrap">
       <div class="head">
-        <p class="kicker" lang="en">Proof, in numbers</p>
-        <h2 id="growth-title">숫자로 보는 성장</h2>
-        <p class="sub-en" lang="en">Grades, scholarships and first semesters</p>
-        <p>같은 노선을 걸은 학생들의 실제 기록입니다.</p>
+        <p class="kicker" lang="en">Admissions &amp; Scholarships</p>
+        <h2 id="growth-title">합격과 장학금</h2>
+        <p class="sub-en" lang="en">Where students were admitted, and the aid they received</p>
+        <p>같은 과정을 걸은 학생들의 실제 합격·장학 기록입니다.</p>
       </div>
-      <div class="proof-grid">
-        <article class="proof-card">
-          <h3>고교 GPA, 학년마다 오릅니다</h3>
-          <p class="pc-sub">텍사스&nbsp;현지&nbsp;고교 재학생 2명의 학년별 GPA (4.0 만점)</p>
-          <div class="chart" id="gpa-chart" role="img" aria-label="학생 A: 9학년 1.83, 10학년 2.92, 11학년 3.84. 학생 B: 9학년 3.80, 10학년 3.81, 11학년 3.90."></div>
-          <ul class="legend" id="gpa-legend"></ul>
-        </article>
-        <article class="proof-card">
-          <h3>텍사스&nbsp;A&amp;M 진학생 대부분 4.0</h3>
-          <p class="pc-sub">블린&nbsp;칼리지 첫 학기 GPA 4.0 만점자가 기수마다 나왔습니다</p>
-          <div class="cohorts" id="cohorts"></div>
-        </article>
+      <div class="proof-grid proof-one">
         <article class="proof-card">
           <h3>장학금이 등록금을 줄입니다</h3>
           <p class="pc-sub">텍사스&nbsp;A&amp;M 1학기 실제 청구서 사례</p>
@@ -330,12 +316,12 @@
           <article class="admit">
             <img class="admit-photo" src="assets/img/am-admit-1.jpg" alt="텍사스 A&amp;M 통계학과 합격생" width="412" height="492" loading="lazy" decoding="async">
             <div class="admit-body">
-              <p class="admit-tag"><span>장학금 75%</span><span>GPA 4.0</span></p>
+              <p class="admit-tag"><span>장학금 75%</span></p>
               <h4>통계학과 합격</h4>
               <p class="admit-major" lang="en">Texas A&amp;M · Statistics</p>
               <ol class="admit-path">
                 <li><b>2021.07–2023.07</b><span>미국 칼리지 준학사(AA) 과정</span></li>
-                <li><b>2024.01–2024.12</b><span>블린&nbsp;칼리지 컴퓨터공학 · GPA 4.0</span></li>
+                <li><b>2024.01–2024.12</b><span>블린&nbsp;칼리지 컴퓨터공학</span></li>
                 <li class="goal"><b>2025.01</b><span>텍사스&nbsp;A&amp;M 통계학과 합격 · 학과 전미 13위</span></li>
               </ol>
             </div>
@@ -491,7 +477,7 @@
         </div>
         <div class="com-grid">
           <figure class="cg-sbu"><img src="assets/img/grad-stonybrook.jpg" alt="Stony Brook University 공과대학 건물 앞에서 졸업 가운을 입은 율로기아 졸업생" loading="lazy" decoding="async" width="1080" height="905"><figcaption>율로기아 졸업생 · Stony Brook University</figcaption></figure>
-          <figure class="cg-psu"><img src="assets/img/grad-pennstate.jpg" alt="펜실베이니아 주립대 Old Main 건물 계단에서 가운을 입고 찍은 졸업 사진" loading="lazy" decoding="async" width="1200" height="1600"><figcaption>율로기아 졸업생 · 펜실베이니아 주립대</figcaption></figure>
+          <figure class="cg-psu"><img src="assets/img/grad-pennstate.jpg" alt="펜실베이니아 주립대 Old Main 건물 계단에서 가운을 입고 찍은 졸업 사진" loading="lazy" decoding="async" width="1200" height="1600"><figcaption>율로기아 졸업생 · 펜실베이니아 주립대 졸업 · 한화 취업</figcaption></figure>
           <figure class="cg-2017"><img src="assets/img/grad-2017.jpg" alt="2017 율로기아 졸업식 현수막 앞에서 졸업생과 재학생들이 함께 찍은 사진" loading="lazy" decoding="async" width="1280" height="960"><figcaption>2017 율로기아 졸업식</figcaption></figure>
           <figure class="cg-cake"><img src="assets/img/grad-2025-cake.jpg" alt="CLASS 2025 장식 앞에서 졸업 케이크를 자르는 졸업생" loading="lazy" decoding="async" width="1600" height="739"><figcaption>2025 졸업식 · Class of 2025</figcaption></figure>
           <figure class="cg-2025"><img src="assets/img/grad-2025.jpg" alt="졸업식 현수막 앞에서 목사님과 함께 선 2025 졸업생, 성균관대학교 합격" loading="lazy" decoding="async" width="739" height="1600"><figcaption>2025 졸업생 · 성균관대 입학</figcaption></figure>
@@ -542,13 +528,13 @@
           <p>원하는 날짜와 시간을 남겨 주시면 학교에서 연락드립니다.</p>
           <div class="adm-contact">
             <p class="adm-role">현지 입학 상담 · 입학 레벨 테스트</p>
-            <p class="adm-name">도형래 선교사 <span>한국어 상담</span></p>
+            <p class="adm-name"><span lang="en">Administrator</span> <span class="adm-badge">한국어 상담</span></p>
             <a class="adm-line" href="tel:+66993715575"><span>전화</span><b>+66 99-371-5575</b></a>
             <a class="adm-line" href="mailto:dhr2000@daum.net"><span>이메일</span><b>dhr2000@daum.net</b></a>
           </div>
           <dl>
             <div><dt lang="en">Thai</dt><dd><a href="tel:+66850333982">085-033-3982</a> · <a href="tel:+66992963331">099-296-3331</a></dd></div>
-            <div><dt lang="en">English</dt><dd><a href="tel:+66993715575">099-371-5575</a> (도형래 선교사)</dd></div>
+            <div><dt lang="en">English</dt><dd><a href="tel:+66993715575">099-371-5575</a> (<span lang="en">Administrator</span>)</dd></div>
             <div><dt lang="en">Email</dt><dd><a href="mailto:eulogiaschool@gmail.com">eulogiaschool@gmail.com</a></dd></div>
           </dl>
         </div>
@@ -620,7 +606,7 @@
 
       <div class="tuition-pay" aria-labelledby="tu-title">
         <h3 id="tu-title">학비 납부 계좌</h3>
-        <p class="tu-sub">입학금·수업료·교재비·점심·비자·LCA 비용은 도형래 선교사 계좌로 냅니다.</p>
+        <p class="tu-sub">입학금·수업료·교재비·점심·비자·LCA 비용은 아래 학비 계좌로 냅니다.</p>
         <div class="tu-accts">
           <div class="acct-card">
             <p class="acct-tag">치앙마이 계좌 · SCB</p>
@@ -707,7 +693,7 @@
         <div>
           <h3 lang="en">Phone</h3>
           <p>태국어 · <a href="tel:+66850333982">085-033-3982</a>, <a href="tel:+66992963331">099-296-3331</a></p>
-          <p>한국어·영어 · <a href="tel:+66993715575">099-371-5575</a> <span class="ct-who">(도형래 선교사 · 입학 상담·레벨 테스트)</span></p>
+          <p>한국어·영어 · <a href="tel:+66993715575">099-371-5575</a> <span class="ct-who">(<span lang="en">Administrator</span> · 입학 상담·레벨 테스트)</span></p>
         </div>
         <div>
           <h3 lang="en">Online</h3>
@@ -738,7 +724,7 @@
   <a href="https://www.google.com/maps/search/?api=1&amp;query=79+Moo+7+Fa+Ham+Mueang+Chiang+Mai+50000" target="_blank" rel="noopener">길 찾기</a>
 </nav>
 
-<script src="assets/js/data.js?v=20261113f"></script>
-<script src="assets/js/main.js?v=20261113f"></script>
+<script src="assets/js/data.js?v=20261113i"></script>
+<script src="assets/js/main.js?v=20261113i"></script>
 </body>
 </html>
