@@ -1185,3 +1185,8 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
   .tuition-row .qr { order: -1; margin-top: 8px; }
   .tuition-row .pay-en { margin-top: 0; }
 }
+
+.fee-bank .acct-tag { display: inline-block; margin-top: 14px; padding: 3px 10px; border-radius: 999px; font-size: var(--fs-micro); font-weight: 700; color: var(--navy-deep); background: var(--gold-lt); }
+.fee-bank .tuition-row dl { margin-top: 4px; }
+.kr-acct { margin-top: 18px; padding-top: 4px; border-top: 1px solid var(--on-color-line); }
+.kr-acct dl { margin: 8px 0 12px; }
