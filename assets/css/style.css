@@ -1155,3 +1155,26 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
 
 .fee-bank dd small { display: block; font-weight: 500; font-size: var(--fs-caption); color: var(--on-dark-muted); }
 .qr figcaption { margin-bottom: 8px; }
+
+/* 기숙사비와 계좌 (학비와 따로 받음) */
+.dorm { margin-top: var(--g); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--g); align-items: stretch; }
+.dorm-head { display: grid; align-content: start; gap: 8px; padding: 24px; border-radius: var(--r-2); background: var(--gold-soft); border: 1px solid var(--line); }
+.dorm-head h3 { font-size: var(--fs-h3); }
+.dorm-fee { margin-top: 4px; font-size: var(--fs-small); color: var(--muted); }
+.dorm-fee b { font: 700 var(--fs-num-l)/1 var(--f-serif); color: var(--ink); font-variant-numeric: lining-nums; }
+.dorm-fee span { margin-left: 4px; font-weight: 700; color: var(--gold-ink); }
+.dorm-accts { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--g); }
+.acct-card { padding: 22px 24px; border-radius: var(--r-2); background: var(--navy-deep); color: var(--on-dark); min-width: 0; }
+.acct-tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: var(--fs-micro); font-weight: 700; color: var(--navy-deep); background: var(--gold-lt); }
+.acct-card dl { margin: 12px 0 0; display: grid; }
+.acct-card dl div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--on-color-line); }
+.acct-card dt { font-size: var(--fs-caption); color: var(--on-dark-muted); }
+.acct-card dd { margin: 0; font-weight: 700; text-align: right; }
+.acct-card dd small { display: block; font-weight: 500; font-size: var(--fs-caption); color: var(--on-dark-muted); }
+.acct-card .acct { font: 700 var(--fs-h4)/1.2 var(--f-serif); color: var(--gold-lt); font-variant-numeric: tabular-nums; letter-spacing: .02em; white-space: nowrap; }
+.acct-card .qr figcaption { color: var(--on-dark-muted); }
+.acct-th .bank-row dl { margin-top: 12px; }
+.fee-bank dl { margin-top: 16px; }
+@media (max-width: 1199px) { .dorm-accts { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1023px) { .dorm { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 599px) { .dorm-head, .acct-card { padding: 20px 16px; } }
