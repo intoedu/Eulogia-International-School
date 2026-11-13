@@ -1190,3 +1190,13 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
 .fee-bank .tuition-row dl { margin-top: 4px; }
 .kr-acct { margin-top: 18px; padding-top: 4px; border-top: 1px solid var(--on-color-line); }
 .kr-acct dl { margin: 8px 0 12px; }
+
+/* 학비 계좌: 학비 표 바로 아래 */
+.tuition-pay { margin-top: var(--g); padding: 24px; border-radius: var(--r-2); background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--gold); }
+.tuition-pay h3 { font-size: var(--fs-h3); }
+.tu-sub { margin-top: 6px; font-size: var(--fs-small); color: var(--muted); }
+.tu-accts { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--g); }
+.fee-refund { margin-top: var(--g); }
+@media (max-width: 1023px) { .tu-accts { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 599px) { .tuition-pay { padding: 20px 16px; } }
+@media (max-width: 479px) { .acct-th .qr { order: -1; } }
