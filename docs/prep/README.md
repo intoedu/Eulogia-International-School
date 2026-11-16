@@ -4,7 +4,7 @@
 - 담당자: 김택곤 (teakgonkim@gmail.com)
 - 작성일: 2026-10-27
 - 상태: **초안 공개 중** (홈페이지 파일은 저장소 맨 위 `index.html`·`assets/`. 진학 실적·일정 데이터는 `assets/js/data.js`만 고치면 바뀜)
-- 배포: **GitHub Pages** (main 브랜치 맨 위 폴더) · 주소 https://intoedu.github.io/Eulogia-International-School/ · 초안 기간에는 검색엔진 노출 차단(noindex)
+- 배포: **GitHub Pages** (main 브랜치 맨 위 폴더) · 주소 https://eulogia.co.kr/ (가비아 도메인, 2026-11-16 연결) · 초안 기간에는 검색엔진 노출 차단(noindex)
 
 ## 문서 목록
 
