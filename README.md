@@ -2,7 +2,8 @@
 
 율로기아(치앙마이) 학교 홈페이지입니다. 빌드 도구 없이 바로 열리는 정적 사이트입니다.
 
-- 사이트 주소: https://intoedu.github.io/Eulogia-International-School/ (GitHub Pages, main 브랜치 맨 위 폴더)
+- 사이트 주소: https://eulogia.co.kr/ (GitHub Pages, main 브랜치 맨 위 폴더 · 도메인은 가비아, 맨 위 `CNAME` 파일로 연결)
+- 예전 주소 https://intoedu.github.io/Eulogia-International-School/ 로 들어오면 새 도메인으로 자동 이동
 - main에 변경이 들어가면 1~2분 뒤 사이트에 자동으로 반영됩니다.
 
 ## 폴더
