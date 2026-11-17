@@ -1210,3 +1210,7 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
 
 .spot h4 > span:not(.nw) { display: block; }
 .spot h4 .nw { display: inline; margin: 0; font: inherit; color: inherit; }
+
+/* 초안 표시 삭제 후: 이메일을 오른쪽 끝으로, 휴대폰에서는 빈 띠 숨김 */
+.utility .u-mail { margin-left: auto; }
+@media (max-width: 599px) { .utility { display: none; } }
