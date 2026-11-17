@@ -1214,3 +1214,6 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
 /* 초안 표시 삭제 후: 이메일을 오른쪽 끝으로, 휴대폰에서는 빈 띠 숨김 */
 .utility .u-mail { margin-left: auto; }
 @media (max-width: 599px) { .utility { display: none; } }
+
+/* 머리말: 휴대폰에서도 「Christian School」 표시 */
+@media (max-width: 419px) { .crest small { display: block; } }
