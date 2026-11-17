@@ -15,7 +15,7 @@
 | `assets/js/data.js` | 진학 실적·성장 기록·학사 일정 데이터 (자료가 오면 이 파일만 고침) |
 | `assets/js/main.js` | 화면 동작 (노선도, 그래프, 검색, 신청서) |
 | `assets/img/` | 로고·학교 사진 |
-| `privacy.html` | 개인정보 처리방침 (초안, 법률 검토 전) |
+| `privacy.html` | 개인정보 처리방침 (2026-11-17 시행) |
 | `404.html` | 없는 주소로 들어왔을 때 보이는 페이지 (GitHub Pages 주소 기준 경로) |
 | `docs/prep/` | 제작 준비 자료 (진단, 질문지, 명세, 점검표 등) |
 
@@ -27,6 +27,11 @@
 
 학생 얼굴이 나온 사진과 사용 허락을 받지 않은 외부 사진은 저장소에 올리지 않습니다 (`assets/img/private/`는 `.gitignore`로 제외). 그 자리에는 「사진 준비 중」이 보입니다.
 
-## 초안 표시
+## 검색 노출
 
-정식 오픈 전에는 `index.html`·`privacy.html`의 `noindex` 줄로 검색엔진 노출을 막아 둡니다. 오픈할 때 이 줄을 지웁니다.
+2026-11-17 정식 공개: `noindex`를 지웠고, `robots.txt`·`sitemap.xml`로 검색엔진에 사이트를 알립니다. 404 페이지만 검색에서 뺍니다.
+
+## 학교 이름과 교표
+
+- 머리말: **EULOGIA Christian School** · 새 교표(`assets/img/logo.jpg`)
+- 하단: **EULOGIA LANGUAGE SCHOOL** · 언어학교 교표(`assets/img/logo-language.jpg`)
