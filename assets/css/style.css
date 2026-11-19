@@ -1217,3 +1217,16 @@ td.yr { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowra
 
 /* 머리말: 휴대폰에서도 「Christian School」 표시 */
 @media (max-width: 419px) { .crest small { display: block; } }
+
+/* 언어 전환 (한국어 ↔ English) */
+.lang-sw { flex: none; margin-left: 20px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: var(--fs-caption); font-weight: 700; line-height: 1.2; color: var(--link); text-decoration: none; white-space: nowrap; }
+.lang-sw:hover { border-color: var(--link); }
+.lang-sw + .head-cta { margin-left: 12px; }
+@media (max-width: 1119px) { .lang-sw { margin-left: auto; } }
+@media (max-width: 759px) { .lang-sw ~ .menu-btn { margin-left: 10px; } .lang-sw { padding: 5px 10px; } }
+
+/* 영어판: 문장이 길어 첫 화면 제목 크기를 조금 줄임 */
+html[lang="en"] .hero h1 { font-size: clamp(1.875rem, 1.1rem + 2.1vw, 2.625rem); line-height: 1.16; }
+html[lang="en"] .hero h1 br { display: none; }
+html[lang="en"] .hero h1 em { display: block; }
+html[lang="en"] .nw { white-space: normal; }

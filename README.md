@@ -35,3 +35,10 @@
 
 - 머리말: **EULOGIA Christian School** · 새 교표(`assets/img/logo.jpg`)
 - 하단: **EULOGIA LANGUAGE SCHOOL** · 언어학교 교표(`assets/img/logo-language.jpg`)
+
+## 영어판
+
+- 주소: https://eulogia.co.kr/en/ (`en/index.html`), 머리말의 「English / 한국어」 버튼으로 오갑니다.
+- 사진·CSS·JS·`data.js`는 한국어판과 같은 파일을 씁니다. 대학·장학금·일정은 `data.js`만 고치면 두 언어에 함께 반영됩니다.
+- 화면에 그려지는 영어 문구는 `main.js` 맨 위 `EN_WORDS`에 있습니다. `data.js`에 새 한국어 표시(장학금 문구·지역)를 넣으면 `EN_WORDS`에도 영어를 더해 주세요. 「장학금 N%」「장학금 $N」 형식은 자동으로 바뀝니다.
+- 한국어판 `index.html`의 문장을 바꾸면 `en/index.html`의 같은 자리도 함께 고쳐야 합니다.
