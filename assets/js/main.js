@@ -20,6 +20,29 @@
       .replace(/Dual Credit/g, "Dual Credit")
       .replace(/텍사스 현지 고교/g, "텍사스 현지 고교");
   }
+  /* 영어판(/en/): <html lang="en"> 이면 화면 글자를 영어로 */
+  var EN = /^en/i.test(document.documentElement.lang || "");
+  var BASE = EN ? "../" : "";   /* 영어판은 /en/ 폴더 안에 있어 사진 경로가 한 단계 위 */
+  var EN_WORDS = {
+    "치앙마이 · 유아반 교실": "Chiang Mai · Early Years classroom", "치앙마이 · Eulogia Vision Center": "Chiang Mai · Eulogia Vision Center",
+    "치앙마이 · 유아반 독서 공간": "Chiang Mai · Early Years reading corner", "치앙마이 · 유아반 음악실": "Chiang Mai · Early Years music room",
+    "전액 장학금": "Full scholarship", "졸업": "Graduated", "석사 과정": "Master's program",
+    "Honors · 퍼블릭 아이비": "Honors · Public Ivy", "Honors · 장학금 70%": "Honors · 70% scholarship",
+    "졸업 · 미국 조지아 한화 취업": "Graduated · now at Hanwha, Georgia (USA)",
+    "전액 장학금 · 기숙사 · 생활비": "Full scholarship · housing · living allowance",
+    "장학금 90% + CMSF": "90% + CMSF scholarship", "장학금 90% · 졸업": "90% scholarship · Graduated",
+    "마카오": "Macau", "카타르": "Qatar", "두바이": "Dubai", "베트남": "Vietnam", "싱가포르": "Singapore",
+    "방콕": "Bangkok", "성균관대학교": "Seoul", "인천 송도": "Songdo, Incheon",
+    "최대 75%": "Up to 75%", "Corps of Cadets 장학금": "Corps of Cadets scholarship",
+    "텍사스 주립대 (영문 명칭 확인 필요)": "Texas State University"
+  };
+  function tr(s) {
+    if (!EN || s == null) return s;
+    if (EN_WORDS[s]) return EN_WORDS[s];
+    var m = /^장학금 ([\d$,%]+)$/.exec(s);
+    if (m) return m[1] + " scholarship";
+    return s;
+  }
   function setText(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
   function debounce(fn, ms) { var t; return function () { clearTimeout(t); t = setTimeout(fn, ms); }; }
   var money = function (n) { return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
@@ -63,7 +86,7 @@
       active = ok;
       if (ok.length < 2) {
         /* 사진이 1장뿐이면 처음 건물 사진을 그대로 두고 점은 숨김 */
-        var first = ok[0] || { src: "assets/img/k-classroom.jpg", pos: "50% 60%", place: capEl ? capEl.textContent : "" };
+        var first = ok[0] || { src: BASE + "assets/img/k-classroom.jpg", pos: "50% 60%", place: capEl ? capEl.textContent : "" };
         slidesEl.innerHTML = '<img class="slide on" src="' + esc(first.src) + '" alt="" style="object-position:' + esc(first.pos || "50% 50%") + '">';
         if (capEl && first.place) capEl.textContent = first.place;
         dotsEl.hidden = true;
@@ -103,9 +126,10 @@
     var done = function () { if (++checked === wanted.length) build(); };
     wanted.forEach(function (w, i) {
       var im = new Image();
-      im.onload = function () { loaded.push({ i: i, src: w.src, place: w.place, pos: w.pos, nw: im.naturalWidth, nh: im.naturalHeight }); done(); };
+      var src = BASE + w.src;
+      im.onload = function () { loaded.push({ i: i, src: src, place: tr(w.place), pos: w.pos, nw: im.naturalWidth, nh: im.naturalHeight }); done(); };
       im.onerror = done;
-      im.src = w.src;
+      im.src = src;
     });
     document.addEventListener("visibilitychange", function () { if (document.hidden) stopPlay(); else play(); });
     window.addEventListener("resize", debounce(function () { if (checked === wanted.length) build(); }, 300));
@@ -131,8 +155,8 @@
       return '<li class="uni" style="--c:' + color(r) + '">' +
         '<span class="mono" aria-hidden="true">' + esc(r.abbr || "") + "</span>" +
         '<span class="uni-body"><b lang="en">' + esc(r.university) + "</b>" +
-        '<span class="uni-ko">' + esc(nb(r.ko)) + " · " + esc(r.state) + "</span></span>" +
-        '<span class="uni-n">합격</span>' +
+        '<span class="uni-ko">' + (EN ? "" : esc(nb(r.ko)) + " · ") + esc(r.state) + "</span></span>" +
+        '<span class="uni-n">' + (EN ? "Admitted" : "합격") + "</span>" +
         "</li>";
     };
     /* 텍사스 A&M은 율로기아 졸업생 목록에 함께 표시하므로 여기서는 뺌 */
@@ -141,8 +165,8 @@
     var others = rest.slice(4);
     if (listEl) listEl.innerHTML = others.map(function (r) {
       return '<li style="--c:' + color(r) + '"><i aria-hidden="true"></i>' +
-        '<span class="nm"' + (r.check ? "" : ' lang="en"') + ">" + esc(r.university) +
-        (r.check ? ' <span class="tag-sample">명칭 확인</span>' : "") + "</span>" +
+        '<span class="nm"' + (r.check && !EN ? "" : ' lang="en"') + ">" + esc(tr(r.university)) +
+        (r.check ? ' <span class="tag-sample">' + (EN ? "Name TBC" : "명칭 확인") + "</span>" : "") + "</span>" +
         "</li>";
     }).join("");
     setText("uni-rest-n", others.length);
@@ -154,15 +178,15 @@
       board.innerHTML = own.map(function (g) {
         nUni += g.schools.length;
         return '<section class="ob' + (g.wide ? " ob-wide" : "") + '" aria-label="' + esc(g.region) + '">' +
-          '<h4><span lang="en">' + esc(g.en) + "</span><small>" + esc(g.region) + "</small></h4><ul>" +
+          '<h4><span lang="en">' + esc(g.en) + "</span>" + (EN ? "" : "<small>" + esc(g.region) + "</small>") + "</h4><ul>" +
           g.schools.map(function (u, k) {
             if (u.tag && u.tag.indexOf("전액") === 0) nFull++;
             var cls = (u.key ? "key" : "") + (g.wide && k >= 10 ? " more" : "");
             return "<li" + (cls.trim() ? ' class="' + cls.trim() + '"' : "") + '><span class="ob-nm" lang="en">' + esc(u.name) + "</span>" +
-              (u.place ? '<span class="ob-pl">' + esc(u.place) + "</span>" : "") +
-              (u.tag ? '<span class="ob-tag">' + esc(u.tag) + "</span>" : "") + "</li>";
+              (u.place ? '<span class="ob-pl">' + esc(tr(u.place)) + "</span>" : "") +
+              (u.tag ? '<span class="ob-tag">' + esc(tr(u.tag)) + "</span>" : "") + "</li>";
           }).join("") + "</ul>" +
-          (g.wide && g.schools.length > 10 ? '<button type="button" class="ob-more" aria-expanded="false">' + esc(g.region) + " 대학 " + (g.schools.length - 10) + "곳 더 보기</button>" : "") +
+          (g.wide && g.schools.length > 10 ? '<button type="button" class="ob-more" aria-expanded="false">' + (EN ? "Show " + (g.schools.length - 10) + " more" : esc(g.region) + " 대학 " + (g.schools.length - 10) + "곳 더 보기") + "</button>" : "") +
           "</section>";
       }).join("");
       board.querySelectorAll(".ob-more").forEach(function (btn) {
@@ -170,7 +194,7 @@
         btn.addEventListener("click", function () {
           var open = btn.closest(".ob").classList.toggle("open");
           btn.setAttribute("aria-expanded", open ? "true" : "false");
-          btn.textContent = open ? "접기" : label;
+          btn.textContent = open ? (EN ? "Show less" : "접기") : label;
         });
       });
       setText("wall-unis", nUni);
@@ -178,7 +202,7 @@
       setText("own-n-full", nFull);
       ownEl.hidden = false;
     }
-    setText("summary-meta", results.length + "곳");
+    setText("summary-meta", results.length + (EN ? " universities" : "곳"));
   }
 
   /* 진학 실적 펼치기: #results 로 가는 링크, 주소의 #results */
@@ -218,20 +242,20 @@
       return [r.university, r.ko, r.state, r.note].join(" ").toLowerCase().indexOf(q) !== -1;
     });
     if (!rows.length) {
-      tbody.innerHTML = '<tr class="empty-row"><td colspan="3" class="empty">조건에 맞는 대학이 없습니다. 검색어나 주를 바꿔 보세요.</td></tr>';
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="3" class="empty">' + (EN ? "No universities match. Try another search or state." : "조건에 맞는 대학이 없습니다. 검색어나 주를 바꿔 보세요.") + '</td></tr>';
     } else {
       tbody.innerHTML = rows.map(function (r) {
-        var sch = r.scholarship ? '<span class="sch">' + esc(nb(r.scholarship)) + "</span>" + (r.note ? "<small>" + esc(r.note) + "</small>" : "") : "—";
+        var sch = r.scholarship ? '<span class="sch">' + esc(EN ? tr(r.scholarship) : nb(r.scholarship)) + "</span>" + (r.note ? "<small>" + esc(tr(r.note)) + "</small>" : "") : "—";
         return "<tr" + (r.scholarship ? ' class="has-sch"' : "") + ">" +
           '<td class="nm-cell"><span class="uni-dot" style="--c:' + esc(r.color || "#283090") + '"></span>' +
-          '<span class="nm"' + (r.check ? "" : ' lang="en"') + ">" + esc(r.university) + "</span>" +
-          "<small>" + esc(nb(r.ko)) + '<span class="st-inline"> · ' + esc(r.state) + "</span>" + (r.check ? ' <span class="tag-sample">명칭 확인</span>' : "") + "</small></td>" +
+          '<span class="nm"' + (r.check && !EN ? "" : ' lang="en"') + ">" + esc(tr(r.university)) + "</span>" +
+          "<small>" + (EN ? "" : esc(nb(r.ko))) + '<span class="st-inline">' + (EN ? "" : " · ") + esc(r.state) + "</span>" + (r.check ? ' <span class="tag-sample">' + (EN ? "Name TBC" : "명칭 확인") + "</span>" : "") + "</small></td>" +
           '<td class="st">' + esc(r.state) + '</td>' +
           '<td class="sch-cell">' + sch + "</td></tr>";
       }).join("");
     }
     if (summary) {
-      summary.innerHTML = "대학 <b>" + rows.length + "</b>곳";
+      summary.innerHTML = EN ? "<b>" + rows.length + "</b> universities" : "대학 <b>" + rows.length + "</b>곳";
     }
   }
   if (stateSel) stateSel.addEventListener("change", renderResults);
@@ -266,7 +290,12 @@
   if (line) {
     var stops = line.querySelectorAll("li");
     var startFor = function (age) { return age < 6 ? 0 : age < 13 ? 1 : age < 18 ? 2 : 3; };
-    var copy = [
+    var copy = EN ? [
+      ["Start in Early Years → Grades 1–8 → Texas → U.S. university", "Children begin English and school life in Eulogia Early Years, then continue into the elementary and middle program. From about Grade 8 they can move to a high school in Texas."],
+      ["Start in SOT·Abeka → high school in Texas → Blinn College → U.S. university", "After at least six months at Eulogia and a school recommendation, students can move to a high school in Texas <b>from Grade 8</b>."],
+      ["Start at a high school in Texas → Blinn College → Texas A&M and U.S. universities", "Students prepare at Eulogia for at least six months, then go to a high school in Texas, where <b>dual credit at Blinn College</b> and AP courses give them a head start on university."],
+      ["Start at Blinn College → transfer to Texas A&M", "High school graduates study at Blinn College for <b>one to two years</b>, then transfer to Texas A&amp;M. A Blinn nursing pathway is also available."]
+    ] : [
       ["유아반에서 출발 → 초·중등 → 텍사스 → 미국 대학", "율로기아 유아반에서 영어와 학교생활을 시작하고, 초·중등 과정으로 이어집니다. 8학년 무렵부터 텍사스 현지 고교로 갈 수 있습니다."],
       ["초·중등 SOT·Abeka에서 출발 → 텍사스 현지 고교 → 블린 칼리지 → 미국 대학", "율로기아에서 6개월 이상 공부하고 학교 추천을 받으면 <b>8학년부터</b> 텍사스 현지 고교로 진학할 수 있습니다."],
       ["텍사스 현지 고교에서 출발 → 블린 칼리지 → 텍사스 A&M·미국 대학", "율로기아에서 6개월 이상 준비한 뒤 텍사스 현지 고교로 갑니다. 재학 중 <b>블린 칼리지 학점 선이수</b>와 AP를 들어 대학 준비를 앞당깁니다."],
@@ -282,7 +311,7 @@
         if (i === st && !badge) {
           badge = document.createElement("span");
           badge.className = "badge";
-          badge.textContent = "출발";
+          badge.textContent = EN ? "Start" : "출발";
           li.querySelector("b").appendChild(badge);
         } else if (i !== st && badge) badge.remove();
       });
@@ -363,12 +392,12 @@
   if (aidEl && aidCase) {
     var pct = Math.round(aidCase.aid / aidCase.charges * 100);
     aidEl.innerHTML =
-      '<div class="aid-big"><b>' + pct + "%</b><span>를 장학금으로</span></div>" +
-      '<div class="aid-bar" role="img" aria-label="청구액 ' + money(aidCase.charges) + " 중 장학금 " + money(aidCase.aid) + ", 실제 부담 " + money(aidCase.net) + '">' +
+      '<div class="aid-big"><b>' + pct + "%</b><span>" + (EN ? " covered by scholarship" : "를 장학금으로") + "</span></div>" +
+      '<div class="aid-bar" role="img" aria-label="' + (EN ? "Charges " + money(aidCase.charges) + ", scholarship " + money(aidCase.aid) + ", paid " + money(aidCase.net) : "청구액 " + money(aidCase.charges) + " 중 장학금 " + money(aidCase.aid) + ", 실제 부담 " + money(aidCase.net)) + '">' +
       '<span class="aid-a" style="width:' + pct + '%"></span><span class="aid-n" style="width:' + (100 - pct) + '%"></span></div>' +
-      '<dl class="aid-dl"><div><dt>' + esc(aidCase.term) + " 청구액</dt><dd>" + money(aidCase.charges) + "</dd></div>" +
-      '<div class="a"><dt>장학금</dt><dd>−' + money(aidCase.aid) + "</dd></div>" +
-      '<div class="n"><dt>실제 부담</dt><dd>' + money(aidCase.net) + "</dd></div></dl>";
+      '<dl class="aid-dl"><div><dt>' + (EN ? "First-semester charges" : esc(aidCase.term) + " 청구액") + "</dt><dd>" + money(aidCase.charges) + "</dd></div>" +
+      '<div class="a"><dt>' + (EN ? "Scholarship" : "장학금") + "</dt><dd>−" + money(aidCase.aid) + "</dd></div>" +
+      '<div class="n"><dt>' + (EN ? "Amount paid" : "실제 부담") + "</dt><dd>" + money(aidCase.net) + "</dd></div></dl>";
   }
 
   /* 블린 첫 학기 4.0: 기수별 점 */
@@ -397,11 +426,15 @@
       allBody.innerHTML = calendar.slice().sort(function (a, b) { return parse(a.start) - parse(b.start); }).map(function (e) {
         var past = parse(e.end) < today;
         var k = kind[e.cat] || ["", ""];
+        if (EN) return "<tr" + (past ? ' class="past"' : "") + '><td class="yr">' + esc(rangeOf(e)) + "</td><td>" + esc(e.en) + "</td><td>" + esc(k[1]) + "</td></tr>";
         return "<tr" + (past ? ' class="past"' : "") + '><td class="yr">' + esc(rangeOf(e)) + "</td><td>" + esc(e.ko) + '<small lang="en">' + esc(e.en) + "</small></td><td>" + esc(k[0]) + ' <span lang="en">' + esc(k[1]) + "</span></td></tr>";
       }).join("");
     }
     calEl.innerHTML = upcoming.map(function (e) {
       var k = kind[e.cat] || ["", ""];
+      if (EN) return '<li class="' + esc(e.cat) + '"><span class="k"><span>' + esc(k[1]) + "</span></span>" +
+        '<span class="d">' + esc(rangeOf(e)) + "</span>" +
+        '<span class="t">' + esc(e.en) + "</span></li>";
       return '<li class="' + esc(e.cat) + '"><span class="k"><span>' + esc(k[0]) + '</span> <span lang="en">' + esc(k[1]) + "</span></span>" +
         '<span class="d">' + esc(rangeOf(e)) + "</span>" +
         '<span class="t">' + esc(e.ko) + '<small lang="en">' + esc(e.en) + "</small></span></li>";
@@ -423,7 +456,17 @@
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      var lines = [
+      var lines = EN ? [
+        "Parent's name: " + val("f-name"),
+        "Phone: " + val("f-phone"),
+        "E-mail: " + val("f-email"),
+        "Program: " + label("f-program"),
+        "Preferred date: " + (val("f-date") || "-"),
+        "Preferred time: " + (label("f-time") || "-"),
+        "Visitors: " + (val("f-people") || "-"),
+        "Language: " + val("f-lang"),
+        "Message: " + (val("f-msg") || "-")
+      ] : [
         "보호자 이름: " + val("f-name"),
         "연락처: " + val("f-phone"),
         "이메일: " + val("f-email"),
@@ -435,12 +478,13 @@
         "요청 사항: " + (val("f-msg") || "-")
       ];
       var body = lines.join("\n");
-      var subject = "[입학 상담 신청] " + val("f-name") + " · " + label("f-program");
+      var subject = (EN ? "[Admissions enquiry] " : "[입학 상담 신청] ") + val("f-name") + " · " + label("f-program");
       var msg = document.getElementById("form-msg");
       if (msg) {
         msg.hidden = false;
-        msg.innerHTML = "메일 앱에서 <b>보내기</b>를 누르면 신청이 끝납니다. 메일 앱이 열리지 않으면 아래 내용을 복사해 " +
-          '<a href="mailto:' + esc(applyEmail) + '">' + esc(applyEmail) + "</a> 로 보내 주시거나 학교로 전화해 주세요." +
+        msg.innerHTML = (EN ? "Press <b>Send</b> in your mail app to finish. If no mail app opens, copy the text below and e-mail it to " :
+          "메일 앱에서 <b>보내기</b>를 누르면 신청이 끝납니다. 메일 앱이 열리지 않으면 아래 내용을 복사해 ") +
+          '<a href="mailto:' + esc(applyEmail) + '">' + esc(applyEmail) + "</a>" + (EN ? ", or call the school." : " 로 보내 주시거나 학교로 전화해 주세요.") +
           "<pre>" + esc(subject + "\n\n" + body) + "</pre>";
       }
       window.location.href = "mailto:" + applyEmail + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
